@@ -1,0 +1,136 @@
+<#if opcao == 1>
+<#list listaLogAdmVO as item>
+CREATE TABLE ${esquema}.log_${item.tabela} (
+	id         BIGINT not null primary key,
+	usuario    varchar(30),
+	data       TIMESTAMP(0),
+	operacao   char(1),
+	ip         varchar(50),${item.campos});
+</#list>                     
+<#elseif opcao == 2>
+<#list listaLogAdmVO as item>
+CREATE SEQUENCE ${esquema}.log_${item.tabela}_seq minvalue 1 maxvalue 999999999999999999 start with 1 increment by 1 CYCLE;
+</#list>
+<#elseif opcao == 3>
+<#list listaLogAdmVO as item>
+CREATE OR REPLACE FUNCTION ${item.tabela}_aiud() RETURNS trigger AS 
+    $BODY$ 
+    BEGIN
+      IF (TG_OP = 'INSERT') THEN
+        INSERT INTO ${esquema}.log_${item.tabela}(id,data,operacao,usuario,ip,
+        ${item.colunas}) VALUES
+        (nextval('${esquema}.log_${item.tabela}_seq'), current_timestamp, 'I', coalesce(pkg_adm_obter_usuario(), session_user),
+        coalesce(pkg_adm_obter_ip_usuario(), substr(CAST(inet_client_addr() AS VARCHAR),1,strpos(CAST(inet_client_addr() AS VARCHAR),'/')-1)),
+        ${item.newColunas});
+        RETURN NEW;
+      ELSIF (TG_OP = 'UPDATE') THEN
+        INSERT INTO ${esquema}.log_${item.tabela}(id,data,operacao,usuario,ip,
+		${item.xColunas},
+        ${item.colunas}) VALUES
+        (nextval('${esquema}.log_${item.tabela}_seq'), current_timestamp, 'U', coalesce(pkg_adm_obter_usuario(), session_user), 
+        coalesce(pkg_adm_obter_ip_usuario(), substr(CAST(inet_client_addr() AS VARCHAR),1,strpos(CAST(inet_client_addr() AS VARCHAR),'/')-1)),
+        ${item.oldColunas},
+        ${item.newColunas});
+        RETURN NEW;
+      ELSIF (TG_OP = 'DELETE') THEN
+		INSERT INTO ${esquema}.log_${item.tabela}(id,data,operacao,usuario,ip,
+        ${item.colunas}) VALUES 
+        (nextval('${esquema}.log_${item.tabela}_seq'), current_timestamp, 'D', coalesce(pkg_adm_obter_usuario(), session_user), 
+        coalesce(pkg_adm_obter_ip_usuario(), substr(CAST(inet_client_addr() AS VARCHAR),1,strpos(CAST(inet_client_addr() AS VARCHAR),'/')-1)),
+        ${item.oldColunas});
+        RETURN OLD;
+      END IF;
+      RETURN NULL;                   
+    END;
+    $BODY$
+      LANGUAGE plpgsql VOLATILE
+      COST 100;
+</#list>      
+<#elseif opcao == 4>
+<#list listaLogAdmVO as item>
+CREATE TRIGGER trg_${item.tabela}_auid 
+   AFTER INSERT OR UPDATE OR DELETE 
+   ON ${item.tabela}
+   FOR EACH ROW
+   EXECUTE PROCEDURE ${esquema}.${item.tabela}_auid();
+</#list>   
+<#elseif opcao == 5>
+<#list listaLogAdmVO as item>
+ALTER TABLE ${item.tabela} ENABLE TRIGGER trg_${item.tabela}_auid;
+</#list>
+<#elseif opcao == 6>
+<#list listaLogAdmVO as item>
+CREATE OR REPLACE VIEW VW_ADM_LOG_DADOS AS
+SELECT t.usuario, t.data, t.operacao, t.ip, '${item.entidade}' entidade, '${item.tabela}' tabela, ${item.chave} chave, to_number(to_char(t.data,'YYYYMMDDHH24MISS'),'99999999999999') dataNumero
+    FROM log_${item.tabela} t
+UNION
+</#list>
+
+CREATE OR REPLACE VIEW public.vw_adm_log AS 
+ SELECT row_number() OVER () AS id,
+    v.usuario,
+    v.data,
+    v.operacao,
+    v.ip,
+    v.entidade,
+    v.tabela,
+    v.chave,
+    v.datanumero
+   FROM ( SELECT DISTINCT t.usuario,
+            t.data,
+            t.operacao,
+            t.ip,
+            t.entidade,
+            t.tabela,
+            t.chave,
+            t.datanumero
+           FROM vw_adm_log_dados t
+          ORDER BY t.data DESC) v;
+          
+<#elseif opcao == 7>
+<#list listaLogAdmValorVO as item>
+CREATE OR REPLACE VIEW VW_ADM_LOG_VALOR_DADOS AS
+SELECT t.usuario, t.data, t.operacao, t.ip, '${item.entidade}' entidade, '${item.tabela}' tabela, ${item.chave} chave, to_number(to_char(t.data,'YYYYMMDDHH24MISS'),'99999999999999') dataNumero, 
+'${item.coluna}' coluna, cast(t.x${item.campo} as varchar) valorAnterior, cast(t.${item.campo} as varchar) valor
+    FROM log_${item.tabela} t
+UNION
+</#list>
+
+CREATE OR REPLACE VIEW public.vw_adm_log_valor AS 
+ SELECT row_number() OVER () AS id,
+    v.usuario,
+    v.data,
+    v.operacao,
+    v.ip,
+    v.entidade,
+    v.tabela,
+    v.chave,
+    v.datanumero,
+    v.coluna,
+    v.valoranterior,
+    v.valor
+   FROM ( SELECT DISTINCT t.usuario,
+            t.data,
+            t.operacao,
+            t.ip,
+            t.entidade,
+            t.tabela,
+            t.chave,
+            t.datanumero,
+            t.coluna,
+            t.valoranterior,
+            t.valor
+           FROM vw_adm_log_valor_dados t
+          ORDER BY t.data DESC) v;
+          
+<#elseif opcao == 8>
+<#list listaLogAdmVO as item>
+DROP TRIGGER trg_${item.tabela}_auid ON log_${item.tabela};
+DROP FUNCTION trg_${item.tabela}_aiud();
+DROP SEQUENCE log_${item.tabela}_seq;
+</#list>
+
+<#list listaLogAdmVO as item>
+DROP TABLE log_${item.tabela};
+</#list>
+</#if>

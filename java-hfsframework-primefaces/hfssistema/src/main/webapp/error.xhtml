@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="/layout/layout.xhtml">
+
+	<ui:define name="itens-menu"></ui:define>
+	<ui:define name="conteudo-maior">
+		<h:form id="formErrorMsg">
+			<div class="row-fluid">
+				<div class="span2"></div>
+				<div class="span8" style="text-align: center;">
+					<div class="hero-unit">
+						<h1>Desculpe, ocorreu um erro no sistema!</h1>
+						<p>Favor entrar em contato com a Central de Atendimento e informar o erro para que possamos corrigí-lo. Assim o sistema em breve voltará ao normal.</p>
+						<a class="btn btn-primary btn-large"
+							href="#{request.contextPath}/login.xhtml">Retornar para
+							tela principal</a>
+							
+						<p:commandButton value="Ver erro" update="formErrorMsg" style="margin-left: 10px; padding: 4px !important;" 
+								 	oncomplete="PF('exceptionDialog').show()" styleClass="btn btn-primary btn-large disableSubmit"/>
+								 	
+					</div>
+				</div>
+			</div>
+			<p:dialog id="exceptionDialog" appendTo="@(body)" header="Ocorreu a exceção '#{errorType}'" 
+				widgetVar="exceptionDialog" height="500px" width="700px">
+			       <b>Tipo Exceção: </b><h:outputText value="#{errorType}"/> <BR/><BR/>
+			       <b>Causa : </b><h:outputText value="#{errorCausa}"/><BR/><BR/>
+			       <b>Mensagem : </b><h:outputText value="#{errorMsg}"/><BR/><BR/>
+			       <b>StackTrace Exceção: </b><h:outputText value="#{errorStackTrace}"/><BR/><BR/>
+			       <p:outputLabel value=""></p:outputLabel>
+			       <p:outputLabel value=""></p:outputLabel>
+			       <p:commandButton value="Fechar" 
+			       		onclick="PF('exceptionDialog').hide()" styleClass="btn btn-primary btn-large disableSubmit"/>
+		   	</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

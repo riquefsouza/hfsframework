@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<title>HFS Sistema</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />		
+	</f:facet>
+
+	<link href="#{request.contextPath}/resources/css/sistema.css"
+		rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/resources/css/bootstrap.min.css"
+		rel="stylesheet" type="text/css" />
+	<link
+		href="#{request.contextPath}/resources/css/bootstrap-theme.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="#{request.contextPath}/resources/css/datepicker.css"
+		rel="stylesheet" type="text/css" />
+
+	<h:outputScript name="js/jquery.js" />
+	<h:outputScript name="js/sistema.js" />
+	<h:outputScript name="js/bootstrap.min.js" />
+	<h:outputScript name="js/bootstrap-datepicker.js" />
+	<h:outputScript name="js/bootstrap-datepicker.pt-BR.js" />
+	<h:outputScript name="js/jquery.meio.mask.min.js" />
+	<h:outputScript name="js/jquery.numeric.js" />
+
+	<script type='text/javascript'>  
+ 		var $jq = jQuery.noConflict(true);  
+ 	</script>
+
+	<ui:insert name="head" />
+	
+</h:head>
+
+<h:body>
+
+	<!-- [if lt IE 9] >
+            <script src="/hfssistema/js/html5.js" type="text/javascript"></script>
+        <![endif]-->
+
+	<div id="div-principal-sistema">
+	
+		<nav id="menu-principal" class="navbar" style="background-color: lightgray">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#sistema-navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar" /> <span class="icon-bar" /> <span
+							class="icon-bar" />
+					</button>
+					<h:outputLink styleClass="navbar-brand" id="nomeSistema"
+						value="#{request.contextPath}/private/desktop.xhtml">
+						<p:graphicImage id="figuraSistema" style="margin-top: -15px;" 
+							name="logo.png" library="img" />
+					</h:outputLink>
+					<a class="navbar-brand" 
+						href="#{request.contextPath}/private/desktop.xhtml"><span style="color: black;">HFS-Sistema</span></a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="sistema-navbar-collapse">
+				
+						<ui:include src="#{aplicacaoUtil.debugMode ? '/private/menu2.xhtml' : '/private/menu.xhtml'}" />
+					
+						<h:form lang="pt">
+							<ul class="nav navbar-nav">
+								<li><h:commandLink action="#{autenticador.logOut()}"
+										immediate="true" rendered="#{identity.loggedIn}">
+										<p:graphicImage name="/img/exit01.png" /> 
+										<span style="color: black;">Sair</span>
+									</h:commandLink></li>
+							</ul>
+						</h:form>
+
+						<ul class="nav navbar-nav pull-right"
+							style="display: inline-block; padding-top: 15px; font-size: 90%">
+							<li style="#{identity.loggedIn ? '' : 'display:none;'}">
+									<small> 
+										<span id="informacoes-usuario" class="lightgray">
+											<h:outputText value="Sessão expira: " /> 
+											<span id="dialog-countdown-geral"></span> 
+											<i class="glyphicon glyphicon-user"></i> 
+											<p:outputLabel value="  #{identity.account.loginName}" 
+												onclick="PF('infoUsuarioDialog').show()" 
+												style="cursor: pointer; cursor: hand;" />										
+										</span>
+									</small>
+								
+								</li>
+						</ul>
+					
+				</div>
+			</div>
+		</nav>
+	
+		
+		<div id="conteudo-principal" class="container-fluid">
+			<div>
+				<p:outputPanel id="alert-messages">
+					<p:messages id="messages"
+						styleClass="alert-messages skipModalLoading" escape="false"
+						closable="true" showDetail="true" autoUpdate="true"
+						showSummary="false" infoClass="alert alert-info skipModalLoading"
+						successClass="alert alert-success skipModalLoading"
+						errorClass="alert alert-danger skipModalLoading"
+						warnClass="alert alert-warning skipModalLoading" />
+				</p:outputPanel>
+
+				<div>
+					<ui:insert name="conteudo-maior">
+						<div>														
+							<ui:insert name="conteudo">...</ui:insert>							
+						</div>
+					</ui:insert>
+				</div>
+			</div>
+		</div>
+		
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="tempoTotalSessao = maxTempoTotalSessao;PF('statusDialog').hide()"
+			oncomplete="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			id="statusDialog" header="Aguarde" closable="false" resizable="false"
+			style="min-width: 0em; border-style: none; box-shadow: none !important; background-color: transparent;"
+			showHeader="false">
+			<p:graphicImage name="/img/ajax_loader_blue_128.gif"/>
+		</p:dialog>
+		
+	</div>
+
+	<!-- Default ajaxErrorHandler -->
+	<p:ajaxExceptionHandler title="Desculpe. Ocorreu um erro no sistema"
+		body="O servidor retornou a exceção {error-name} com a descrição &lt;b&gt;{error-message}&lt;/b&gt;"
+		button="Fechar" widgetVar="myAjaxErrorHandler"
+		buttonOnclick="myAjaxErrorHandler.hide()" />
+
+	<ui:insert name="sessaoSistema">
+		<ui:include src="/sessionTimeOut.xhtml" />
+	</ui:insert>
+
+	<ui:include src="/private/infoUsuario.xhtml" />
+</h:body>
+</html>

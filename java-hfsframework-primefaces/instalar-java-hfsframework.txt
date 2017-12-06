@@ -1,0 +1,6 @@
+C:\demoiselle3\maven3.5.0
+
+maven3.5.0
+
+C:\demoiselle3\maven3.5.0\conf\settings.xml
+

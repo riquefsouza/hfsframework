@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="/layout/layout.xhtml">
+
+	<ui:define name="conteudo-maior">
+		<h:form id="listar${classe}">
+			<fieldset id="fieldsetListar${classe}">
+				<div class="panel panel-default">
+					<div class="panel-heading" 
+						style="font-weight: bold;font-size: large;">
+						${classe}
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<p:commandButton value="Incluir" ajax="false" icon="ui-icon-circle-plus"
+						action="#\{${objeto}MB.onIncluir()\}" id="btnIncluir"
+						styleClass="btn btn-success disableSubmit"
+						title="Incluir uma nova ${objeto}" />
+
+					<p:commandButton id="btnEditar" value="Editar" ajax="false" icon="ui-icon-circle-triangle-n"
+						styleClass="btn btn-warning disableSubmit"
+						action="#\{${objeto}MB.onEditar(${objeto}MB.bean)\}"
+						title="Editar ${objeto}">
+					</p:commandButton>
+
+					<p:commandButton id="btnExcluir" value="Excluir" icon="ui-icon-circle-minus"
+						styleClass="btn btn-danger disableSubmit"
+						action="#\{${objeto}MB.prepararParaExcluir(${objeto}MB.bean)\}"
+						title="Excluir ${objeto}" update="@form">
+					</p:commandButton>
+
+					<p:commandButton value="Voltar" immediate="true" ajax="false" 
+						icon="ui-icon-circle-arrow-w"
+						action="#\{${objeto}MB.cancelar()\}" id="btnVoltar"
+						styleClass="btn btn-primary disableSubmit" title="Voltar" />
+				</div>
+
+				<p:confirmDialog message="#\{messages['texto_confirmacao_exclusao']\}"
+					header="#\{messages['titulo_confirmacao']\}" severity="alert"
+					widgetVar="confirmation">
+					<p:commandButton value="Sim" update="@form"
+						oncomplete="PF('confirmation').hide()"
+						styleClass="btn btn-success disableSubmit"
+						action="#\{${objeto}MB.excluir(${objeto}MB.bean)\}" />
+					<p:spacer width="10" height="10" />
+					<p:commandButton value="Não" onclick="PF('confirmation').hide()"
+						styleClass="btn btn-danger disableSubmit" type="button" />
+				</p:confirmDialog>
+
+				<p:dataTable var="item" rowKey="#\{item.id\}" id="table"
+					selection="#\{${objeto}MB.bean\}" selectionMode="single"
+					value="#\{${objeto}MB.listaBean\}" 
+					rows="#\{aplicacaoConfig.dtLinhas\}" rowsPerPageTemplate="#\{aplicacaoConfig.dtModeloLinhasPorPagina\}"
+					paginator="true" paginatorPosition="#\{aplicacaoConfig.dtPosicaoPaginador\}"					
+					paginatorTemplate="#\{aplicacaoConfig.dtModeloPaginador\}"
+ 					currentPageReportTemplate="#\{aplicacaoConfig.dtModeloRelatorioPagina\}"					
+					emptyMessage="#\{messages['main.nenhum.registro']\}">
+
+					<f:facet name="\{Exporters\}">
+						<h:commandLink style="float: left;">
+							<p:graphicImage value="/resources/img/excel.png" width="24" />
+							<p:dataExporter type="xls" encoding="iso-8859-1" target="table" options="#\{exporterUtil.excelOpt\}" 
+								 fileName="${objeto}s" />
+						</h:commandLink>
+	
+						<h:commandLink style="float: left;">
+							<p:graphicImage value="/resources/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" encoding="iso-8859-1" target="table" options="#\{exporterUtil.pdfOpt\}" 
+								preProcessor="#\{${objeto}MB.preProcessPDF\}" fileName="${objeto}s" />
+						</h:commandLink>	
+					</f:facet>
+
+					<p:column headerText="Descrição" sortBy="#\{item.descricao\}"
+						filterBy="#\{item.descricao\}">
+						<h:outputText value="#\{item.descricao\}" />
+					</p:column>
+				</p:dataTable>
+			</fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,9 @@
+namespace hfsframework.admin.model
+{
+    public class ${classe}
+    {
+	    <#list listaColunas as item>
+	    public virtual ${item.tipoPropriedade} ${item.propriedade} { get; set; }
+		</#list>
+    }
+}

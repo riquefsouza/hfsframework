@@ -1,0 +1,290 @@
+/**
+ * <p><b>HFS Framework</b></p>
+ * @author Henrique Figueiredo de Souza
+ * @version 1.0
+ * @since 2017
+ */
+package br.com.hfsframework.security;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
+import br.com.hfsframework.AplicacaoConfig;
+import br.com.hfsframework.AplicacaoUtil;
+import br.com.hfsframework.admin.AdmFuncionarioBC;
+import br.com.hfsframework.admin.AdmPerfilBC;
+import br.com.hfsframework.admin.AdmUsuarioBC;
+import br.com.hfsframework.admin.model.AdmUsuario;
+import br.com.hfsframework.base.BaseViewController;
+import br.com.hfsframework.security.model.MenuVO;
+import br.com.hfsframework.security.model.PaginaVO;
+import br.com.hfsframework.security.model.PermissaoVO;
+import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
+import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
+import br.com.hfsframework.util.ldap.LdapConfig;
+import br.com.hfsframework.util.ldap.LdapUtil;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SistemaMB.
+ */
+@Named
+@ViewScoped
+@TratamentoErrosEsperados
+public class SistemaMB extends BaseViewController implements Serializable {
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/** The ldap util. */
+	@Inject	
+	private LdapUtil ldapUtil;
+	
+	/** The adm perfil BC. */
+	@Inject
+	private AdmPerfilBC admPerfilBC;
+
+	/** The vw adm funcionario BC. */
+	@Inject
+	private AdmFuncionarioBC admFuncionarioBC;
+
+	/** The aplicacao config. */
+	@Inject
+	private AplicacaoConfig aplicacaoConfig;
+
+	/** The aplicacao util. */
+	@Inject
+	private AplicacaoUtil aplicacaoUtil;
+
+	/** The adm usuario BC. */
+	@Inject
+	private AdmUsuarioBC admUsuarioBC;
+
+	/** The usuario autenticado. */
+	@Inject
+	protected UsuarioAutenticadoVO usuarioAutenticado;
+	
+	/** The usuario logado. */
+	private AdmUsuario usuarioLogado;
+	
+	/**
+	 * Inicia o.
+	 */
+	@PostConstruct
+	public void init() {
+		// this.log.debug("userName: " + this.usuarioAutenticado.getUserName());
+	}
+
+	/**
+	 * Segura sessao.
+	 */
+	public void seguraSessao() {
+		this.log.warn(this.usuarioAutenticado.getDisplayName() + " continua conectado na sessão");
+	}
+
+	/**
+	 * Autenticar.
+	 *
+	 * @param login
+	 *            the login
+	 * @param senha
+	 *            the senha
+	 * @return true, if successful
+	 */
+	public boolean autenticar(String login, String senha) {
+		if (aplicacaoConfig.isHabilitarLDAP()) {
+			if (autenticarViaLDAP(login, senha)) {
+				setPropriedades(login);
+				return true;
+			}
+		} else {
+			if (autenticarViaBanco(login, senha)) {
+				setPropriedades(login);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Logout.
+	 */
+	public void logout(){
+		//ldapLogin.logout();
+	}
+	
+	/**
+	 * Sets the propriedades.
+	 *
+	 * @param login
+	 *            the new propriedades
+	 */
+	private void setPropriedades(String login) {
+		this.usuarioAutenticado.setUserName(login);
+		if (!aplicacaoUtil.isDebugMode() && aplicacaoConfig.isHabilitarControlePerfil()) {
+			
+			if (aplicacaoConfig.isHabilitarLDAP()) 
+				this.usuarioAutenticado.setFuncionario(admFuncionarioBC.load(ldapUtil.getMatricula()).toFuncionarioVO());
+			else
+				this.usuarioAutenticado.setFuncionario(admFuncionarioBC.load(usuarioLogado.getId().getMatricula()).toFuncionarioVO());
+				
+			this.usuarioAutenticado.setDisplayName(this.usuarioAutenticado.getFuncionario().getNome());
+			this.usuarioAutenticado.setEmail(this.usuarioAutenticado.getFuncionario().getEmail());
+			this.usuarioAutenticado.setListaPermissao(admPerfilBC.getPermissao(usuarioAutenticado));
+
+			if (!this.usuarioAutenticado.getListaPermissao().isEmpty()){
+				this.usuarioAutenticado.setListaMenus(
+						admPerfilBC.findMenuPaiByPerfil(
+								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+				
+				this.usuarioAutenticado.setListaAdminMenus(
+						admPerfilBC.findAdminMenuPaiByPerfil(
+								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+			}
+			
+			try {
+				if (aplicacaoConfig.isHabilitarLDAP()) {
+					this.usuarioAutenticado.setUsuario(admUsuarioBC.getUsuario(ldapUtil.getMatricula(),
+						ldapUtil.getLogin(), ldapUtil.getNome(),
+						this.usuarioAutenticado.getFuncionario().getCpf(),
+						ldapUtil.getEmail(), ldapUtil.getLdapDN()).toUsuarioVO());
+				} else {
+					this.usuarioAutenticado.setUsuario(admUsuarioBC.getUsuario(usuarioAutenticado.getFuncionario().getId(),
+							usuarioLogado.getLogin(), usuarioAutenticado.getFuncionario().getNome(),
+							this.usuarioAutenticado.getFuncionario().getCpf(),
+							usuarioAutenticado.getFuncionario().getEmail(), "").toUsuarioVO());
+				}
+					
+				aplicacaoUtil.setUsuarioAutenticado(this.usuarioAutenticado);
+				
+			} catch (Exception e) {
+				gerarMensagemErro(e, e.getMessage());
+			}
+			
+			this.log.info(this.usuarioAutenticado.getUserName() + " : Setor: "
+					+ this.usuarioAutenticado.getFuncionario().getSetor() + ", Perfis: "
+					+ this.usuarioAutenticado.getListaPermissao().toString());
+			mostrarPerfilURL();
+			mostrarMenus();
+		}
+	}
+
+	/**
+	 * Mostrar perfil URL.
+	 */
+	public void mostrarPerfilURL() {
+		for (PermissaoVO permissao : this.usuarioAutenticado.getListaPermissao()) {
+			for (PaginaVO pagFuncionalidade : permissao.getPaginasFuncionalidade()) {
+				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Funcionalidade Pagina inicial URL: "
+						+ pagFuncionalidade.getUrl());
+			}
+			for (PaginaVO admPagina : permissao.getPaginas()) {
+				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Pagina URL: " + admPagina.getUrl());
+			}
+		}
+	}
+
+	/**
+	 * Mostrar menus.
+	 */
+	public void mostrarMenus() {		
+		for (MenuVO menu : this.usuarioAutenticado.getListaMenus()) {
+			log.info("Menu: " + menu.toString());
+		}
+		for (MenuVO menu : this.usuarioAutenticado.getListaAdminMenus()) {
+			log.info("Menu Admin: " + menu.toString());
+		}		
+	}
+	
+	/**
+	 * Gets the lista menus.
+	 *
+	 * @return the lista menus
+	 */
+	public List<MenuVO> getListaMenus() {
+		return this.usuarioAutenticado.getListaMenus();
+	}
+
+	/**
+	 * Gets the lista admin menus.
+	 *
+	 * @return the lista admin menus
+	 */
+	public List<MenuVO> getListaAdminMenus() {
+		return this.usuarioAutenticado.getListaAdminMenus();
+	}
+
+	/**
+	 * Gets the pagina.
+	 *
+	 * @param idMenu
+	 *            the id menu
+	 * @return the pagina
+	 */
+	public PaginaVO getPagina(Long idMenu) {
+		return this.usuarioAutenticado.getPaginaByMenu(idMenu);
+	}
+
+	/**
+	 * Autenticar via banco.
+	 *
+	 * @param login the login
+	 * @param senha the senha
+	 * @return true, if successful
+	 */
+	private boolean autenticarViaBanco(String login, String senha) {
+		if (!aplicacaoUtil.isDebugMode()) {
+			
+			String csenha = DigestUtils.shaHex(senha);
+			
+			if (!login.isEmpty() && !csenha.isEmpty()) {
+				usuarioLogado = admUsuarioBC.login(login, csenha);
+				return (usuarioLogado!=null);
+			}
+		} else {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * Autenticar.
+	 *
+	 * @param login
+	 *            the login
+	 * @param senha
+	 *            the senha
+	 * @return true, if successful
+	 */
+	private boolean autenticarViaLDAP(String login, String senha) {
+		if (!aplicacaoUtil.isDebugMode()) {
+			if (!login.isEmpty() && !senha.isEmpty()) {
+				LdapConfig config = new LdapConfig();
+				log.info(config.toString());
+				ldapUtil.configurar(config);
+				ldapUtil.setListaLdapAtributo(ldapUtil.getAtributos(login));
+				
+				return ldapUtil.login(login, senha);
+			}
+		} else {
+			return true;
+		}
+
+		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see br.com.hfsframework.base.BaseViewController#getUsuarioAutenticado()
+	 */
+	public UsuarioAutenticadoVO getUsuarioAutenticado() {
+		return usuarioAutenticado;
+	}
+	
+}

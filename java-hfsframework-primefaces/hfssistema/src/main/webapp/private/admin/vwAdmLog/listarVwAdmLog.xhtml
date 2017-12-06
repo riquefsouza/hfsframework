@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui" template="/layout/layout.xhtml">
+
+	<ui:define name="conteudo-maior">
+		<h:form id="listarVwAdmLog">
+			<fieldset id="fieldsetListarVwAdmLog">
+				<div class="panel panel-default">
+					<div class="panel-heading" 
+						style="font-weight: bold;font-size: large;">
+						Visualizar os Logs de Auditoria
+					</div>
+					<div class="panel-body">
+					
+						<div class="row">
+							<div class="col-md-4 form-group">			
+								<h:outputLabel value="Entidade:" for="cmbEntidade" />
+							    <p:selectOneMenu id="cmbEntidade" value="#{vwAdmLogMB.vwAdmLogFiltros.entidade}" filter="true" filterMatchMode="startsWith">
+							    	<p:ajax listener="#{vwAdmLogMB.selectEntidade}" />
+							    	<f:selectItem itemLabel="Selecione uma Entidade" itemValue="" />
+							    	<f:selectItems value="#{vwAdmLogMB.listaSEntidade}" var="item" itemLabel="#{item}" itemValue="#{item}" />			    	  	
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-2 form-group">
+								<p:outputLabel for="chaveValor" value="Valor Id:" />
+								<p:inputText id="chaveValor" label="Valor Id" 
+									value="#{vwAdmLogMB.vwAdmLogFiltros.chave}" maxlength="50">
+								</p:inputText>
+							</div>
+							<div class="col-md-2 form-group">
+								<p:outputLabel for="usuario" value="Usuário:" />
+								<p:inputText id="usuario" label="Usuário" 
+									value="#{vwAdmLogMB.vwAdmLogFiltros.usuario}" maxlength="50">
+								</p:inputText>
+							</div>
+							<div class="col-md-2 form-group">
+								<p:outputLabel for="ip" value="IP:" />
+								<p:inputText id="ip" label="IP" 
+									value="#{vwAdmLogMB.vwAdmLogFiltros.ip}" maxlength="15">
+								</p:inputText>
+							</div>							
+						</div>
+
+						<div class="row">
+							<div class="col-md-2 form-group">			
+								<h:outputLabel value="Operação:" for="cmbOperacao" />
+							    <p:selectOneMenu id="cmbOperacao" value="#{vwAdmLogMB.vwAdmLogFiltros.operacao}">
+							    	<f:selectItem itemLabel="Todas as operações" itemValue="" />
+							    	<f:selectItem itemLabel="Inclusão" itemValue="I" />
+							    	<f:selectItem itemLabel="Exclusão" itemValue="D" />
+							    	<f:selectItem itemLabel="Alteração" itemValue="U" />
+								</p:selectOneMenu>
+							</div>
+							<div class="col-md-1 form-group">
+								<p:outputLabel for="dataInicial" value="Data Inicial:" />
+								<p:calendar id="dataInicial" label="Data Inicial"								
+									value="#{vwAdmLogMB.vwAdmLogFiltros.dataInicio}" 
+									showButtonPanel="true" pattern="#{dataUtil.dataPadrao}"
+									styleClass="date" effect="slide" locale="pt">
+								</p:calendar>
+							</div>
+							<div class="col-md-1 form-group">
+								<p:outputLabel for="dataFinal" value="Data Final:" />
+								<p:calendar id="dataFinal" label="Data Final"
+									mindate="#{vwAdmLogMB.vwAdmLogFiltros.dataInicio}"							
+									value="#{vwAdmLogMB.vwAdmLogFiltros.dataFim}" 
+									showButtonPanel="true" pattern="#{dataUtil.dataPadrao}"
+									styleClass="date" effect="slide" locale="pt">
+								</p:calendar>
+							</div>
+						</div>
+					
+						<div class="row">					
+							<div class="col-md-3 form-group">		
+								<p:outputLabel for="cmbTipoRelatorio" value="Escolha o tipo de relatório:" />																
+							    <p:selectOneMenu id="cmbTipoRelatorio" value="#{vwAdmLogRelMB.tipoRelatorio}">
+							    	<f:selectItems value="#{vwAdmLogRelMB.listaTipoRelatorio}" />			    	  	
+								</p:selectOneMenu>											
+							</div>					
+							
+							<div class="col-md-2 form-group">
+								<p:outputLabel for="forcaDownload" value="Forçar Download:" />
+								<p:selectBooleanCheckbox id="forcaDownload" value="#{vwAdmLogRelMB.forcarDownload}" />
+							</div>
+						</div>
+					
+					</div>					
+				</div>
+
+				<div class="form-actions">
+					<p:commandButton value="Exportar" title="Exportar" onclick="form.target='_blank'" 
+						styleClass="btn btn-primary disableSubmit" id="btnExportar"
+						icon="ui-icon-print" action="#{vwAdmLogRelMB.exportar()}"
+						ajax="false" />
+						
+					<p:spacer width="10" height="10" />	
+				
+					<p:commandButton value="Pesquisar" ajax="true" icon="ui-icon-search"
+						action="#{vwAdmLogMB.onPesquisar()}" id="btnPesquisar"
+						styleClass="btn btn-primary disableSubmit" update="table" 
+						title="Pesquisar contratos" />
+					<p:commandButton value="Limpar" ajax="true" icon="ui-icon-star"
+						action="#{vwAdmLogMB.onLimparPesquisa()}" id="btnLimparPesquisa"
+						styleClass="btn btn-primary disableSubmit" update="@form" 
+						title="Limpar Campos da Pesquisa" />
+					<p:commandButton value="Voltar" immediate="true" ajax="false" 
+						icon="ui-icon-circle-arrow-w"
+						action="#{vwAdmLogMB.cancelar()}" id="btnVoltar"
+						styleClass="btn btn-primary disableSubmit" title="Voltar" />
+				</div>
+
+				<p:dataTable var="item" rowKey="#{item.id}" id="table"
+					selection="#{vwAdmLogMB.bean}" selectionMode="single"
+					value="#{vwAdmLogMB.listaBean}" rows="#{aplicacaoConfig.dtLinhas}" rowsPerPageTemplate="#{aplicacaoConfig.dtModeloLinhasPorPagina}"
+					paginator="true" paginatorPosition="#{aplicacaoConfig.dtPosicaoPaginador}"					
+					paginatorTemplate="#{aplicacaoConfig.dtModeloPaginador}"
+ 					currentPageReportTemplate="#{aplicacaoConfig.dtModeloRelatorioPagina}"					
+					emptyMessage="#{messages['main.nenhum.registro']}">
+
+					<f:facet name="{Exporters}">
+						<h:commandLink style="float: left;">
+							<p:graphicImage value="/resources/img/excel.png" width="24" />
+							<p:dataExporter type="xls" encoding="iso-8859-1" target="table" options="#{exporterUtil.excelOpt}" 
+								 fileName="vwAdmLogs" />
+						</h:commandLink>
+	
+						<h:commandLink style="float: left;">
+							<p:graphicImage value="/resources/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" encoding="iso-8859-1" target="table" options="#{exporterUtil.pdfOpt}" 
+								preProcessor="#{vwAdmLogMB.preProcessPDF}" fileName="vwAdmLogs" />
+						</h:commandLink>	
+					</f:facet>
+
+					<p:column headerText="Id Log" sortBy="#{item.id}" filterBy="#{item.id}">
+						<h:outputText value="#{item.id}" />
+					</p:column>
+
+					<p:column headerText="Data" sortBy="#{item.data}" filterBy="#{item.data}">
+						<h:outputText value="#{item.data}">
+						 	<f:convertDateTime pattern="#{dataUtil.dataHoraPadrao}" locale="pt" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Usuário" sortBy="#{item.usuario}" filterBy="#{item.usuario}">
+						<h:outputText value="#{item.usuario}" />
+					</p:column>
+
+					<p:column headerText="IP" sortBy="#{item.ip}" filterBy="#{item.ip}">
+						<h:outputText value="#{item.ip}" />
+					</p:column>
+
+					<p:column headerText="Entidade" sortBy="#{item.entidade}" filterBy="#{item.entidade}">
+						<h:outputText value="#{item.entidade}" />
+					</p:column>
+
+					<p:column headerText="Operação" sortBy="#{item.operacaoTexto}" 
+						filterBy="#{item.operacaoTexto}">
+						<h:outputText value="#{item.operacaoTexto}" />
+					</p:column>
+					
+					<p:column style="width:50px;text-align: center">
+			             <p:commandButton update=":listarVwAdmLog:tableLogVO" oncomplete="PF('logDialog').show()" icon="ui-icon-search" title="View">
+			                <f:setPropertyActionListener value="#{item}" target="#{vwAdmLogMB.bean}" />
+			            </p:commandButton>
+			        </p:column>
+					
+				</p:dataTable>
+			</fieldset>
+			
+			<p:dialog header="Detalhes do Log" widgetVar="logDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="50%">
+				<p:dataTable var="item" rowKey="#{item.id}" id="tableLogVO"
+					selection="#{vwAdmLogMB.vwAdmLogValor}" selectionMode="single"
+					value="#{vwAdmLogMB.bean.listaLogValor}" rows="10" 
+					paginator="true" paginatorPosition="#{aplicacaoConfig.dtPosicaoPaginador}"					
+					paginatorTemplate="#{aplicacaoConfig.dtModeloPaginador}"
+ 					currentPageReportTemplate="#{aplicacaoConfig.dtModeloRelatorioPagina}"					
+					emptyMessage="#{messages['main.nenhum.registro']}">
+
+					<f:facet name="{Exporters}">
+						<h:commandLink style="float: left;">
+							<p:graphicImage value="/resources/img/excel.png" width="24" />
+							<p:dataExporter type="xls" encoding="iso-8859-1" target="tableLogVO" 
+								 fileName="LogDetalhe" />
+						</h:commandLink>
+	
+						<h:commandLink style="float: left;">
+							<p:graphicImage value="/resources/img/pdf.png" width="24" />
+							<p:dataExporter type="pdf" encoding="iso-8859-1" target="tableLogVO" 
+								preProcessor="#{vwAdmLogMB.preProcessPDF}" fileName="LogDetalhe" />
+						</h:commandLink>	
+					</f:facet>
+
+					<p:column headerText="Coluna" sortBy="#{item.coluna}"
+						filterBy="#{item.coluna}">
+						<h:outputText value="#{item.coluna}" />
+					</p:column>
+					<p:column headerText="Valor Anterior" sortBy="#{item.valorAnterior}"
+						filterBy="#{item.valorAnterior}" style="text-align:left; width:40%;">
+						<h:outputText value="#{item.valorAnterior}" />
+					</p:column>
+					<p:column headerText="Valor" sortBy="#{item.valor}"
+						filterBy="#{item.valor}" 
+						style="text-align:left; width:40%; #{item.alterado ? 'background-color: #fafad2;' : ''}">
+						<h:outputText value="#{item.valor}" />
+					</p:column>					
+				</p:dataTable>
+
+		    </p:dialog>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

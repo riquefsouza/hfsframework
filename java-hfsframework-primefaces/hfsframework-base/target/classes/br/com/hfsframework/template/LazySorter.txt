@@ -1,0 +1,14 @@
+package ${pacote}.view.${objeto};
+
+import org.primefaces.model.SortOrder;
+
+import br.com.hfsframework.base.BaseLazySorter;
+import ${pacote}.model.${classe};
+
+public class ${classe}LazySorter extends BaseLazySorter<${classe}> {
+
+	public ${classe}LazySorter(String sortField, SortOrder sortOrder) {
+		super(sortField, sortOrder);
+	}
+
+}
