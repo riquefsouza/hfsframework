@@ -1,0 +1,146 @@
+use hfsbanco
+
+db.ADM_PERFIL.insert({prf_seq: 1, prf_descricao: 'Geral', prf_geral: 'S', prf_administrador: 'N'});
+db.ADM_PERFIL.insert({prf_seq: 2, prf_descricao: 'Administrador', prf_geral: 'N', prf_administrador: 'S'});
+
+db.ADM_PAGINA.insert({pag_seq: 1, pag_url: 'admin/admParametroCategoria/listarAdmParametroCategoria.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admParametroCategoria.AdmParametroCategoriaMB'});
+db.ADM_PAGINA.insert({pag_seq: 2, pag_url: 'admin/admParametroCategoria/editarAdmParametroCategoria.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admParametroCategoria.AdmParametroCategoriaMB'});
+db.ADM_PAGINA.insert({pag_seq: 3, pag_url: 'admin/admParametro/listarAdmParametro.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admParametro.AdmParametroMB'});
+db.ADM_PAGINA.insert({pag_seq: 4, pag_url: 'admin/admParametro/editarAdmParametro.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admParametro.AdmParametroMB'});
+db.ADM_PAGINA.insert({pag_seq: 5, pag_url: 'admin/admPerfil/listarAdmPerfil.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admPerfil.AdmPerfilMB'});
+db.ADM_PAGINA.insert({pag_seq: 6, pag_url: 'admin/admPerfil/editarAdmPerfil.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admPerfil.AdmPerfilMB'});
+db.ADM_PAGINA.insert({pag_seq: 7, pag_url: 'admin/admFuncionalidade/listarAdmFuncionalidade.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admFuncionalidade.AdmFuncionalidadeMB'});
+db.ADM_PAGINA.insert({pag_seq: 8, pag_url: 'admin/admFuncionalidade/editarAdmFuncionalidade.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admFuncionalidade.AdmFuncionalidadeMB'});
+db.ADM_PAGINA.insert({pag_seq: 9, pag_url: 'admin/admPagina/listarAdmPagina.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admPagina.AdmPaginaMB'});
+db.ADM_PAGINA.insert({pag_seq: 10, pag_url: 'admin/admPagina/editarAdmPagina.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admPagina.AdmPaginaMB'});
+db.ADM_PAGINA.insert({pag_seq: 11, pag_url: 'admin/admMenu/listarAdmMenu.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admMenu.AdmMenuMB'});
+db.ADM_PAGINA.insert({pag_seq: 12, pag_url: 'admin/admMenu/editarAdmMenu.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admMenu.AdmMenuMB'});
+db.ADM_PAGINA.insert({pag_seq: 13, pag_url: 'admin/admCargo/listarAdmCargo.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admCargo.AdmCargoMB'});
+db.ADM_PAGINA.insert({pag_seq: 14, pag_url: 'admin/admCargo/editarAdmCargo.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admCargo.AdmCargoMB'});
+db.ADM_PAGINA.insert({pag_seq: 15, pag_url: 'admin/admFuncionario/listarAdmFuncionario.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admFuncionario.AdmFuncionarioMB'});
+db.ADM_PAGINA.insert({pag_seq: 16, pag_url: 'admin/admFuncionario/editarAdmFuncionario.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admFuncionario.AdmFuncionarioMB'});
+db.ADM_PAGINA.insert({pag_seq: 17, pag_url: 'admin/admSetor/listarAdmSetor.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admSetor.AdmSetorMB'});
+db.ADM_PAGINA.insert({pag_seq: 18, pag_url: 'admin/admSetor/editarAdmSetor.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admSetor.AdmSetorMB'});
+db.ADM_PAGINA.insert({pag_seq: 19, pag_url: 'admin/admUsuario/listarAdmUsuario.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admUsuario.AdmUsuarioMB'});
+db.ADM_PAGINA.insert({pag_seq: 20, pag_url: 'admin/vwAdmLog/listarVwAdmLog.xhtml', pag_mb: 'br.com.hfsframework.admin.view.vwAdmLog.VwAdmLogMB'});
+db.ADM_PAGINA.insert({pag_seq: 21, pag_url: 'admin/admLogColuna/listarAdmLogColuna.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admLogColuna.AdmLogColunaMB'});
+db.ADM_PAGINA.insert({pag_seq: 22, pag_url: 'admin/admLogColuna/editarAdmLogColuna.xhtml', pag_mb: 'br.com.hfsframework.admin.view.admLogColuna.AdmLogColunaMB'});
+db.ADM_PAGINA.insert({pag_seq: 23, pag_url: 'admin/visualizarArqLogServidor.xhtml', pag_mb: 'br.com.hfsframework.admin.view.VisualizarArqLogServidorMB'});
+
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 1, fun_pag_seq: 1, fun_descricao: 'Categoria dos Parâmetros de Configuração (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 2, fun_pag_seq: 2, fun_descricao: 'Editar Categoria dos Parâmetros de Configuração (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 3, fun_pag_seq: 3, fun_descricao: 'Parâmetros de Configuração (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 4, fun_pag_seq: 4, fun_descricao: 'Editar Parâmetros de Configuração (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 5, fun_pag_seq: 5, fun_descricao: 'Administrar Perfil (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 6, fun_pag_seq: 6, fun_descricao: 'Editar Administrar Perfil (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 7, fun_pag_seq: 7, fun_descricao: 'Administrar Funcionalidade (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 8, fun_pag_seq: 8, fun_descricao: 'Editar Administrar Funcionalidade (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 9, fun_pag_seq: 9, fun_descricao: 'Administrar Página (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 10, fun_pag_seq: 10, fun_descricao: 'Editar Administrar Página (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 11, fun_pag_seq: 11, fun_descricao: 'Administrar Menu (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 12, fun_pag_seq: 12, fun_descricao: 'Editar Administrar Menu (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 13, fun_pag_seq: 13, fun_descricao: 'Administrar os Cargos (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 14, fun_pag_seq: 14, fun_descricao: 'Editar Administrar os Cargos (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 15, fun_pag_seq: 15, fun_descricao: 'Administrar os Funcionários (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 16, fun_pag_seq: 16, fun_descricao: 'Editar Administrar os Funcionários (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 17, fun_pag_seq: 17, fun_descricao: 'Administrar os Setores (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 18, fun_pag_seq: 18, fun_descricao: 'Editar Administrar os Setores (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 19, fun_pag_seq: 19, fun_descricao: 'Visualizar os Usuários (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 20, fun_pag_seq: 20, fun_descricao: 'Visualizar os Logs de Auditoria (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 21, fun_pag_seq: 21, fun_descricao: 'Administrar os Campos do Log de Auditoria (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 22, fun_pag_seq: 22, fun_descricao: 'Editar Administrar os Campos do Log de Auditoria (Administrativo)'});
+db.ADM_FUNCIONALIDADE.insert({fun_seq: 23, fun_pag_seq: 23, fun_descricao: 'Visualizar Arquivo de Log do Servidor (Administrativo)'});
+
+
+
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 1, fpg_pag_seq: 1});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 2, fpg_pag_seq: 2});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 3, fpg_pag_seq: 3});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 4, fpg_pag_seq: 4});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 5, fpg_pag_seq: 5});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 6, fpg_pag_seq: 6});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 7, fpg_pag_seq: 7});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 8, fpg_pag_seq: 8});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 9, fpg_pag_seq: 9});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 10, fpg_pag_seq: 10});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 11, fpg_pag_seq: 11});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 12, fpg_pag_seq: 12});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 13, fpg_pag_seq: 13});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 14, fpg_pag_seq: 14});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 15, fpg_pag_seq: 15});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 16, fpg_pag_seq: 16});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 17, fpg_pag_seq: 17});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 18, fpg_pag_seq: 18});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 19, fpg_pag_seq: 19});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 20, fpg_pag_seq: 20});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 21, fpg_pag_seq: 21});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 22, fpg_pag_seq: 22});
+db.ADM_FUNCIONALIDADE_PAGINA.insert({fpg_fun_seq: 23, fpg_pag_seq: 23});
+
+
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 1, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 2, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 3, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 4, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 5, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 6, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 7, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 8, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 9, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 10, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 11, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 12, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 13, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 14, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 15, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 16, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 17, fpl_prf_seq: 1});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 17, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 18, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 19, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 20, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 21, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 22, fpl_prf_seq: 2});
+db.ADM_FUNCIONALIDADE_PERFIL.insert({fpl_fun_seq: 23, fpl_prf_seq: 2});
+
+
+db.ADM_MENU.insert({mnu_seq: 1, mnu_descricao: 'Administrativo', mnu_pai_seq: null, mnu_fun_seq: null, mnu_ordem: 1});
+db.ADM_MENU.insert({mnu_seq: 2, mnu_descricao: 'Categoria dos Parâmetros de Configuração (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 1, mnu_ordem: 2});
+db.ADM_MENU.insert({mnu_seq: 3, mnu_descricao: 'Parâmetros de Configuração (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 3, mnu_ordem: 3});
+db.ADM_MENU.insert({mnu_seq: 4, mnu_descricao: 'Administrar Perfil (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 5, mnu_ordem: 4});
+db.ADM_MENU.insert({mnu_seq: 5, mnu_descricao: 'Administrar Funcionalidade (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 7, mnu_ordem: 5});
+db.ADM_MENU.insert({mnu_seq: 6, mnu_descricao: 'Administrar Página (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 9, mnu_ordem: 6});
+db.ADM_MENU.insert({mnu_seq: 7, mnu_descricao: 'Administrar Menu (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 11, mnu_ordem: 7});
+db.ADM_MENU.insert({mnu_seq: 8, mnu_descricao: 'Administrar os Cargos (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 13, mnu_ordem: 8});
+db.ADM_MENU.insert({mnu_seq: 9, mnu_descricao: 'Administrar os Funcionários (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 15, mnu_ordem: 9});
+db.ADM_MENU.insert({mnu_seq: 10, mnu_descricao: 'Administrar os Setores (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 17, mnu_ordem: 10});
+db.ADM_MENU.insert({mnu_seq: 11, mnu_descricao: 'Visualizar os Usuários (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 19, mnu_ordem: 11});
+db.ADM_MENU.insert({mnu_seq: 12, mnu_descricao: 'Visualizar os Logs de Auditoria (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 20, mnu_ordem: 12});
+db.ADM_MENU.insert({mnu_seq: 13, mnu_descricao: 'Administrar os Campos do Log de Auditoria (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 21, mnu_ordem: 13});
+db.ADM_MENU.insert({mnu_seq: 14, mnu_descricao: 'Visualizar Arquivo de Log do Servidor (Administrativo)', mnu_pai_seq: 1, mnu_fun_seq: 23, mnu_ordem: 14});
+
+
+
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 1, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 2, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 3, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 4, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 5, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 6, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 7, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 8, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 9, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 10, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 11, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 12, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 13, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 14, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 15, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 16, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 17, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 18, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 19, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 20, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 21, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 22, pgl_prf_seq: 2});
+db.ADM_PAGINA_PERFIL.insert({pgl_pag_seq: 23, pgl_prf_seq: 2});
