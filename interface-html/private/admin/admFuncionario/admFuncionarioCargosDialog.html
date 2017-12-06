@@ -1,0 +1,86 @@
+<!-- Modal -->
+<div class="modal fade" id="admFuncionarioCargosDialog" role="dialog">
+	<div class="modal-dialog modal-md">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Funcionário</h4>
+			</div>
+			<div class="modal-body">
+			
+				<table class="table table-bordered table-condensed">
+					<tbody>
+						<tr>
+							<td style="font-weight: bold;">Matrícula:</td>
+							<td>90875</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Nome:</td>
+							<td>Henrique Figueiredo de Souza</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">CPF:</td>
+							<td>890.654.321.45</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">E-mail:</td>
+							<td>riquefsouza@gmail.com</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Telefone(s):</td>
+							<td>(21) 908028209</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Celular(s):</td>
+							<td>(21) 908028209</td>							
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Setor:</td>
+							<td>DIREM</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Cargo Principal:</td>
+							<td>Analista Judiciário</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Data de Admissão:</td>
+							<td>03/10/2017</td>
+						</tr>
+						<tr>
+							<td style="font-weight: bold;">Data de Saída:</td>
+							<td>03/10/2017</td>
+						</tr>
+					</tbody>
+				</table>
+			
+			
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label for="cmbCargosFuncionario">Cargos do Funcionário:</label>
+						<select size="5" class="form-control" id="cmbCargosFuncionario" label="Cargos do Funcionário">
+							<option id="item1">Item1</option>
+							<option id="item1">Item2</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('#tabelaFuncionariosCargo').DataTable({
+			scrollY: "200px",
+			scrollCollapse: true,
+			paging: false,
+			select: {
+				style: 'single'
+			},
+			language: hfsDatatablesLinguagem()
+		});
+	});
+</script>

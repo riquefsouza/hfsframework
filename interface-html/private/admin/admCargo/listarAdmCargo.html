@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/sistema-datatables.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		$("#admCargoPerfisDlg").load("admCargoPerfisDialog.html");
+		hfsDatatablesIniciar("AdmCargo", 1);		
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmCargo">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Cargos
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir um novo cargo" onclick="window.location.href='editarAdmCargo.html'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar um cargo" onclick="hfsDatatablesEditar('AdmCargo')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir um cargo" onclick="hfsDatatablesExcluir('AdmCargo')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<div id="admCargoPerfisDlg"></div>
+		
+		<table id="tabelaAdmCargo"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">				
+			<thead>
+				<tr class="tema-principal">
+					<th>Descri&ccedil;&atilde;o</th>
+					<td></td>
+				</tr>	
+			</thead>
+			<tbody>
+				<tr>
+				  <td>ANALISTA
+			JUD - AREA JUDICIARIA</td>
+				  <td style="width:50px;text-align: center;"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+					<td>ANALISTA
+			JUD - AREA ADMINISTRATIVA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AREA ADM(PLANEJ)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESTAGIARIO
+			- NIVEL MEDIO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESTAGIARIO
+			- NIVEL SUPERIOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CARGO
+			FICTICIO - FUNCIONARIO INATIVO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE APOIO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			TECNICO DE PAGAMENTO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE DIRETOR GERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			JURIDICO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>OFICIAL
+			DE JUSTICA AVALIADOR FEDERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA AIC</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>AGENTE DE
+			SEGURANCA JUDICIARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADM - (TELEC E ELET)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADM - (SEGURAN&Ccedil;A)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADM - (MECANICA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADM - (CARP E MARC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADM - ARTES GR&Aacute;FICAS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SERVIDOR
+			REMOVIDO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CONVOCADO TRT</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			DESIGNADO VT</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>AGENTE
+			ESPECIALIZADO TURMA/GAB.</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>PRESIDENTE
+			COMISSAO PERMANENTE AUDITORIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DE SECRETARIA DE VT (JCJ)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			(FC-2)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADM - (TRANSPORTE)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AESP (OPERA&Ccedil;&Atilde;O COMP)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AREA ADM(CONTABILIDADE)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP(MEDICINA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP(TECNO INFORMA&Ccedil;&Atilde;O)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO - GRACO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP-(MEDICINA DO TRABALHO)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO I</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			ESPECIALIZADO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE JUIZ DIRETOR DE FORO DA CAPITAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			DE CONTROLE INTERNO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO-GERAL
+			DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			GERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESCRITURARIO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>OFICIAL
+			DE JUSTICA AVALIADOR PJ</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPLENTE
+			DE JUIZ DE JCJ</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			SECRETARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DE SECRETARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIR
+			DISTRIB MANDADOS JUDICIAIS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DEPOSITARIO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DISTRIBUIDOR
+			DE FEITOS JUDICIAIS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CORREGEDOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ VICE
+			CORREGEDOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CLASSISTA TRT TRABALHADORES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CLASSISTA TRT EMPREGADORES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			TOGADO TRT</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			TITULAR DE VARA DO TRABALHO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			SUBSTITUTO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			GERAL DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPL JUIZ
+			CLASS REP EMPREGADOS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPL JUIZ
+			CLASS REP EMPREGADORES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPL JUIZ
+			CLASS TRT TRABALHADORES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPL JUIZ
+			CLASS TRT EMPREGADORES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP(ARQUIVOLOGIA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP(ESTATISTICA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSIST
+			CHEFE SECRETARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>BIBLIOTECARIO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-01 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-02 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-03 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-04 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-05 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-06 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-07 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-08 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-09 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CEDIDO
+			FC-10 CONTROLE SEC LEGISLACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP-(MEDICINA CARDIOLOGIA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>COORDENADOR
+			CJ-2</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			JURIDICO 2</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPERVISOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA AJU</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA ACC</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>COORDENADOR
+			CPL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>COMISSIONADO
+			SEM PROVIMENTO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA II</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA ARR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESPECIALISTA
+			DE CONTROLE INTERNO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA ACC</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESPECIALISTA
+			EM TECNOLOGIA DA INFORMACAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPERVISOR
+			E</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			JURIDICO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE DIRETOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE COORDENADOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE COORDENADOR DE CPL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			DA AREA FINANCEIRA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			DE NEGOCIOS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>AGENTE
+			ESPECIALIZADO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DESEN CON QUAL SEG TEC INF</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DE APOIO EXTERNO E INSTITUC</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			ADMINISTRATIVO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			ADMINISTRATIVO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSIST
+			GERAL SECRET PRES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DIRETOR GERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			CHEFE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSIST
+			CHEFE DE DIVISAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSIST
+			DIR SECRETARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSIST
+			TEC ESPECIALIZADO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA COORDENADOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			SECAO ESPECIALIZADA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA I</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DE PLANEJ E ORCAMENTO PRES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			TECNICO DE PLANEJ E ORCAMEN</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			SEC DE TURMA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			COORDENADORIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR-GERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DE DEPARTAMENTO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DE SECRETARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CORREGEDOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ VICE
+			CORREGEDOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>PRESIDENTE
+			DO TRIBUNAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			GERAL DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			DIRETOR GERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			TRIBUNAL PLENO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			ESPEC CALCULISTA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPERVISOR
+			DE SETOR (extinta)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>VICE
+			PRESIDENTE DO TRIBUNAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CLASSISTA REP EMPREGADOS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>JUIZ
+			CLASSISTA REP EMPREGADORES</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CARGO
+			EXTINTO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>FUNCIONARIO
+			ACOMPANHA CONJUGE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SERVIDOR
+			REQUISITADO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DE JUIZ</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DE SERVICOS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DE DIVISAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			DO TRIBUNAL PLENO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA CORREGEDORIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (AG ADMIN)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (AG SEG JUD)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (AG TELE ELET)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (ANALIST SIST)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (ARTIF ART GRAF)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (ART CARP MARC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (ART ELET COM)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (ARTIF MECAN)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (ASSIST SOC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (ATEND JUDIC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (AUX JUDIC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (BIBLIOTEC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (CONTADOR)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (ENFERMEIRO)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (MEDICO)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (OF JUST AV)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUDICIARIO (OPER COMP)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (TECN ADM)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUDICIARIO (TECN JUDIC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DO DIRETOR GERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA JUDICIARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AREA ADMINISTRATIVA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - SERV GER(TRANSP E SEG)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - SERV GER(TELEC E ELET)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - SERV GER(ARTES GRAFIC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - SERV GER (CARP E MARC)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - SERV GERAIS (MECANICA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP (SERVICO SOCIAL)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP(BIBLIOTECONOMIA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP (ENFERMAGEM)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP(PSICOLOGIA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AREA JUD(EXEC MANDAD)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AREA ADM(ADMINISTR)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			ESPECIALIZADO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE DIRETOR CJ-1</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO apoio graco</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DA PRESIDENCIA ACE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPERVISOR
+			DA COMISS&Atilde;O DE INVENT&Aacute;RIO ALMOX PATRIM</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE SUPERVISOR</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AREA JUD - OF JUSTICA AVAL FEDERAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE DIRETOR DE SECRETARIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ANALISTA
+			JUD - AESP (MEDICINA PSIQUIATRIA)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>DIRETOR
+			DA SECRETARIA-GERAL JUDICI&Aacute;RIA</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			CALCULISTA DE VT</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			(VT)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			POSTO AVAN&Ccedil;ADO FC-6</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE CHEFE DE POSTO AVAN&Ccedil;ADO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			GABINETE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SECRETARIO
+			DE AUDIENCIAS</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			DIVISAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			SECAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE GABINETE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			ADMINISTRATIVO (gab)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO (jurisp)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO (socioamb)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE DIRETOR DE SECRETARIA<span style="">&nbsp;
+				  </span>(VT)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			SECRETARIO DE JUIZ<span style="">&nbsp;
+				  </span>(VT)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AESP (TECNO INFORMA&Ccedil;&Atilde;O)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSISTENTE
+			DE JUIZ SUBSTITUTO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			GABINETE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>CHEFE DE
+			COMISSAO</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DE CONTRATA&Ccedil;&Atilde;O</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ASSESSOR
+			DE CONFORMIDADE</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESPECIALISTA
+			DE CONTRATA&Ccedil;&Atilde;O</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESPECIALISTA
+			DE MANUTEN&Ccedil;&Atilde;O E INFRAESTRUTURA PREDIAL</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>SUPERVISOR
+			(Ouvidoria)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>TECNICO
+			JUD - AESP (ENFERMAGEM)</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				<tr>
+				  <td>ESTAGIARIO
+			- NIVEL SUPERIOR 6H</td>
+				  <td style="width:50px;text-align: center"><button type="button" class="btn btn-info" style="font-size:4px" data-toggle="modal" data-target="#admCargoPerfisDialog"><span class="glyphicon glyphicon-search" style="font-size:8px"></span></button></td>
+				</tr>
+				
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>

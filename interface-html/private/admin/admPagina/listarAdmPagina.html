@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/sistema-datatables.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		hfsDatatablesIniciar("AdmPagina");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmPagina">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar Página
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir uma nova categoria dos parâmetros de configuração" onclick="window.location.href='editarAdmPagina.html'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar uma categoria dos parâmetros de configuração" onclick="hfsDatatablesEditar('AdmPagina')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir uma categoria dos parâmetros de configuração" onclick="hfsDatatablesExcluir('AdmPagina')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<table id="tabelaAdmPagina"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">
+			<col style="width: 239pt;" width="319">
+			<col style="width: 317pt;" width="422">
+			<col style="width: 275pt;" width="366">
+			<thead>
+				<tr class="tema-principal">
+					<th>P&aacute;gina</th>
+					<th>Classe da P&aacute;gina</th>
+					<th>Perfil(s) da P&aacute;gina</th>
+				</tr>	
+			</thead>
+			<tbody>
+				<tr>
+					<td>tipoDespesa/editarTipoDespesa.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.tipoDespesa.TipoDespesaMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>tipoDespesa/listarTipoDespesa.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.tipoDespesa.TipoDespesaMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/vwAdmLog/listarVwAdmLog.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.vwAdmLog.VwAdmLogMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admLogColuna/listarAdmLogColuna.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admLogColuna.AdmLogColunaMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admLogColuna/editarAdmLogColuna.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admLogColuna.AdmLogColunaMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/visualizarArqLogServidor.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.VisualizarArqLogServidorMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>painelOrcamento/painelOrcamento.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.painelorcamento.PainelOrcamentoMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>gerarPlanilha.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.GerarPlanilhaMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>orcamento/listarOrcamento.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.orcamento.OrcamentoMB</td>
+					<td>Operador/Respons&aacute;vel por Contrato em
+						Setor, Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>orcamento/editarOrcamento.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.orcamento.OrcamentoMB</td>
+					<td>Operador/Respons&aacute;vel por Contrato em
+						Setor, Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>visualizarOrcamento/visualizarOrcamento.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.orcamento.VisualizarOrcamentoMB</td>
+					<td>Consulta, Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>classificacao/listarClassificacao.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.ClassificacaoMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>classificacao/editarClassificacao.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.ClassificacaoMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>categoria/listarCategoria.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.categoria.CategoriaMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>categoria/editarCategoria.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.categoria.CategoriaMB</td>
+					<td>Financeiro, Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>setor/listarSetor.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.SetorMB</td>
+					<td>Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>credor/listarCredor.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.CredorMB</td>
+					<td>Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>fiscal/listarFiscal.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.FiscalMB</td>
+					<td>Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>vwSigFuncionario/listarVwSigFuncionario.xhtml</td>
+					<td>br.jus.trt1.orcamento.view.VwSigFuncionarioMB</td>
+					<td>Geral, Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admParametroCategoria/listarAdmParametroCategoria.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admParametroCategoria.AdmParametroCategoriaMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admParametroCategoria/editarAdmParametroCategoria.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admParametroCategoria.AdmParametroCategoriaMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admParametro/listarAdmParametro.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admParametro.AdmParametroMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admParametro/editarAdmParametro.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admParametro.AdmParametroMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admPerfil/listarAdmPerfil.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admPerfil.AdmPerfilMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admPerfil/editarAdmPerfil.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admPerfil.AdmPerfilMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admFuncionalidade/listarAdmFuncionalidade.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admFuncionalidade.AdmFuncionalidadeMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admFuncionalidade/editarAdmFuncionalidade.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admFuncionalidade.AdmFuncionalidadeMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admPagina/listarAdmPagina.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admPagina.AdmPaginaMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admPagina/editarAdmPagina.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admPagina.AdmPaginaMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admMenu/listarAdmMenu.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admMenu.AdmMenuMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admMenu/editarAdmMenu.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admMenu.AdmMenuMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admCargo/listarAdmCargo.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admCargo.AdmCargoMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admFuncionario/listarAdmFuncionario.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admFuncionario.AdmFuncionarioMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admSetor/listarAdmSetor.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admSetor.AdmSetorMB</td>
+					<td>Administrador</td>
+				</tr>
+				<tr>
+					<td>admin/admUsuario/listarAdmUsuario.xhtml</td>
+					<td>br.jus.trt1.frameworkdirem.admin.view.admUsuario.AdmUsuarioMB</td>
+					<td>Administrador</td>
+				</tr>
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/datepicker.css" />
+	
+	<link rel="stylesheet" type="text/css" href="resources/css/sistema.css" />
+
+	<script src="resources/js/jquery-3.2.1.min.js"></script>
+	<script src="resources/js/jquery.meio.mask.min.js"></script>
+	<script src="resources/js/jquery.numeric.js"></script>
+
+	<script src="resources/js/bootstrap.min.js"></script>
+	<script src="resources/js/bootstrap-datepicker.js"></script>
+	<script src="resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="resources/js/bootbox.min.js"></script>
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand">HFS Framework</a>
+		</div>
+	  </div>
+	</nav>
+	
+	<div class="container-fluid" style="margin: 0 auto; width:400px; position: float;">
+		<div id="tela-login">
+			<div class="panel panel-default" id="tela-login">
+				<div class="panel-heading" style="font-weight: normal;">Autentique-se</div>
+				<div class="panel-body">			
+					<div class="form-group">
+						<label for="username">Usuário:</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input type="text" class="form-control" id="username" label="Usuário" placeholder="Informe seu nome de usuário" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password">Senha:</label>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input type="password" class="form-control" id="password" label="Senha" placeholder="Informe sua senha">
+						</div>
+					</div>
+					<br />
+					<div class="form-group">
+						<div style="margin: 0 auto; width:30%">
+							<button type="button" class="btn btn-success" id="login-button" style="width: 120px" onclick="window.location.href='private/desktop.html'">Entrar</button>
+						</div>
+					</div>
+				</div>		
+			</div>
+		</div>	
+	</div>
+	<div class="rodape-central hidden-xs">
+		<div class="info-browser">
+			<span>Todos os direitos reservados para Henrique Figueiredo de Souza</span>
+		</div>
+	</div>
+</body>
+</html>

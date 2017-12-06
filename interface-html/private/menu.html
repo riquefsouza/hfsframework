@@ -1,0 +1,65 @@
+﻿<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+	  <a class="navbar-brand" href="file:///c:/hfs-workspace/interface-html/private/desktop.html">HFS Framework</a>
+    </div>
+    <ul class="nav navbar-nav">
+	  <li class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" href="#">Administrativo<span class="caret"></span></a>
+		<ul class="dropdown-menu">
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admParametroCategoria/listarAdmParametroCategoria.html">Categoria dos Parâmetros de Configuração</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admParametro/listarAdmParametro.html">Parâmetros de Configuração</a></li>	          
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admPerfil/listarAdmPerfil.html">Administrar Perfil</a></li>
+		  <li role="separator" class="divider"></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admFuncionalidade/listarAdmFuncionalidade.html">Administrar Funcionalidade</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admPagina/listarAdmPagina.html">Administrar Página</a></li>	          
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admMenu/listarAdmMenu.html">Administrar Menu</a></li>
+		  <li role="separator" class="divider"></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admCargo/listarAdmCargo.html">Administrar os Cargos</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admFuncionario/listarAdmFuncionario.html">Administrar os Funcionários</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admSetor/listarAdmSetor.html">Administrar os Setores</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admUsuario/listarAdmUsuario.html">Visualizar os Usuários</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admLog/listarAdmLog.html">Visualizar os Logs de Auditoria</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/admLogColuna/listarAdmLogColuna.html">Administrar os Campos do Log de Auditoria</a></li>
+		  <li><a href="file:///c:/hfs-workspace/interface-html/private/admin/visualizarArqLogServidor.html">Visualizar Arquivo de Log do Servidor</a></li>
+		</ul>
+	  </li>
+	  <li><a href="file:///c:/hfs-workspace/interface-html/private/alterarSenha.html">Alterar Senha</a></li>
+	  
+	  <li><a href="file:///c:/hfs-workspace/interface-html/login.html"><img class="imagem-inverte" src="file:///c:/hfs-workspace/interface-html/resources/img/sair.png" alt="Sair" />Sair</a></li>
+    </ul>
+	
+	<ul class="nav navbar-nav pull-right"
+		style="display: inline-block; padding-top: 15px; font-size: 90%">
+		<li>
+				<small> 
+					<span id="informacoes-usuario" class="lightgray">Sessão expira: 
+						<span id="dialog-countdown-geral"></span>
+						<i class="glyphicon glyphicon-user"></i> 
+						<a data-toggle="modal" data-target="#infoUsuarioDialog" style="cursor: pointer; cursor: hand; text-decoration: none;">henrique.souza</a>
+					</span>
+				</small>
+			
+			</li>
+	</ul>
+	
+  </div>
+</nav>
+
+<div class="tela-conteudo">
+	<div class="alert alert-danger alert-dismissable fade in" id="alert-messages" style="display:none;">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Favor selecionar um registro da tabela para proceder esta ação.</strong>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$("#sessaoSistema").load("file:///c:/hfs-workspace/interface-html/sessionTimeOut.html");	
+        $("#infoUsuario").load("file:///c:/hfs-workspace/interface-html/private/infoUsuario.html");
+	});
+</script>
+
+<div id="sessaoSistema"></div>
+
+<div id="infoUsuario"></div>

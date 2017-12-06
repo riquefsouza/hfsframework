@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../resources/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../resources/css/bootstrap-spinner.css" />
+	
+	<link rel="stylesheet" type="text/css" href="../../resources/css/sistema.css" />
+		
+	<script src="../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../resources/js/bootstrap.min.js"></script>
+	<script src="../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../resources/js/sistema-datatables.js"></script>
+	<script src="../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../private/menu.html");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="visualizarArqLogServidor">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Visualizar Arquivo de Log do Servidor
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="numeroLinhasLog">Número de Linhas do Log:</label>
+						<div class="input-group spinner" style="width: 80%;">
+							<input type="text" class="form-control" id="numeroLinhasLog" label="Número de Linhas do Log" value="100">
+							<div class="input-group-btn-vertical">
+								<button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+								<button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+							</div>
+						</div>
+					</div>			
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-info" id="btnPesquisar">
+				<span class="glyphicon glyphicon-search"></span> Pesquisar
+			</button>
+
+			<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+				<span class="glyphicon glyphicon-star"></span> Limpar
+			</button>
+			
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+		
+		<pre style="width:100%;height:600px">
+			<div id="txtLog"> texto </div>
+		</pre>
+			
+	</form>
+</div>
+
+<script src="../../resources/js/bootstrap-spinner.js"></script>
+
+</body>
+</html>

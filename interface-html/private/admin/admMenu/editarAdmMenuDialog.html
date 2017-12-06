@@ -1,0 +1,49 @@
+<!-- Modal -->
+<div class="modal fade" id="editarAdmMenuDialog" role="dialog">
+	<div class="modal-dialog modal-lg">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Incluir Novo Item de Menu</h4>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label for="cmbFuncionalidade">Funcionalidade:</label>
+						<select class="form-control" id="cmbFuncionalidade"	label="Funcionalidade">
+							<option id="item1">Item1</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label for="descricao">Nome do Item de Menu:</label> 
+						<input type="text" class="form-control" id="descricao"
+							label="Nome do Item de Menu" maxlength="250">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label for="cmbMenuPai">Menu Pai:</label> <select
+							class="form-control" id="cmbMenuPai" label="Menu Pai">
+							<option id="item1">Item1</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" id="btnSalvar"
+					label="Salvar um item de menu" data-dismiss="modal">
+					<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+				</button>
+				<button type="button" class="btn btn-primary" id="btnCancelar"
+					label="Cancelar" data-dismiss="modal">
+					<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+				</button>
+			</div>
+		</div>
+
+	</div>
+</div>

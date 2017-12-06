@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/jasny-bootstrap.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+	
+	<script src="../../../resources/js/jasny-bootstrap.min.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="editarAdmFuncionario">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Funcionários
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar um cargo" onclick="window.location.href='listarAdmFuncionario.html'">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='listarAdmFuncionario.html'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="matricula">Matrícula:</label>
+						<input type="text" class="form-control" id="matricula" label="Matrícula" maxlength="10">
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="nome">Nome:</label>
+						<input type="text" class="form-control" id="nome" label="Nome" maxlength="255">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-2 form-group">
+						<label for="cpf">CPF:</label>
+						<input type="text" class="form-control" id="cpf" label="CPF" data-mask="999.999.999-99" placeholder="digite o CPF">
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="email">E-mail:</label>
+						<input type="text" class="form-control" id="email" label="E-mail" maxlength="255">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="cmbSetor">Setor:</label>
+						<select class="form-control" id="cmbSetor" label="Setor">
+							<option id="item1">Setor 1</option>
+						</select>
+					</div>
+					<div class="col-md-4 form-group">
+						<label for="cmbCargoPrincipal">Cargo Principal:</label>
+						<select class="form-control" id="cmbCargoPrincipal" label="Cargo Principal">
+							<option id="item1">Cargo Principal 1</option>
+						</select>
+					</div>					
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>
+	

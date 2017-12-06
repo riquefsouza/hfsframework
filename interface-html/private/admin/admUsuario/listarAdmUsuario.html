@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/sistema-datatables.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		hfsDatatablesIniciar("AdmUsuario");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmUsuario">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Visualizar os Usuários
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<table id="tabelaAdmUsuario"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">
+				
+			<thead>
+				<tr class="tema-principal">
+				  <th>Matr&iacute;cula</th>
+				  <th>IP</th>
+				  <th>Login</th>
+				  <th>Nome</th>
+				  <th>Data</th>
+				  <th>CPF</th>
+				  <th>E-mail</th>
+				</tr>	
+			</thead>
+			<tbody>
+
+<tr>
+				  <td>93203</td>
+				  <td>10.1.49.104</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>09/08/2017
+			14:40:10</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>55140</td>
+				  <td>10.1.49.104</td>
+				  <td>maria.bittencourt</td>
+				  <td>MARIA
+			DE LOURDES PIRES BITTENCOURT</td>
+				  <td>09/08/2017
+			16:08:10</td>
+				  <td>006.613.537-02</td>
+				  <td>maria.bittencourt@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.72.111</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>19/07/2017
+			12:06:31</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.49.52</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>21/07/2017
+			14:06:31</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>141070</td>
+				  <td>10.1.103.132</td>
+				  <td>kaio.peixoto</td>
+				  <td>KAIO
+			CESAR NASCIMENTO PEIXOTO</td>
+				  <td>18/08/2017
+			16:07:44</td>
+				  <td>368.227.328-02</td>
+				  <td>kaio.peixoto@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.107.95</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>01/09/2017
+			15:14:14</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93203</td>
+				  <td>10.1.63.123</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>23/08/2017
+			15:48:29</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.49.104</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>20/09/2017
+			14:23:40</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>95745</td>
+				  <td>10.1.107.58</td>
+				  <td>romulo.oliveira</td>
+				  <td>Romulo
+			Oliveira Souza</td>
+				  <td>20/09/2017
+			17:16:01</td>
+				  <td>896.407.641-91</td>
+				  <td>romulo.oliveira@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>38105</td>
+				  <td>10.1.96.44</td>
+				  <td>denise.silva</td>
+				  <td>Denise
+			Barbosa Alves e Silva</td>
+				  <td>20/09/2017
+			17:32:32</td>
+				  <td>844.005.447-53</td>
+				  <td>denise.silva@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>77119</td>
+				  <td>10.1.72.111</td>
+				  <td>paula.genofre</td>
+				  <td>Paula
+			de Frias Werneck Genofre</td>
+				  <td>20/07/2017
+			11:26:43</td>
+				  <td>074.048.567-95</td>
+				  <td>paula.genofre@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93220</td>
+				  <td>10.1.96.209</td>
+				  <td>leila.furtado</td>
+				  <td>Leila
+			de Oliveira Furtado</td>
+				  <td>18/08/2017
+			11:27:24</td>
+				  <td>035.527.377-23</td>
+				  <td>leila.furtado@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93203</td>
+				  <td>10.1.96.209</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>18/08/2017
+			11:27:45</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93203</td>
+				  <td>10.1.107.123</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>05/10/2017
+			12:55:38</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.96.168</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>20/07/2017
+			17:51:18</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93203</td>
+				  <td>127.0.0.1</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>17/07/2017
+			13:49:12</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93203</td>
+				  <td>10.1.72.111</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>19/07/2017
+			13:11:38</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>77119</td>
+				  <td>10.1.101.185</td>
+				  <td>paula.genofre</td>
+				  <td>Paula
+			de Frias Werneck Genofre</td>
+				  <td>21/07/2017
+			12:49:30</td>
+				  <td>074.048.567-95</td>
+				  <td>paula.genofre@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>98256</td>
+				  <td>10.1.96.49</td>
+				  <td>filemon.santos</td>
+				  <td>Fil&ecirc;mon
+			de Castro Santos</td>
+				  <td>27/07/2017
+			15:18:41</td>
+				  <td>758.260.382-68</td>
+				  <td>filemon.santos@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>98256</td>
+				  <td>10.1.96.152</td>
+				  <td>filemon.santos</td>
+				  <td>Fil&ecirc;mon
+			de Castro Santos</td>
+				  <td>14/08/2017
+			10:31:56</td>
+				  <td>758.260.382-68</td>
+				  <td>filemon.santos@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>95273</td>
+				  <td>10.1.107.97</td>
+				  <td>enio.marins</td>
+				  <td>Enio
+			Romano Marins</td>
+				  <td>17/08/2017
+			18:17:13</td>
+				  <td>025.565.197-03</td>
+				  <td>enio.marins@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.63.123</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>21/08/2017
+			16:53:44</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>86592</td>
+				  <td>10.1.51.138</td>
+				  <td>rafael.remiro</td>
+				  <td>Rafael
+			Remiro</td>
+				  <td>04/09/2017
+			16:31:54</td>
+				  <td>055.180.997-38</td>
+				  <td>rafael.remiro@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>93203</td>
+				  <td>10.1.107.30</td>
+				  <td>henrique.souza</td>
+				  <td>Henrique
+			Figueiredo de Souza</td>
+				  <td>17/07/2017
+			12:58:37</td>
+				  <td>026.857.484-74</td>
+				  <td>henrique.souza@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>77801</td>
+				  <td>10.1.72.111</td>
+				  <td>andre.rocha</td>
+				  <td>Andre
+			Resende Rocha</td>
+				  <td>20/07/2017
+			13:20:51</td>
+				  <td>047.588.426-47</td>
+				  <td>andre.rocha@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>141070</td>
+				  <td>10.1.63.123</td>
+				  <td>kaio.peixoto</td>
+				  <td>KAIO
+			CESAR NASCIMENTO PEIXOTO</td>
+				  <td>18/08/2017
+			18:01:23</td>
+				  <td>368.227.328-02</td>
+				  <td>kaio.peixoto@trtrio.gov.br</td>
+				</tr>
+				<tr>
+				  <td>95273</td>
+				  <td>10.1.63.123</td>
+				  <td>enio.marins</td>
+				  <td>Enio
+			Romano Marins</td>
+				  <td>18/08/2017
+			18:18:01</td>
+				  <td>025.565.197-03</td>
+				  <td>enio.marins@trtrio.gov.br</td>
+				</tr>
+			
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>

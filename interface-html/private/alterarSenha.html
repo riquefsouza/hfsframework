@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../resources/css/datepicker.css" />
+	
+	<link rel="stylesheet" type="text/css" href="../resources/css/sistema.css" />
+
+	<script src="../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../resources/js/jquery.numeric.js"></script>
+
+	<script src="../resources/js/bootstrap.min.js"></script>
+	<script src="../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../resources/js/bootbox.min.js"></script>
+	<script src="../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("menu.html");
+	});
+
+	function dlgAlterarSenha(){
+		bootbox.confirm({
+			message: "Confirma Alterar Senha?",
+			buttons: {
+				confirm: {
+					label: 'Sim',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: 'Não',
+					className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				alert(result);
+			}
+		});
+	}	
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="alterarSenha" style="width: 550px">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Alteração de Senha
+			</div>
+			<div class="panel-body">
+			
+				<div class="form-actions">
+					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar a senha" onclick="dlgAlterarSenha()">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+				
+					<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='desktop.html'">
+						<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+					</button>
+				</div>
+
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label for="senhaAtual">Senha atual:</label>
+						<input type="password" class="form-control" id="senhaAtual" label="Senha Atual" maxlength="128">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label for="senhaNova">Nova senha:</label>
+						<input type="password" class="form-control" id="senhaNova" label="Nova senha" maxlength="128">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label for="confirmaSenhaNova">Confirmar nova senha:</label>
+						<input type="password" class="form-control" id="confirmaSenhaNova" label="Confirmar nova senha" maxlength="128">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>

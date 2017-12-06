@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script src="../../../resources/js/datatables.min.js"></script>
+	<script src="../../../resources/js/bootstrap-treeview.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		$("#editarAdmMenuDlg").load("editarAdmMenuDialog.html");
+		
+        var menuDados = [
+          {
+            text: 'Administrativo',
+            nodes: [
+              { text: 'Categoria dos Parâmetros de Configuração (Administrativo)'},
+              { text: 'Parâmetros de Configuração (Administrativo)'},
+              { text: 'Administrar Perfil (Administrativo)'},
+              { text: 'Administrar Funcionalidade (Administrativo)'},
+              { text: 'Administrar Página (Administrativo)'},
+              { text: 'Administrar Menu (Administrativo)'},
+              { text: 'Visualizar os Cargos (Administrativo)'},
+              { text: 'Visualizar os Funcionários (Administrativo)'},
+              { text: 'Visualizar os Setores (Administrativo)'},
+              { text: 'Visualizar os Usuários (Administrativo)'},
+              { text: 'Visualizar os Logs de Auditoria (Administrativo)'},
+              { text: 'Administrar os Campos do Log de Auditoria (Administrativo)'},
+              { text: 'Visualizar Arquivo de Log do Servidor (Administrativo)'}
+            ]
+          },
+          {
+            text: 'Consultas SIGEO',
+            nodes: [
+              { text: 'Consulta de Credor (SIGEO)'},
+              { text: 'Consulta de Setor (SIGEO)'},
+              { text: 'Consulta de Fiscal (SIGEO)'},
+              { text: 'Consulta de Funcionário (SIGEO)'}
+			]
+          },
+          {
+            text: 'Orçamento',
+            nodes: [
+              { text: 'Painel de Aquisições e contratações'},
+              { text: 'Gerar Planilha'},
+              { text: 'Cadastro de Orçamento'},
+              { text: 'Visualizar Orçamento'},
+              { text: 'Abas (visões) primárias'},
+              { text: 'Tipos de despesa'},
+              { text: 'Classificação de processos e empenhos'}
+            ]
+          }
+		];
+		
+		
+		$('#arvoreMenu').treeview({
+			levels: 1,
+			showBorder: false,
+			data: menuDados,
+			multiSelect: false,
+			onNodeSelected: function(event, node) {
+				alert(node.text);
+			}
+		});
+		  
+	});
+	
+	function prepararParaExcluir() {
+		bootbox.confirm({
+			message: "Confirma exclusão?",
+			buttons: {
+				confirm: {
+					label: 'Sim',
+					className: 'btn-success'
+				},
+				cancel: {
+					label: 'Não',
+					className: 'btn-danger'
+				}
+			},
+			callback: function (result) {
+				alert('Resultado: ' + result);
+			}
+		});
+	}	
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmMenu">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar Menu
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir uma nova categoria dos parâmetros de configuração" data-toggle="modal" data-target="#editarAdmMenuDialog">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar uma categoria dos parâmetros de configuração" data-toggle="modal" data-target="#editarAdmMenuDialog">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir uma categoria dos parâmetros de configuração" onclick="prepararParaExcluir()">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<div class="row">
+			<div class="tela-conteudo">
+				<h4>Menu Superior do Sistema:</h4>
+				<div id="arvoreMenu" class=""></div>
+			</div>	
+		</div>
+		
+		<div id="editarAdmMenuDlg"></div>
+		
+	</form>
+</div>
+
+</body>
+</html>

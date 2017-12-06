@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/hfscomponents-pickList.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		hfsPickListIniciar("perfil");
+		hfsPickListIniciar("pagina");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="editarAdmFuncionalidade">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar Funcionalidade
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar uma categoria dos parâmetros de configuração" onclick="window.location.href='listarAdmFuncionalidade.html'">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='listarAdmFuncionalidade.html'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+
+				<div class="row">
+					<div class="col-md-7 form-group">
+						<label for="descricao">Funcionalidade:</label>
+						<input type="text" class="form-control" id="descricao" label="Funcionalidade" maxlength="255">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-7 form-group">			
+						<label for="cmbPaginaInicial">Página Inicial:</label>
+						<select class="form-control" id="cmbPaginaInicial" label="Página Inicial">
+							<option id="item1">Item1</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+				
+					<!--  pickList_perfils -->
+					<div class="col-md-5" id="pickList_perfil">
+						<div class="row">
+							<div class="col-md-11">
+								<label style="width:100%;" class="tema-principal">Perfil(s) da Funcionalidade:</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa1_perfil" placeholder="Pesquisar...">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								</div>								
+							</div>
+							<div class="col-md-1">
+								
+							</div>
+							<div class="col-md-5">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa2_perfil" placeholder="Pesquisar...">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="height: 5px">
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<label for="pickListValor1_perfil" style="width:100%;" class="tema-principal">Disponíveis</label>
+								<select class="form-control" multiple="multiple" size="10" id="pickListValor1_perfil">
+									<option id="item1">Item1</option>
+									<option id="item2">Item2</option>
+								</select>
+							</div>
+							<div class="col-md-1">
+								<div style="height: 50px"></div>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn btn-default" id="pickListBtnAdicionar_perfil">
+										<span class="glyphicon glyphicon-forward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnTodosAdicionar_perfil">
+										<span class="glyphicon glyphicon-fast-forward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnRemover_perfil">
+										<span class="glyphicon glyphicon-backward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnTodosRemover_perfil">
+										<span class="glyphicon glyphicon-fast-backward"></span>
+									</button>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<label for="pickListValor2_perfil" style="width:100%;" class="tema-principal">Autorizadas</label>
+								<select class="form-control" multiple="multiple" size="10" id="pickListValor2_perfil">
+									<option id="item3">Item3</option>
+									<option id="item4">Item4</option>
+								</select>
+							</div>
+						</div>
+					</div>				
+					
+					<!--  pickList_pagina -->
+					<div class="col-md-5" id="pickList_pagina">
+						<div class="row">
+							<div class="col-md-11">
+								<label style="width:100%;" class="tema-principal">Página(s) da Funcionalidade:</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa1_pagina" placeholder="Pesquisar...">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								</div>								
+							</div>
+							<div class="col-md-1">
+								
+							</div>
+							<div class="col-md-5">
+								<div class="input-group">
+									<input type="text" class="form-control" maxlength="20" id="pickListPesquisa2_pagina" placeholder="Pesquisar...">
+									<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="height: 5px">
+						</div>
+						<div class="row">
+							<div class="col-md-5">
+								<label for="pickListValor1_pagina" style="width:100%;" class="tema-principal">Disponíveis</label>
+								<select class="form-control" multiple="multiple" size="10" id="pickListValor1_pagina">
+									<option id="item1">Item1</option>
+									<option id="item2">Item2</option>
+								</select>
+							</div>
+							<div class="col-md-1">
+								<div style="height: 50px"></div>
+								<div class="btn-group-vertical">
+									<button type="button" class="btn btn-default" id="pickListBtnAdicionar_pagina">
+										<span class="glyphicon glyphicon-forward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnTodosAdicionar_pagina">
+										<span class="glyphicon glyphicon-fast-forward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnRemover_pagina">
+										<span class="glyphicon glyphicon-backward"></span>
+									</button>
+									<button type="button" class="btn btn-default" id="pickListBtnTodosRemover_pagina">
+										<span class="glyphicon glyphicon-fast-backward"></span>
+									</button>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<label for="pickListValor2_pagina" style="width:100%;" class="tema-principal">Autorizadas</label>
+								<select class="form-control" multiple="multiple" size="10" id="pickListValor2_pagina">
+									<option id="item3">Item3</option>
+									<option id="item4">Item4</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>
+	

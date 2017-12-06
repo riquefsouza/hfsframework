@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="editarAdmLogColuna">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Campos do Log
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar um setor" onclick="window.location.href='listarAdmLogColuna.html'">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='listarAdmLogColuna.html'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="nomeCampo">Campo:</label>
+						<input type="text" class="form-control" id="nomeCampo" label="Campo" maxlength="30">
+					</div>
+				</div>	
+				<div class="row">	
+					<div class="col-md-4 form-group">
+						<label for="descricao">Descrição:</label>
+						<input type="text" class="form-control" id="descricao" label="Descrição" maxlength="100">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="comandoSQL">Comando SQL:</label>
+						<textarea class="form-control" id="comandoSQL" maxlength="4000" rows="6" style="resize: none;"></textarea>
+						<h6 class="pull-right" id="comandoSQL_countMessage"></h6>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+<script>
+	$('#comandoSQL_countMessage').html($('#comandoSQL').attr('maxlength') + ' caracteres restantes.');
+
+	$('#comandoSQL').keyup(function() {
+		var textoMax = $('#comandoSQL').attr('maxlength');
+		var textoLength = $('#comandoSQL').val().length;
+		var textoRemaining = textoMax - textoLength;
+		
+		$('#comandoSQL_countMessage').html(textoRemaining + ' caracteres restantes.');
+	});
+</script>
+
+</body>
+</html>
+	

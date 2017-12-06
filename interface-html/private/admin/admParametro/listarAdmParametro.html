@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/sistema-datatables.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		hfsDatatablesIniciar("AdmParametro");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmParametro">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Parâmetros de Configuração
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir uma nova categoria dos parâmetros de configuração" onclick="window.location.href='editarAdmParametro.html'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar uma categoria dos parâmetros de configuração" onclick="hfsDatatablesEditar('AdmParametro')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir uma categoria dos parâmetros de configuração" onclick="hfsDatatablesExcluir('AdmParametro')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<table id="tabelaAdmParametro"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">
+				
+			<col style="width: 114pt;" width="152">
+			<col style="width: 103pt;" width="137">
+			<col style="width: 155pt;" width="207">
+			<col style="width: 471pt;" width="628">
+			<thead>
+				<tr class="tema-principal">
+					<th>Categoria do Par&acirc;metro</th>
+					<th>Par&acirc;metro</th>
+					<th>Valor</th>
+					<th>Descri&ccedil;&atilde;o</th>
+				</tr>	
+			</thead>
+			<tbody>
+				<tr>
+					<td>Par&acirc;metros do Tribunal</td>
+					<td>NOME_TRIBUNAL</td>
+					<td>Tribunal Regional do Trabalho da 1a. Regi&atilde;o</td>
+					<td>Nome do tribunal onde o sistema est&aacute;	instalado.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros do Tribunal</td>
+					<td>SIGLA_TRIBUNAL</td>
+					<td>TRT1</td>
+					<td>Sigla do tribunal onde o sistema est&aacute; instalado.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros do Tribunal</td>
+					<td>CODIGO_UNIDADE_GESTORA</td>
+					<td>080009</td>
+					<td>C&oacute;digo n&uacute;m&eacute;rico de 6 d&iacute;gitos que identifica o &oacute;rg&atilde;o no SIAFI.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros do Tribunal</td>
+					<td>APELIDO_UNIDADE_GESTORA</td>
+					<td>102</td>
+					<td>C&oacute;digo n&uacute;m&eacute;rico de 3 d&iacute;gitos da UG no c&oacute;digo de barras da GRU.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de Login</td>
+					<td>BLOQUEAR_LOGIN</td>
+					<td>false</td>
+					<td>Bloquear o sistema para que os usu&aacute;rios, exceto do administador, n&atilde;o fa&ccedil;am login</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de Login</td>
+					<td>AMBIENTE_SISTEMA</td>
+					<td>Produ&ccedil;&atilde;o</td>
+					<td>Define o ambiente onde o sistema est&aacute; instalado. Este par&acirc;metro pode ser preenchido com: desenvolvimento, homologa&ccedil;&atilde;o ou produ&ccedil;&atilde;o</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de Login</td>
+					<td>ATRIBUTO_LOGIN</td>
+					<td>NOME_USUARIO</td>
+					<td>Define o atributo usado para efetuar login no sistema. Este par&acirc;metro pode ser preenchido com: NOME_USUARIO ou CPF</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de E-mail</td>
+					<td>SMTP_SERVIDOR</td>
+					<td>smtp.trt1.jus.br</td>
+					<td>Servidor SMTP para que o sistema envie e-mail.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de E-mail</td>
+					<td>SMTP_PORTA</td>
+					<td>25</td>
+					<td>Porta do servidor SMTP para que o sistema envie e-mail.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de E-mail</td>
+					<td>SMTP_USERNAME</td>
+					<td></td>
+					<td>Usu&aacute;rio para login no servidor SMTP.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de E-mail</td>
+					<td>SMTP_PASSWORD</td>
+					<td></td>
+					<td>Senha para login no servidor SMTP.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de E-mail</td>
+					<td>SMTP_EMAIL_FROM</td>
+					<td>sistema@trt1.jus.br</td>
+					<td>E-mail do sistema.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de Conex&atilde;o de Rede</td>
+					<td>PROXY_SERVIDOR</td>
+					<td>bravo.trtrio.gov.br</td>
+					<td>Servidor do Proxy.</td>
+				</tr>
+				<tr>
+					<td>Par&acirc;metros de Conex&atilde;o de Rede</td>
+					<td>PROXY_PORTA</td>
+					<td>8080</td>
+					<td>Porta do Proxy.</td>
+				</tr>
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>

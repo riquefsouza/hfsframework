@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="editarAdmParametro">
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Parâmetros de Configuração
+			</div>
+			<div class="panel-body">			
+				<div class="form-actions">
+				
+					<button type="button" class="btn btn-success" id="btnSalvar" label="Salvar uma categoria dos parâmetros de configuração" onclick="window.location.href='listarAdmParametro.html'">
+						<span class="glyphicon glyphicon-ok-sign"></span> Salvar
+					</button>
+				
+					<button type="reset" class="btn btn-primary" id="btnLimpar" label="Limpar Campos">
+						<span class="glyphicon glyphicon-star"></span> Limpar
+					</button>
+
+					<button type="button" class="btn btn-primary" id="btnCancelar" label="Cancelar" onclick="window.location.href='listarAdmParametro.html'">
+						<span class="glyphicon  glyphicon-remove-sign"></span> Cancelar
+					</button>
+				</div>
+
+				<div class="row">					
+					<div class="col-md-4 form-group">		
+						<label for="categoria">Categoria do Parâmetro:</label>
+						<select class="form-control" id="categoria" label="Categoria do Parâmetro">
+							<option id="item1">Item1</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label for="codigo">Código:</label>
+						<input type="text" class="form-control" id="codigo" label="Código" maxlength="10">
+					</div>
+					<div class="col-md-8 form-group">
+						<label for="valor">Valor:</label>
+						<input type="text" class="form-control" id="valor" label="Valor" maxlength="3000">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label for="descricao">Descrição:</label>
+						<input type="text" class="form-control" id="descricao" label="Descrição" maxlength="255">
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>
+	

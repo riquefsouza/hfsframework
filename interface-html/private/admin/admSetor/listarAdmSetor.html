@@ -1,0 +1,7656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<title>HFS Framework</title>
+	<meta charset="utf-8" />
+	<!-- <meta http-equiv="refresh" content="5" />	-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/bootstrap-theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datepicker.css" />
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/datatables.min.css"/>
+	
+	<link rel="stylesheet" type="text/css" href="../../../resources/css/sistema.css" />
+	
+	<script src="../../../resources/js/jquery-3.2.1.min.js"></script>
+	<script src="../../../resources/js/jquery.meio.mask.min.js"></script>
+	<script src="../../../resources/js/jquery.numeric.js"></script>
+
+	<script src="../../../resources/js/bootstrap.min.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.js"></script>
+	<script src="../../../resources/js/bootstrap-datepicker.pt-BR.js"></script>
+	
+	<script src="../../../resources/js/bootbox.min.js"></script>
+ 
+	<script type="text/javascript" src="../../../resources/js/datatables.min.js"></script>
+	<script type="text/javascript" src="../../../resources/js/sistema-datatables.js"></script>
+	<script src="../../../resources/js/sistema-session-timeout.js"></script>
+</head>
+<body>
+
+<script>
+	$(document).ready(function(){
+        $("#menu").load("../../../private/menu.html");
+		hfsDatatablesIniciar("AdmSetor");
+	});
+</script>
+
+<div id="menu"></div>
+
+<div class="tela-conteudo">
+	<form id="listarAdmSetor">
+
+		<div class="panel panel-default">
+			<div class="panel-heading" 
+				style="font-weight: bold;font-size: large;">
+				Administrar os Setores
+			</div>
+			<div class="panel-body">				
+				<div class="row">					
+					<div class="col-md-3 form-group">		
+						<label for="cmbTipoRelatorio">Escolha o tipo de relatório:</label>
+						<select class="form-control" id="cmbTipoRelatorio" label="Tipo de relatório">
+							<optgroup label="Documentos">
+								<option id="PDF">Portable Document Format (.pdf)</option>
+								<option id="DOCX">Microsoft Word XML (.docx)</option>
+								<option id="RTF">Rich Text Format (.rtf)</option>
+								<option id="ODT">OpenDocument Text (.odt)</option>
+							</optgroup>
+							<optgroup label="Planilhas">
+								<option id="XLS">Microsoft Excel (.xls)</option>
+								<option id="XLSX">Microsoft Excel XML (.xlsx)</option>
+								<option id="ODS">OpenDocument Spreadsheet (.ods)</option>
+							</optgroup>
+							<optgroup label="Texto puro">
+								<option id="CSV">Valores Separados Por Vírgula (.csv)</option>
+								<option id="TXT">Somente Texto (.txt)</option>
+							</optgroup>
+							<optgroup label="Outros">
+								<option id="PPTX">Microsoft Powerpoint XML (.pptx)</option>
+								<option id="HTML">Linguagem de Marcação de Hipertexto (.html)</option>
+							</optgroup>								
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label class="checkbox-inline" for="forcaDownload"><input type="checkbox" id="forcaDownload" value="">Forçar Download</label>
+					</div>
+				</div>
+			</div>					
+		</div>
+
+		<div class="form-actions">
+			<button type="button" class="btn btn-primary" id="btnExportar" onclick="form.target='_blank'">
+				<span class="glyphicon glyphicon-print"></span> Exportar
+			</button>
+			
+			<button type="button" class="btn btn-success" id="btnIncluir" label="Incluir um novo setor" onclick="window.location.href='editarAdmSetor.html'">
+				<span class="glyphicon glyphicon-plus-sign"></span> Incluir
+			</button>
+		
+			<button type="button" class="btn btn-warning" id="btnEditar" label="Editar um setor" onclick="hfsDatatablesEditar('AdmSetor')">
+				<span class="glyphicon glyphicon-edit"></span> Editar
+			</button>
+		
+			<button type="button" class="btn btn-danger" id="btnExcluir" label="Excluir um setor" onclick="hfsDatatablesExcluir('AdmSetor')">
+				<span class="glyphicon glyphicon-minus-sign"></span> Excluir
+			</button>
+
+			<button type="button" class="btn btn-primary" id="btnVoltar" label="Voltar" onclick="window.location.href='../../desktop.html'">
+				<span class="glyphicon glyphicon-circle-arrow-left"></span> Voltar
+			</button>
+		</div>
+
+		<table id="tabelaAdmSetor"
+			class="table table-striped table-bordered" cellspacing="0"
+			width="100%">
+				
+			<thead>
+				<tr class="tema-principal">
+					<th>Sigla</th>
+					<th>Nome</th>
+					<th>Tipo</th>
+				</tr>	
+			</thead>
+			<tbody>
+
+				<tr>
+				  <td>PAPA</td>
+				  <td>POSTO
+			AVANCADO DE PARATY</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>PARO</td>
+				  <td>POSTO
+			AVANCADO DE RIO DAS OSTRAS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CCIN</td>
+				  <td>COORDENADORIA
+			DE CORREI&Ccedil;&Atilde;O E INSPE&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DADM</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO ADMINISTRATIVO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETMOP</td>
+				  <td>SETOR
+			DE MOVIMENTA&Ccedil;&Atilde;O PROCESSUAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEINS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE INSPE&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>EXEXT</td>
+				  <td>SGP
+			EXERCICIO EXTERNO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEM SETOR</td>
+				  <td>SEM
+			SETOR</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>PR-JURISP</td>
+				  <td>SETOR
+			DE JURISPRUD&Ecirc;NCIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DARE</td>
+				  <td>DIVISAO
+			DE AUDITORIA DE RECURSOS HUMANOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAC</td>
+				  <td>DIVISAO
+			DE AUDITORIA CONTABIL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SDE</td>
+				  <td>SECRETARIA
+			DE DESENVOLVIMENTO INSTITUCIONAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SEDI-GAB</td>
+				  <td>SECRETARIA
+			DASE&Ccedil;&Atilde;O ESPECIALIZADA DISSIDIOS INDIVID</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>CMG</td>
+				  <td>COMISS&Atilde;O
+			DE MODERNIZA&Ccedil;&Atilde;O E GEST&Atilde;O</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>BENS_NLOC_2010</td>
+				  <td>Setor
+			com bens de setores virtuais NLOC at&eacute; 2010</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DINF-MSGAC</td>
+				  <td>DIVIS&Atilde;O
+			DE INFRA-ESTRUTURA - MSGAC</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DINF-MSGAS</td>
+				  <td>DIVIS&Atilde;O
+			DE INFRA-ESTRUTURA - MSGAS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-BO</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - BONSUCESSO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-BR</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS M&Oacute;VEIS - AV. BRASIL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-LAV</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - LAVRADIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-RA</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - RAMOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DSMI AGORA</td>
+				  <td>SETORES
+			VIRTUAIS DA DSMI</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-SG</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS SAO GONCALO</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-PE</td>
+				  <td>SECAO
+			PROTOCOLO EXPEDICAO PETROPOLIS</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SERDI-VR</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DE VOLTA REDONDA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>COSEG</td>
+				  <td>COORDENADORIA
+			DE SEGURAN&Ccedil;A</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SETSEG-DC</td>
+				  <td>SETOR
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - DUQUE DE CAXIAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>CPID</td>
+				  <td>COMISS&Atilde;O
+			P. DE INVENT&Aacute;RIO E DESFAZIMENTO MATERIAIS</td>
+				  <td>COMISSAO</td>
+				</tr>
+				<tr>
+				  <td>CAEP</td>
+				  <td>COORDENADORIA
+			DE APOIO &Agrave; EFETIVIDADE PROCESSUAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SECHAS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE HASTAS P&Uacute;BLICAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECCON-2</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CENTRALIZA&Ccedil;&Atilde;O DA
+			CONCILIA&Ccedil;&Atilde;O DE 2&ordm; GRAU</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SGC</td>
+				  <td>SECRETARIA
+			DA GEST&Atilde;O DO CONHECIMENTO</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DITAB</td>
+				  <td>DIVIS&Atilde;O
+			DE TRATAMENTO DE ACERVO BIBLIOGR&Aacute;FICO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECTAR-1</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO 1 (RJ)</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>NURES</td>
+				  <td>NUCLEO
+			DE RESPONSABILIDADE SOCIAL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEARN-III</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO DE NITEROI III</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SRR</td>
+				  <td>SECRETARIA
+			DE RECURSOS DE REVISTA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>TRT-LAVRADIO</td>
+				  <td>SETORES
+			VIRTUAIS MARQUES DO LAVRADIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECSEG-NI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - NOVA IGUA&Ccedil;U</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DG-GAB</td>
+				  <td>GABINETE
+			DA DIRETORIA-GERAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SAM</td>
+				  <td>SECRETARIA
+			DE ADMINISTRA&Ccedil;&Atilde;O DE ATIVOS M&Oacute;VEIS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SEARJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO GERAL - RJ</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-1</td>
+				  <td>SETOR
+			DE ARQUIVO 1 (RJ)</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEACE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GERENCIAMENTO DE ACERVOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDAC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AC&Oacute;RDAOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>AS-ISG</td>
+				  <td>DESEMB
+			IZIDORO SOLER GUELMAN</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JFMJ</td>
+				  <td>DESEMB
+			JOSE DA FONSECA MARTINS JUNIOR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JNAN</td>
+				  <td>DESEMB
+			JOSE NASCIMENTO ARAUJO NETTO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-LCTB</td>
+				  <td>DESEMB
+			LUIZ CARLOS TEIXEIRA BOMFIM</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-MBC</td>
+				  <td>DESEMB
+			MERY BUCKER CAMINHA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-TSG</td>
+				  <td>DESEMB
+			TANIA DA SILVA GARCIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DANDD</td>
+				  <td>DIVIS&Atilde;O
+			DE AN&Aacute;LISE DE DIREITOS E DEVERES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIONC6</td>
+				  <td>DIONC6
+			BBB</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>LIC S/VENC</td>
+				  <td>SEP
+			LICENCA SEM VENCIMENTOS</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>SGP</td>
+				  <td>SECRETARIA
+			DE GEST&Atilde;O DE PESSOAS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DORC</td>
+				  <td>DIVIS&Atilde;O
+			DE ORGANIZA&Ccedil;&Atilde;O DO CONHECIMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PESQUISA E PUBLICA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SGJ-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA-GERAL JUDICI&Aacute;RIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIPRO-1</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO DE 1&ordf; INSTANCIA</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>GDBLAL</td>
+				  <td>GAB
+			DES. BRUNO LOSADA ALBUQUERQUE LOPES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDCMC</td>
+				  <td>GAB
+			DES. CESAR MARQUES CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDDAO</td>
+				  <td>GAB
+			DES. DALVA AMELIA DE OLIVEIRA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DIRET</td>
+				  <td>DIVIS&Atilde;O
+			DE RECRUTAMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CSAD</td>
+				  <td>COORDENADORIA
+			DE SA&Uacute;DE</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SECASS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ASSIST&Ecirc;NCIA COMPLEMENTAR &Agrave; SA&Uacute;DE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEMOP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE PESSOAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DPPE</td>
+				  <td>DIVIS&Atilde;O
+			DE PREPARO DE PAGAMENTO DE PESSOAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SERET</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE RECRUTAMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIAPU-NT</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO USU&Aacute;RIO DE NITER&Oacute;I</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAPU-SG</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO USU&Aacute;RIO DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIDIF-DC</td>
+				  <td>DIVIS&Atilde;O
+			PROTOC. E DIST. FEITOS - DUQUE DE CAXIAS</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>GDJATS</td>
+				  <td>GAB
+			DES. JOSE ANTONIO TEIXEIRA DA SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDJCNC</td>
+				  <td>GAB
+			DES JOSE CARLOS NOVIS CESAR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDLAPM</td>
+				  <td>GAB
+			DES. LUIZ AUGUSTO PIMENTA DE MELLO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>LIC INPS</td>
+				  <td>LICENCA
+			INPS</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>MAGISTRADO</td>
+				  <td>MAGISTRADO</td>
+				  <td>OUTROS</td>
+				</tr>
+				<tr>
+				  <td>DIFEC</td>
+				  <td>DIVIS&Atilde;O
+			DE FISCALIZA&Ccedil;&Atilde;O DE EXECU&Ccedil;&Atilde;O
+			DE CONTRATOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECARC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AN&Aacute;LISE DE REAJUSTE CONTRATUAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECREB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE REGULARIZA&Ccedil;&Atilde;O DE BENS IM&Oacute;VEIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIEMA</td>
+				  <td>DIVIS&Atilde;O
+			DE EXPEDI&Ccedil;&Atilde;O E MALOTE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>COEX</td>
+				  <td>COORDENADORIA
+			DE EXECU&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-CF</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - CABO FRIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-CG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO-CAMPOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-PET</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - PETROPOLIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-SJM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO- S.JOAO MERITI</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIF-SG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROTOC. E DIST. DE FEITOS - S.GON&Ccedil;ALO</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>GDLSP</td>
+				  <td>GAB
+			DES. LEONARDO DA SILVEIRA PACHECO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMACM</td>
+				  <td>GAB
+			DES. MARIA APARECIDA COUTINHO MAGALHAES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMLN</td>
+				  <td>GAB
+			DES. MARCIA LEITE NERY</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETRAP</td>
+				  <td>SETOR
+			PROCEDIMENTOS APURAT&Oacute;RIOS DE PENALIDADES</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETREB</td>
+				  <td>SETOR
+			DE REGULARIZA&Ccedil;&Atilde;O DE BENS IM&Oacute;VEIS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SAPOV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO &Agrave;S VARAS DA CAPITAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETAGF</td>
+				  <td>SETOR
+			DE ADMINISTRA&Ccedil;&Atilde;O DO FORO DA AV GOMES FREIRE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-SG</td>
+				  <td>SECAO
+			DE PROTOCOLO E EXPEDICAO SAO GONCALO</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEDEJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DEP&Oacute;SITO JUDICIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIS-1</td>
+				  <td>SECAO
+			DE DISTRIBUI&Ccedil;&Atilde;O DE FEITOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPRO-1</td>
+				  <td>SECAO
+			DE PROTOCOLO DE 1&ordf; INSTANCIA</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEDIM-RJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-APAS</td>
+				  <td>GAB
+			JUIZ AFRANIO PEIXOTO ALVES DOS SANTOS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-AS</td>
+				  <td>GAB
+			JUIZ ALOYSIO SANTOS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DMAI</td>
+				  <td>DIVIS&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O - INTERIOR</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEMAN-DC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE DUQUE DE CAXIAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEMAN-NI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE NOVA IGUA&Ccedil;U</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SME-GAB</td>
+				  <td>GAB
+			DA SECRETARIA DE MANUTEN&Ccedil;&Atilde;O E ENGENHARIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SMI</td>
+				  <td>SECRETARIA
+			DE MANUTEN&Ccedil;&Atilde;O E INFRAESTRUTURA PREDIAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SECEXP-AC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE EXPEDI&Ccedil;&Atilde;O - ANT&Ocirc;NIO CARLOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DPREC</td>
+				  <td>DIVIS&Atilde;O
+			DE PRECATORIOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIREC</td>
+				  <td>DIVIS&Atilde;O
+			DE RECURSOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DPRE</td>
+				  <td>DIVISAO
+			DE GESTAO DE PRECATORIOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-IDRA</td>
+				  <td>GAB
+			JUIZ IVAN DIAS RODRIGUES ALVES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JMM</td>
+				  <td>GAB
+			JUIZ JOAO MARIO DE MEDEIROS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JNAN</td>
+				  <td>GAB
+			JUIZ JOSE NASCIMENTO A NETTO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MGCVP</td>
+				  <td>GAB
+			JUIZA MARIA DAS GRACAS C V PARANHOS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MJAT</td>
+				  <td>GAB
+			JUIZA MARIA JOSE AGUIAR T OLIVEIRA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DMANI</td>
+				  <td>DIVIS&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DO INTERIOR</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DMANP</td>
+				  <td>DIVIS&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O PREDIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEMEQ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE M&Aacute;QUINAS E EQUIPAMENTOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEREF</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE REFRIGERA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESOM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SOM</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEZEL</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ZELADORIA DA SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-V3</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 3</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEMAN-SE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DO EDIF&Iacute;CIO SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CCON</td>
+				  <td>COORDENADORIA
+			DE CONTABILIDADE</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>T1PR</td>
+				  <td>PRIMEIRA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>T4PR</td>
+				  <td>QUARTA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV9</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 9</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>ACE</td>
+				  <td>ASSESSORIA
+			DE CERIMONIAL E EVENTOS</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>SECVIA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE VIAGENS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETCAD</td>
+				  <td>SETOR
+			DE CADASTRAMENTO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECGER</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GERENCIAMENTO BOLETIM INT. DIARIO ELT. JT</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SADES</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ACOMPANHAMENTO DE DESPESAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SOF-GAB</td>
+				  <td>GABINETE
+			SECR OR&Ccedil;AMENTO, FINAN&Ccedil;AS E CONTABILIDADE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DPROJ</td>
+				  <td>DIVIS&Atilde;O
+			DE PROJETOS DE INFRAESTRUTURA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>1VTANG</td>
+				  <td>1a
+			VT DE ANGRA DOS REIS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTITG</td>
+				  <td>1a
+			VT DE ITAGUAI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DITEL</td>
+				  <td>DIVIS&Atilde;O
+			DE TELECOMUNICA&Ccedil;&Otilde;ES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIMPO</td>
+				  <td>DIVIS&Atilde;O
+			DE DESENVOLVIMENTO E MANUTEN&Ccedil;&Atilde;O DO PORTAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>A.CARLOS</td>
+				  <td>CSTU
+			ANTONIO CARLOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>1VTPE</td>
+				  <td>1a
+			VT DE PETROPOLIS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>23VTRJ</td>
+				  <td>23a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DSETI</td>
+				  <td>DIVIS&Atilde;O
+			DE SUPORTE A EQUIPAMENTOS DE TEC DA INFORM</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>LAVRADIO</td>
+				  <td>DSTU
+			LAVRADIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DAST</td>
+				  <td>DIVISAO
+			DE ADMINISTRACAO DE SISTEMAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SGPIR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			GERENCIA E PROJ DE INFRA-ESTRUTURA DE REDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEONC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE OPERA&Ccedil;&Atilde;O DE N&Uacute;CLEOS DE
+			COMPUTA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DOST</td>
+				  <td>DIVISAO
+			DE OPERACAO E SUPORTE TECNICO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDAP/BACK</td>
+				  <td>SECAO
+			DE APOIO AO USUARIO BACKUP</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEOPE-FCC</td>
+				  <td>SECAO
+			DE OPERACAO-AUTO ATENDIMENTO FCC</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DSMI</td>
+				  <td>DIVIS&Atilde;O
+			DE SUPORTE A MICROINFORMATICA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DMAT</td>
+				  <td>DIVIS&Atilde;O
+			DE MATERIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEACO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ANALISE E ATENDIMENTO DE MATERIAL CONSUMO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DPAT</td>
+				  <td>DIVIS&Atilde;O
+			DE PATRIM&Ocirc;NIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>2VTCF</td>
+				  <td>2a
+			VT DE CABO FRIO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTITG</td>
+				  <td>2a
+			VT DE ITAGUAI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTPE</td>
+				  <td>2a
+			VT DE PETROPOLIS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>31VTRJ</td>
+				  <td>31a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>38VTRJ</td>
+				  <td>38a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>3VTMA</td>
+				  <td>3a
+			VT DE MACAE</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>3VTSJM</td>
+				  <td>3a
+			VT DE SAO JOAO DE MERITI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>49VTRJ</td>
+				  <td>49a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>4VTDC</td>
+				  <td>4a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>4VTNI</td>
+				  <td>4a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SED-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE DISTRIBUICAO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEPEG-II</td>
+				  <td>SECAO
+			DE PROTOCOLO DE SEGUNDA INSTANCIA</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>COAD</td>
+				  <td>COORDENADORIA
+			DE ADMINISTRA&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DEJE</td>
+				  <td>DIVIS&Atilde;O
+			DE ENSINO PROJETOS E EVENTOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAD</td>
+				  <td>DIVIS&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>5VTNT</td>
+				  <td>5a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>63VTRJ</td>
+				  <td>63a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>77VTRJ</td>
+				  <td>77a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>78VTRJ</td>
+				  <td>78a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>79VTRJ</td>
+				  <td>79a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SELOGI</td>
+				  <td>SERVI&Ccedil;O
+			DE LOG&Iacute;STICA</td>
+				  <td>SERVICO</td>
+				</tr>
+				<tr>
+				  <td>8VTRJ</td>
+				  <td>8a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>9VTRJ</td>
+				  <td>9a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DICOI</td>
+				  <td>DIVIS&Atilde;O
+			DE CORREI&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-MA</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS DE MACAE</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>REMOVIDO</td>
+				  <td>SEP
+			Removido para outro &oacute;rg&atilde;o</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>SCI</td>
+				  <td>SECRETARIA
+			DE CONTROLE INTERNO</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>1</td>
+				  <td>TRT_AGORA</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>DF-ANG</td>
+				  <td>DIRETOR
+			DE FORO - ANGRA DOS REIS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-BO-GAB</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - BONSUCESSO - GABINETE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>INV2005-NLOC</td>
+				  <td>INV2005-ATIVOS
+			BENS N&Atilde;O LOCALIZADOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-VR</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS V REDONDA</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-CG</td>
+				  <td>SECAO
+			PROTOC.EXPEDICAO CAMPOS GOYTACAZES</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-MA</td>
+				  <td>SECAO
+			DE PROTOCOLO EXPEDICAO DE MACAE</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>ACF</td>
+				  <td>ASSESSORIA
+			DE CONFORMIDADE</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>SESEG-CAP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - CAPITAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SGJ</td>
+				  <td>SECRETARIA-GERAL
+			JUDICI&Aacute;RIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SECPEP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PESQUISA PATRIMONIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>RECLAS</td>
+				  <td>BENS
+			RECLASSIFICADOS DE PERMANENTE PARA CONSUMO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-AFSC</td>
+				  <td>DESEMB
+			ANGELA FIORENCIO S. DA CUNHA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-CMC</td>
+				  <td>DESEMB
+			CESAR MARQUES CARVALHO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DITRA</td>
+				  <td>DIVIS&Atilde;O
+			DE TRANSPORTES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECMOB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE BENS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SCO</td>
+				  <td>SECRETARIA
+			DE ADMINISTRA&Ccedil;&Atilde;O DE CONTRATOS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DIGED</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE DOCUMENTOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DARQ</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE ACERVOS ARQUIVISTICOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-NT</td>
+				  <td>SETOR
+			DE ARQUIVO DE NITER&Oacute;I</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEGED</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GEST&Atilde;O DE DOCUMENTOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETADM</td>
+				  <td>SETOR
+			DE ADMINISTRA&Ccedil;&Atilde;O DO CENTRO CULTURAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>AS-EG</td>
+				  <td>DESEMB
+			EDILSON GONCALVES</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-EMCT</td>
+				  <td>DESEMB
+			EDITH MARIA CORREA TOURINHO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-FERS</td>
+				  <td>DESEMB
+			FLAVIO ERNESTO RODRIGUES SILVA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-NTB</td>
+				  <td>DESEMB
+			NELSON TOMAZ BRAGA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CONVFERIAS</td>
+				  <td>CONVOCA&Ccedil;&Atilde;O
+			DE JU&Iacute;ZES EM F&Eacute;RIAS<span
+			 style="">&nbsp; </span>PER&Iacute;ODO
+			&gt; 11 MESES</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>CPPE</td>
+				  <td>COORDENADORIA
+			DE PREPARO DE PAGAMENTO DE PESSOAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIPPA</td>
+				  <td>DIVIS&Atilde;O
+			DE PREPARO DE PAGAMENTO DE ATIVOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIONC2</td>
+				  <td>DIONC2
+			BBB</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECAO-EXT</td>
+				  <td>SECAO
+			EXTINTA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CMAD</td>
+				  <td>COORDENAD.
+			DE CONTROLE E DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>CODI</td>
+				  <td>COORDENADORIA
+			DAS DIVIS&Otilde;ES DO INTERIOR</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>GDCJC</td>
+				  <td>GAB
+			DES. CELIO JUA&Ccedil;ABA CAVALCANTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDCSGF</td>
+				  <td>GAB
+			DES. CLAUDIA DE SOUZA GOMES FREIRE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DIPERPROV</td>
+				  <td>SGP
+			DIVIS&Atilde;O DE ATEND PERICIAL PROVISORIAMENTE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SERCE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE REGISTRO E CONTROLE FUNCIONAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-MAC</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO- MACAE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-NI</td>
+				  <td>DIVIS&Atilde;O
+			APOIO AS VARAS DO TRABALHO - NOVA IGUA&Ccedil;U</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDJFMJ</td>
+				  <td>GAB
+			DES. JOSE DA FONSECA MARTINS JUNIOR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDJGF</td>
+				  <td>GAB
+			DES. JOSE GERALDO DA FONSECA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDJRDAA</td>
+				  <td>GAB
+			DES. JOSE RICARDO DAMIAO DE ARAUJO AREOSA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DSAD</td>
+				  <td>DIVIS&Atilde;O
+			DE SA&Uacute;DE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETATE</td>
+				  <td>SETOR
+			DE ATENDIMENTO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SLG</td>
+				  <td>SECRETARIA
+			DE LOG&Iacute;STICA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-NT</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - NITEROI</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-SG</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - S.GON&Ccedil;ALO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIDEJ</td>
+				  <td>DIVIS&Atilde;O
+			DE DEP&Oacute;SITO JUDICIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIF-NT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROTOC. E DIST. DE FEITOS - NITER&Oacute;I</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DIMOB</td>
+				  <td>DIVIS&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE BENS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DINF</td>
+				  <td>DIVIS&Atilde;O
+			DE INFRA-ESTRUTURA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEMOB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE BENS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETMAV</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O DE VE&Iacute;CULOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEALM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ALMOXARIFADO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECAJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARRECADA&Ccedil;&Atilde;O JUDICIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDEJ-RA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DEPOSITO JUDICIAL DE RAMOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GDTBSF</td>
+				  <td>GAB
+			DES. THEOCRITO BORGES DOS SANTOS FILHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDVBC</td>
+				  <td>GAB
+			DES. VOLIA BOMFIM CASSAR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-ACA</td>
+				  <td>GAB
+			JUIZ ANTONIO CARLOS AREAL</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-AFG</td>
+				  <td>GAB
+			JUIZ ALBERTO FORTES GIL</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-AMSM</td>
+				  <td>GAB
+			JUIZA ANA MARIA SOARES DE MORAES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-CMC</td>
+				  <td>GAB
+			JUIZ CESAR MARQUES CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-EPMC</td>
+				  <td>GAB
+			JUIZA ELMA PEREIRA DE MELO CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-FAZS</td>
+				  <td>GAB
+			JUIZ FERNANDO ANTONIO ZORZENON DA SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GRTA</td>
+				  <td>PER&Iacute;CIA-GARANTIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SME</td>
+				  <td>SECRETARIA
+			DE MANUTEN&Ccedil;&Atilde;O E ENGENHARIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SEMAN-SG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DMANP-A2</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO E MANUTEN&Ccedil;&Atilde;O PREDIAL - &Aacute;REA 2</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DMANP-A4</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO E MANUTEN&Ccedil;&Atilde;O PREDIAL - &Aacute;REA 4</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECAMP-AD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO MANUT PREDIAL-ARQUIVOS E DEP&Oacute;SITOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECDIG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DIGITALIZA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETDIG</td>
+				  <td>SETOR
+			DE DIGITALIZA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>GJ-GTA</td>
+				  <td>GAB
+			JUIZ GUSTAVO TADEU ALKMIM</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-LAML</td>
+				  <td>GAB
+			JUIZ LUIZ ALFREDO MAFRA LINO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MAP</td>
+				  <td>GAB
+			JUIZ MARCOS ANTONIO PALACIO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-NAA</td>
+				  <td>GAB
+			JUIZA NIDIA DE ASSUNCAO AGUIAR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>CMAN</td>
+				  <td>COORDENADORIA
+			DE MANUTEN&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SECMAI-SG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEFIS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ACOMPANHAMENTO E FISCALIZA&Ccedil;&Atilde;O DE OBRAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERCOP</td>
+				  <td>SETOR
+			DE COPIAS XEROGR&Aacute;FICAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SI</td>
+				  <td>SECR
+			SECAO ESPEC DISSIDIOS INDIVIDUAIS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>GJ-RAMB</td>
+				  <td>GAB
+			JUIZ RILDO ALBUQUERQUE MOUSINHO DE BRITO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V4</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 4</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-ZJMN</td>
+				  <td>GAB
+			JUIZA ZULEICA JORGENSEN M NASCIMENTO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV11</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 11</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETMAI-SG</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEMAN-LV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O<span
+			 style="">&nbsp; </span>EDIF&Iacute;CIO
+			MARQUES DO LAVRAD&Iacute;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETMAP-L/G</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O PREDIAL-LAVRADIO/G.FREIRE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETALV</td>
+				  <td>SETOR
+			DE ALVENARIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEDI-II</td>
+				  <td>SUBSE&Ccedil;&Atilde;O
+			ESPECIALIZADA DISSIDIOS INDIVIDUAIS II</td>
+				  <td>TRIBUNAL</td>
+				</tr>
+				<tr>
+				  <td>SC</td>
+				  <td>SECR
+			SECAO ESPECIAL DISSIDIOS COLETIVOS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>T6PR</td>
+				  <td>SEXTA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV5</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 5</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>JUIZ SUB</td>
+				  <td>JUIZ
+			SUBSTITUTO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>PR</td>
+				  <td>PRESIDENCIA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>ACC</td>
+				  <td>ASSESSORIA
+			DE COMUNICA&Ccedil;&Atilde;O E CERIMONIAL</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>ADI</td>
+				  <td>ASSESSORIA
+			DE DESENVOLVIMENTO INSTITUCIONAL</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>10VTRJ</td>
+				  <td>10a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEPOD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROCESSAMENTO DE DESPESA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CITQ</td>
+				  <td>COORDENADORIA
+			DE IMPLEMENTA&Ccedil;&Atilde;O, TESTE E QUALIDADE</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DITES</td>
+				  <td>DIVIS&Atilde;O
+			DE TESTE E HOMOLOGA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SST-GAB</td>
+				  <td>GABINETE
+			SEC SOLU&Ccedil;&Otilde;ES EM TECNOLOGIA DA
+			INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>13VTRJ</td>
+				  <td>13a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>15VTRJ</td>
+				  <td>15a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>18VTRJ</td>
+				  <td>18a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTARA</td>
+				  <td>1a
+			VT DE ARARUAMA</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTCF</td>
+				  <td>1a
+			VT DE CABO FRIO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>PAV-MAC</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO - RIO DAS OSTRAS</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>STI-SLR</td>
+				  <td>SALA
+			DE REUNI&Atilde;O DA STI</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>STI</td>
+				  <td>SECRETARIA
+			DE TECNOLOGIA DA INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DIGAR</td>
+				  <td>DIVIS&Atilde;O
+			DE GERENCIA DE ATIVOS DE REDE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>1VTNT</td>
+				  <td>1a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTTR</td>
+				  <td>1a
+			VT DE TR&Ecirc;S RIOS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTVR</td>
+				  <td>1a
+			VT DE VOLTA REDONDA</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>22VTRJ</td>
+				  <td>22a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>27VTRJ</td>
+				  <td>27a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>29VTRJ</td>
+				  <td>29a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>CURSO</td>
+				  <td>TREINAMENTO
+			PARA USUARIO ARCHON</td>
+				  <td>OUTROS</td>
+				</tr>
+				<tr>
+				  <td>SEABD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE BANCO DE DADOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPL</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APLICATIVOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>MANUT DSMI</td>
+				  <td>DSMI
+			MANUTENCAO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DSTU</td>
+				  <td>DIVIS&Atilde;O
+			DE SUPORTE T&Eacute;CNICO AO USU&Aacute;RIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SESEG-SEDE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGILANCIA - SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESVI-SE</td>
+				  <td>SECAO
+			DE SEG E VIG EDIF SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SMP</td>
+				  <td>SECRETARIA
+			DE MATERIAL E PATRIM&Ocirc;NIO</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SEMOV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DEP&Oacute;SITO DE BENS M&Oacute;VEIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>2VTNF</td>
+				  <td>2a
+			VT DE NOVA FRIBURGO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>30VTRJ</td>
+				  <td>30a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>PAV-RO</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB RIO DAS OSTRAS VT-CF</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-SC</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - S&Atilde;O CRIST&Oacute;V&Atilde;O</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DSEC</td>
+				  <td>DIVIS&Atilde;O
+			DE SERVI&Ccedil;OS COMPRAS E CONTRATOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECOT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTRATOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SMEDI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			M&Eacute;DICA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETPSI</td>
+				  <td>SETOR
+			DE ATENDIMENTO PSICOLOGICO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SELEG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE LEGISLA&Ccedil;&Atilde;O DE PESSOAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>3VTVR</td>
+				  <td>3a
+			VT DE VOLTA REDONDA</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>47VTRJ</td>
+				  <td>47a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>48VTRJ</td>
+				  <td>48a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>53VTRJ</td>
+				  <td>53a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>55VTRJ</td>
+				  <td>55a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEDIS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>5VTRJ</td>
+				  <td>5a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>61VTRJ</td>
+				  <td>61a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>66VTRJ</td>
+				  <td>66a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>69VTRJ</td>
+				  <td>69a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>70VTRJ</td>
+				  <td>70a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>72VTRJ</td>
+				  <td>72a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>76VTRJ</td>
+				  <td>76a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SECORC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE OR&Ccedil;AMENTO E CONTRATA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETORC</td>
+				  <td>SETOR
+			DE OR&Ccedil;AMENTO E CONTRATA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEDEP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DESENVOLVIMENTO PROFISSIONAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEBID</td>
+				  <td>SECAO
+			BIBLIOTECA E DOCUM SECR EMATRA-RJ</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>7VTRJ</td>
+				  <td>7a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DIMON</td>
+				  <td>DIVIS&Atilde;O
+			DE MONITORAMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SCR-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DA CORREGEDORIA REGIONAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>COPC</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE PROCESSOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DISF</td>
+				  <td>DIVISAO
+			DE DISTRIBUICAO DE FEITOS 2 GRAU</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SET AGORA</td>
+				  <td>SETORES
+			VIRTUAIS AGORA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>COMIN/2009</td>
+				  <td>COMISS&Atilde;O
+			ANUAL DE INVENT&Aacute;RIO PERMANENTE - 2009</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>COMIN2011</td>
+				  <td>COMISS&Atilde;O
+			ANUAL DE INVENT&Aacute;RIO PERMANENTE - 2011</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-ED</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - ENGENHO DE DENTRO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SERDI-CA</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DE CAMPOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERDI-SG</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DE SAO GONCALO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DG</td>
+				  <td>DIRETORIA-GERAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>CSEG</td>
+				  <td>COORDENADORIA
+			DE SEGURAN&Ccedil;A</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>CASJ</td>
+				  <td>COORDENADORIA
+			DE APOIO AOS SISTEMAS JUDICI&Aacute;RIOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SECTAR-4</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO 4</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>INV2008-IBB</td>
+				  <td>INV2008-INATIVOS
+			BENS A BAIXAR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>NDI</td>
+				  <td>NUCLEO
+			DE DESENVOLVIMENTO INSTITUCIONAL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>NUPERG</td>
+				  <td>NUCLEO
+			DE PESQUISA ERGONOMICA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-AFG</td>
+				  <td>DESEMB
+			ALBERTO FORTES GIL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECSEG-SG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - S&Atilde;O
+			GON&Ccedil;ALO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DCMAT</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTROLE DE<span style="">&nbsp;
+				  </span>MATERIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DDESF</td>
+				  <td>DIVIS&Atilde;O
+			DE DESFAZIMENTO DE BENS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIMAP</td>
+				  <td>DIVIS&Atilde;O
+			DE MATERIAL PERMANENTE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECGRA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GR&Aacute;FICA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECADM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DO CENTRO CULTURAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECGEC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GEST&Atilde;O DO CONTE&Uacute;DO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEARC</td>
+				  <td>SECAO
+			DE ARQUIVO JUDICIAL - DUQUE DE CAXIAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-2</td>
+				  <td>SETOR
+			DE ARQUIVO 2 (RJ2)</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEARQ-NI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO JUDICIAL DE NOVA IGUA&Ccedil;&Uacute;</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIDU</td>
+				  <td>DIVISAO
+			DE DOCUMENTACAO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEADI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APROPRIA&Ccedil;&Atilde;O E DIVULGA&Ccedil;&Atilde;O
+			DO CONHECIMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEBIB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE BIBLIOTECA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>AS-GRFM</td>
+				  <td>DESEMB
+			GLORIA REGINA FERREIRA MELLO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-GTA</td>
+				  <td>DESEMB
+			GUSTAVO TADEU ALKMIM</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JMM</td>
+				  <td>DESEMB
+			JOAO MARIO DE MEDEIROS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JRDAA</td>
+				  <td>DESEMB
+			JOSE RICARDO DAMIAO DE A AREOSA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-NAA</td>
+				  <td>DESEMB
+			NIDIA DE ASSUNCAO AGUIAR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-RSVT</td>
+				  <td>DESEMB
+			ROSANA SALIM VILLELA TRAVESEDO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CAPE</td>
+				  <td>COORDENADORIA
+			DE ADMINISTRA&Ccedil;&Atilde;O DE PESSOAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SECEDI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CADASTRAMENTO APOIO CERTIFICA&Ccedil;&Atilde;O DIGITAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEATEN</td>
+				  <td>SETOR
+			DE ATENDIMENTO INTERNO E EXTERNO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECAPE-1</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ATENDIMENTO AO USU&Aacute;RIO DO PJe-LAVRADIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIPRI</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO INTEGRADO</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SECRED</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE RECEBIMENTO E DEVOLU&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>AS-ZJMN</td>
+				  <td>DESEMB
+			ZULEICA JORGENSEN M NASCIMENTO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>GDAMSM</td>
+				  <td>GAB
+			DES. ANA MARIA SOARES DE MORAES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SCOPE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE DE PESSOAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEBEN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE BENEF&Iacute;CIOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETACS</td>
+				  <td>SETOR
+			DE ASSIST&Ecirc;NCIA COMPLEMENTAR &Agrave; SA&Uacute;DE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETREC</td>
+				  <td>SETOR
+			DE RECEP&Ccedil;&Atilde;O E APOIO ADMINISTRATIVO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEPPA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PREPARO DE PAGAMENTO DE ATIVOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIMAN-DC</td>
+				  <td>DIVIS&Atilde;O
+			DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - DUQUE D CAXIAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIMAN-NT</td>
+				  <td>DIVIS&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - NITEROI</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEX-SG</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO E EXPEDI&Ccedil;&Atilde;O - S&Atilde;O
+			GON&Ccedil;ALO</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>GDFAZS</td>
+				  <td>GAB
+			DES. FERNANDO ANTONIO ZORZENON DA SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDGRFM</td>
+				  <td>GAB
+			DES. GLORIA REGINA FERREIRA MELLO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDJLGLV</td>
+				  <td>GAB
+			DES. JOSE LUIZ DA GAMA LIMA VALENTINO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDLAML</td>
+				  <td>GAB
+			DES. LUIZ ALFREDO MAFRA LINO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SGP-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE GEST&Atilde;O DE PESSOAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SGPTRANS</td>
+				  <td>SECRETARIA
+			GESTAO PESSOAS transitorio</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DICOM</td>
+				  <td>DIVIS&Atilde;O
+			DE COMPRAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIALG</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AOS PR&Eacute;DIOS LAVRADIO/GOMES FREIRE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-RES</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - RESENDE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-VR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO<span style="">&nbsp;
+				  </span>VOLTA REDONDA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIF-DC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			PROTOC. E DIST. DE FEITOS - DUQUE DE CAXIAS</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>GDMBC</td>
+				  <td>GAB
+			DES. MERY BUCKER CAMINHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDPPBS</td>
+				  <td>GAB
+			DES. PATRICIA PELLEGRINI BAPTISTA DA SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDRAMB</td>
+				  <td>GAB
+			DES. RILDO ALBUQUERQUE MOUSINHO DE BRITO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDRN</td>
+				  <td>GAB
+			DES. ROBERTO NORRIS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DIPAD</td>
+				  <td>DIVIS&Atilde;O
+			DE PADRONIZA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAPS-GAB05</td>
+				  <td>DIAPS-GAB05</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEDOR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE<span style="">&nbsp;
+				  </span>DOCUMENTO DE
+			REFER&Ecirc;NCIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETEXP-SEDE</td>
+				  <td>SETOR
+			DE EXPEDI&Ccedil;&Atilde;O DO ED&Iacute;FICIO SEDE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-NT</td>
+				  <td>SECAO
+			DE PROTOCOLO EXPEDICAO DE NITEROI</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEATUS-1</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ATENDIMENTO AO USU&Aacute;RIO - LAVRADIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-AFSC</td>
+				  <td>GAB
+			JUIZ ANGELA FIORENCIO SOARES DA CUNHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-ASAB</td>
+				  <td>GABJUIZ
+			ALEXANDRE DE SOUZA AGRA BELMONTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-DV</td>
+				  <td>GAB
+			JUIZ DAMIR VRCIBRADIC</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SLG-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE LOG&Iacute;STICA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEMAN-NT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE NITER&Oacute;I</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DMANP-A3</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO E MANUTEN&Ccedil;&Atilde;O PREDIAL - &Aacute;REA 3</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECCOE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE DE EXPEDIENTE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIFE-2</td>
+				  <td>DIVISAO
+			DE FEITOS DE 2&ordf; INSTANCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPREC</td>
+				  <td>SECAO
+			DE PRECATORIOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-JATS</td>
+				  <td>GAB
+			JUIZ JOSE ANTONIO TEIXEIRA DA SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-LAPM</td>
+				  <td>GAB
+			JUIZ LUIZ AUGUSTO P DE MELLO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DIMAE</td>
+				  <td>DIVIS&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE EQUIPAMENTOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SERCOP-FCC</td>
+				  <td>SETOR
+			DE COPIAS XEROGRAFICAS-FMCC</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SERLUB</td>
+				  <td>SETOR
+			DE LUBRIFICA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETCOE</td>
+				  <td>SETOR
+			DE CONTROLE DE EXPEDIENTE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETHAS</td>
+				  <td>SETOR
+			DE HASTAS P&Uacute;BLICAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SPR-ADIDAS</td>
+				  <td>SECRETARIA-GERAL
+			DA PRESID&Ecirc;NCIA-ADIDAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>ST2</td>
+				  <td>SECRETARIA
+			DA 2A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>SEDI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			ESPECIALIZADA EM<span style="">&nbsp;
+				  </span>DISSIDIOS INDIVIDUAIS</td>
+				  <td>TRIBUNAL</td>
+				</tr>
+				<tr>
+				  <td>GJ-NTB</td>
+				  <td>GAB
+			JUIZ NELSON TOMAZ BRAGA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-RSVT</td>
+				  <td>GAB
+			JUIZ ROSANA SALIM VILLELA TRAVESEDO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V1</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 1</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V5</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 5</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V8</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 8</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV10</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 10</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SECAR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CARPINTARIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SELET</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE EL&Eacute;TRICA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SOF</td>
+				  <td>SECRETARIA
+			DE OR&Ccedil;AMENTO FINAN&Ccedil;AS E CONTABILIDADE</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DICOG</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTABILIDADE GERENCIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CFIN</td>
+				  <td>COORDENADORIA
+			FINANCEIRA</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DPLOR</td>
+				  <td>DIVIS&Atilde;O
+			DE PLANEJAMENTO OR&Ccedil;AMENT&Aacute;RIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>T7PR</td>
+				  <td>SETIMA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>T9PR</td>
+				  <td>NONA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV4</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 4</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV8</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 8</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>NUAGESQ</td>
+				  <td>NUCLEO
+			DE APOIO AO SISTEMA DE GESTAO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>NUAUSG</td>
+				  <td>NUCLEO
+			DE APOIO AS AUDITORIAS DO SISTEMA DE GESTAO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>NUDEST</td>
+				  <td>N&Uacute;CLEO
+			DE ESTAT&Iacute;STICA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>CR</td>
+				  <td>CORREGEDORIA
+			REGIONAL</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SOP</td>
+				  <td>SECRETARIA
+			DE OBRAS E PROJETOS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DIREM</td>
+				  <td>DIVIS&Atilde;O
+			DE REQUISITO E M&Eacute;TRICA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>12VTRJ</td>
+				  <td>12a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>16VTRJ</td>
+				  <td>16a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTBM</td>
+				  <td>1a
+			VT DE BARRA MANSA</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTBP</td>
+				  <td>1a
+			VT DE BARRA DO PIRAI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTDC</td>
+				  <td>1a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>PAV-SAP</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB<span style="">&nbsp;
+				  </span>DE S.A. DE
+			P&Aacute;DUA -VT-ITP</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>1VTMA</td>
+				  <td>1a
+			VT DE MACAE</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DISAG</td>
+				  <td>DIVIS&Atilde;O
+			DE SISTEMAS DE APOIO A GEST&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CSTU</td>
+				  <td>COORDENADORIA
+			DE SUPORTE T&Eacute;CNICO AO USU&Aacute;RIO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DISAU</td>
+				  <td>DIVIS&Atilde;O
+			GEST&Atilde;O DOS SERVI&Ccedil;OS DE ATENDIM. AO USUARIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>PAV-CAN</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB - CANTAGALO<span
+			 style="">&nbsp; </span>VT-NF</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>1VTNIL</td>
+				  <td>1a
+			VT DE NILOPOLIS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>25VTRJ</td>
+				  <td>25a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTCAM</td>
+				  <td>2a
+			VT DE CAMPOS DOS GOYTACAZES</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SETSI</td>
+				  <td>SETOR
+			DE SEGURAN&Ccedil;A DE TECNOLOGIA DA
+			INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEADA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE DADOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECES</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE EQUIPAMENTOS E SUPRIMENTOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESSO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SUPORTE A SOFTWARE E SIST OPERACIONAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>STI-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE TECNOLOGIA DA INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DGCA-GAB</td>
+				  <td>GABINETE
+			DA DIRETORIA GERAL DE COOR ADMINISTRATIVA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEREP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE REPROGRAFIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>PAV-CF</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB RIO DAS OSTRAS VT-CF</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>2VTMA</td>
+				  <td>2a
+			VT DE MACAE</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTNI</td>
+				  <td>2a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>3VTDC</td>
+				  <td>3a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-DIS</td>
+				  <td>SETOR
+			DE BENS MOVEIS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CLASS DISP</td>
+				  <td>CLASSISTAS
+			EM DISPONIBILIDADE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAB</td>
+				  <td>DIVIS&Atilde;O
+			DE ASSISTENCIA E BENEF&Iacute;CIOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SERAP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			CONTROLE E REGIST APOSENTADORIAS E PENS&Otilde;ES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GRACO</td>
+				  <td>GRUPO
+			DE APOIO CORREICIONAL &Agrave;S VARAS DO TRABALHO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>50VTRJ</td>
+				  <td>50a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>58VTRJ</td>
+				  <td>58a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DCAD</td>
+				  <td>DIVISAO
+			DE CADASTRAMENTO PROCESSUAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEG-RSUL</td>
+				  <td>SECAO
+			DE PROTOCOLO GERAL - POSTO RIO SUL</td>
+				  <td>SETOR
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>EJ1</td>
+				  <td>ESCOLA
+			JUDICIAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SEPCO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PLANEJAMENTO E CONTRATA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CCAP</td>
+				  <td>COORDENADORIA
+			DE CAPACITA&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>5VTSG</td>
+				  <td>5a
+			VT DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DIDEP</td>
+				  <td>DIVIS&Atilde;O
+			DE DESENVOLVIMENTO PROFISSIONAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEN</td>
+				  <td>DIVIS&Atilde;O
+			DE PESQUISA E DE ENSINO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEAAD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO ADMINISTRATIVO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAET</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ACOMPANHAMENTO DE EST&Aacute;GIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEQ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PESQUISA E DE ENSINO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIED</td>
+				  <td>DIVISAO
+			DE DESENVOLVIMENTO EDUCACIONAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DPCO</td>
+				  <td>DIVISAO
+			DE PLANEJAMENTO E DE CONCURSO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>JS</td>
+				  <td>CORREGEDORIA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SCR</td>
+				  <td>SECRETARIA
+			DA CORREGEDORIA REGIONAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-NI</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS NOVA IGUACU</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>CACO</td>
+				  <td>COORDENADORIA
+			DE AUDITORIA CONT&Aacute;BIL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DAUP</td>
+				  <td>DIVIS&Atilde;O
+			DE AUDITORIA DE PESSOAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SCI-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE CONTROLE INTERNO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>COMIN/2006</td>
+				  <td>COMISS&Atilde;O
+			ANUAL DE INVENT&Aacute;RIO PERMANENTE - 2006</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DF-CF</td>
+				  <td>DIRETOR
+			DE FORO - CABO FRIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DIPAT
+			AGORA</td>
+				  <td>SETORES
+			VIRTUAIS DA DIPAT</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEPRO-PR</td>
+				  <td>DEPOSITO
+			PROVISORIO - PRESIDENCIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DPAT AGORA</td>
+				  <td>SETORES
+			VIRTUAIS DA DPAT</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-DF</td>
+				  <td>SETOR
+			DE BENS MOVEIS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-SJM</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS S J MERITI</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>SERDI-NI</td>
+				  <td>SECAO
+			RECL DISTR FEITOS NOVA IGUACU</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERDI-PE</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DE PETROPOLIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECCON-1</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CENTRALIZA&Ccedil;&Atilde;O DA
+			CONCILIA&Ccedil;&Atilde;O DE 1&ordm; GRAU</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIARQ</td>
+				  <td>DIVIS&Atilde;O
+			DE ARQUIVO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>JDF-ANG</td>
+				  <td>JUIZ
+			DIRETOR DO FORUM -ANG</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>JDF-VR</td>
+				  <td>JUIZ
+			DIRETOR DO FORUM - VR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>TRT-SL</td>
+				  <td>SETORES
+			VIRTUAIS SANTA LUZIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>TP</td>
+				  <td>TRIBUNAL
+			PLENO</td>
+				  <td>TRIBUNAL</td>
+				</tr>
+				<tr>
+				  <td>AS-ASAB</td>
+				  <td>DESEMB
+			ALEXANDRE DE SOUZA AGRA BELMONTE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DISEG-CAP</td>
+				  <td>DIVIS&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - CAPITAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECSEG-SEDE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DISEG-INT</td>
+				  <td>DIVIS&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGILANCIA - INTERIOR</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GES</td>
+				  <td>GRUPO
+			ESPECIAL DE SEGURAN&Ccedil;A</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DECOM</td>
+				  <td>DIVIS&Atilde;O
+			DE ESPECIFICA&Ccedil;&Atilde;O E COMPRA DE MATERIAIS </td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECMAV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE VE&Iacute;CULOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SAM-GAB</td>
+				  <td>GABINETE
+			SECRETARIA DE ADMINISTRA&Ccedil;&Atilde;O ATIVOS
+			M&Oacute;VEIS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>CPL</td>
+				  <td>COMISSAO
+			PERMANENTE DE LICITACAO E PREGOEIROS</td>
+				  <td>COMISSAO</td>
+				</tr>
+				<tr>
+				  <td>DESCO</td>
+				  <td>DIVIS&Atilde;O
+			DE ESTRUTURA&Ccedil;&Atilde;O DO CONHECIMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETGEM</td>
+				  <td>SETOR
+			DE GEST&Atilde;O DE MEMORIAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIBI</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE ACERVOS BIBLIOGR&Aacute;FICOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>AS-MLP</td>
+				  <td>DESEMB
+			MIRIAN LIPPI PACHECO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-VAC</td>
+				  <td>DESEMB
+			VALMIR DE ARAUJO CARVALHO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>LIC TRANS</td>
+				  <td>SEP
+			LICENCA TRANSITO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>SESCO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ESTRUTURA&Ccedil;&Atilde;O DO CONHECIMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETGEC</td>
+				  <td>SETOR
+			DE GEST&Atilde;O DO CONTE&Uacute;DO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETRUS</td>
+				  <td>SETOR
+			DE RELACIONAMENTO COM USU&Aacute;RIO INT. E EXT.</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DICMA</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTROLE DE MANDADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDACCD</td>
+				  <td>GAB
+			DES. ANTONIO CESAR COUTINHO DAIHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDASAB</td>
+				  <td>GAB
+			DES. ALEXANDRE DE SOUZA AGRA BELMONTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDCRB</td>
+				  <td>GAB
+			DES. CARINA RODRIGUES BICALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDCRVMB</td>
+				  <td>GAB
+			DES.<span style="">&nbsp;
+				  </span>CLAUDIA REGINA VIANNA
+			MARQUES BARROZO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEDID</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AN&Aacute;LISE DE DIREITOS E DEVERES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ</td>
+				  <td>SETOR
+			DE ARQUIVO DA SEC RECURSOS HUMANOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIDIF-NT</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOC. E DIST. DE FEITOS - NITER&Oacute;I</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DIDIF-SG</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOC. E DIST. DE FEITOS - S.GON&Ccedil;ALO</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DIMAN-NI</td>
+				  <td>DIVIS&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - NOVA
+			IGUA&Ccedil;U</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIMAN-SG</td>
+				  <td>DIVIS&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - S&Atilde;O
+			GON&Ccedil;ALO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-CG</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO-CAMPOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDJAP</td>
+				  <td>GAB
+			DES. JOSE ANTONIO PITON</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDJLCX</td>
+				  <td>GAB
+			DES. JOSE LUIS CAMPOS XAVIER</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>FC-VAGAS-1</td>
+				  <td>FC A
+			DISTRIBUIR - VARA A INSTALAR</td>
+				  <td>OUTROS</td>
+				</tr>
+				<tr>
+				  <td>DIDOR</td>
+				  <td>DIVIS&Atilde;O
+			DE<span style="">&nbsp;
+				  </span>DOCUMENTO DE
+			REFER&Ecirc;NCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECRAP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			PROCEDIMENTOS APURAT&Oacute;RIOS DE PENALIDADES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CINF</td>
+				  <td>COORDENADORIA
+			DE INFRAESTRUTURA</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DICAJ</td>
+				  <td>DIVIS&Atilde;O
+			DE ARRECADA&Ccedil;&Atilde;O JUDICIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-MAC</td>
+				  <td>SECAO
+			DE APOIO AS VARAS DO TRABALHO- MACAE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPO-NF</td>
+				  <td>SECAO
+			DE APOIO AS VARAS DO TRABALHO-N.FRIBURGO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIM-NI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - NOVA
+			IGUA&Ccedil;U</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GDMBVP</td>
+				  <td>GAB
+			DES.<span style="">&nbsp;
+				  </span>MONICA BATISTA VIEIRA
+			PUGLIA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMLP</td>
+				  <td>GAB
+			DES. MIRIAN LIPPI PACHECO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMOC</td>
+				  <td>GAB
+			DES. MARCOS DE OLIVEIRA CAVALCANTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMSMP</td>
+				  <td>GAB
+			DES. MARIO SERGIO MEDEIROS PINHEIRO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDPMMS</td>
+				  <td>GAB
+			DES. PAULO MARCELO DE MIRANDA SERRANO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDRLM</td>
+				  <td>GAB
+			DES. ROGERIO LUCAS MARTINS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEFEC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE FISCALIZA&Ccedil;&Atilde;O DE EXECU&Ccedil;&Atilde;O
+			DE CONTRATOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEFOA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE FORMALIZA&Ccedil;&Atilde;O DE AJUSTES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CEATUS-2</td>
+				  <td>CENTRAL
+			DE ATENDIMENTO AO USU&Aacute;RIO - SEDE</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>CFEI-2</td>
+				  <td>COORDENADORIA
+			DE FEITOS DE 2&ordf; INSTANCIA</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>GJ-CAAD</td>
+				  <td>GAB
+			JUIZ CARLOS ALBERTO ARAUJO DRUMMOND</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-EMCT</td>
+				  <td>GAB
+			JUIZA EDITH MARIA CORREA TOURINHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-EXTINTO</td>
+				  <td>GABINETE
+			DE JUIZ EXTINTO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETGRA</td>
+				  <td>SETOR
+			DE GR&Aacute;FICA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECEXP-L/G</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE EXPEDI&Ccedil;&Atilde;O - LAVRADIO/GOMES FREIRE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CPRE</td>
+				  <td>COORDENADORIA
+			DE GESTAO DE PRECATORIOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SEPRC</td>
+				  <td>SECAO
+			DE PRECATORIOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEJUD</td>
+				  <td>SECAO
+			DE APOIO JUDICIARIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-JFGF</td>
+				  <td>GAB
+			JUIZ JORGE FERNANDO G DA FONTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JFMJ</td>
+				  <td>GAB
+			JUIZ JOSE DA FONSECA MARTINS JUNIOR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SPROJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROJETOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEOFI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE OFICINA DE VE&Iacute;CULOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SJU-2-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA JUDICI&Aacute;RIA DE 2&ordf; INST&Acirc;NCIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEAEI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO EXTERNO E INSTITUCIONAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAOC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO OPERACIONAL E CERIMONIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>FC-VAGAS-2</td>
+				  <td>FC A
+			DISTRIBUIR - LEI 11877/08 / POSTO AVAN&Ccedil;ADO</td>
+				  <td>OUTROS</td>
+				</tr>
+				<tr>
+				  <td>ST1</td>
+				  <td>SECRETARIA
+			DA 1A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>ST10</td>
+				  <td>SECRETARIA
+			DA 10A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>SEDI-I</td>
+				  <td>SUBSE&Ccedil;&Atilde;O
+			ESPECIALIZADA DISSIDIOS INDIVIDUAIS I</td>
+				  <td>TRIBUNAL</td>
+				</tr>
+				<tr>
+				  <td>GJ-V10</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 10</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V11</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 11</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V9</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 9</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEMAI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DO INTERIOR</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DICOP</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTABILIDADE P&Uacute;BLICA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CPOR</td>
+				  <td>COORDENADORIA
+			DE PLANEJAMENTO E OR&Ccedil;AMENTO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SEDIC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			ESPECIALIZADA EM DISSIDIOS COLETIVOS</td>
+				  <td>TRIBUNAL</td>
+				</tr>
+				<tr>
+				  <td>SL-SESSAO4</td>
+				  <td>SALA
+			DE SESSAO4</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>T5PR</td>
+				  <td>QUINTA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV3</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 3</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETGER</td>
+				  <td>SETOR
+			DE GERENCIAMENTO BOLETIM INT. DIARIO ELT. JT</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECOG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTABILIDADE GERENCIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SST</td>
+				  <td>SECRETARIA
+			DE SOLU&Ccedil;&Otilde;ES EM TECNOLOGIA DA
+			INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>PAV-AR</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO - PARATY</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>PAV-PAR</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO - PARATY</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>PAV-BP</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB<span style="">&nbsp;
+				  </span>DE VALEN&Ccedil;A -
+			VT-BP</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>1VTNI</td>
+				  <td>1a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTQDS</td>
+				  <td>1a
+			VT DE QUEIMADOS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>20VTRJ</td>
+				  <td>20a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>24VTRJ</td>
+				  <td>24a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SASRM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADM DE SISTEMAS DE RECURSOS MATERIAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESAG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SISTEMAS DE APOIO A GEST&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESIN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SISTEMAS INSTITUCIONAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DSEN</td>
+				  <td>DIVISAO
+			DE DESENVOLVIMENTO DE SISTEMAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDAD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE BANCO DE DADOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SENAP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ANALISE E PROGRAMA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>STA LUZIA</td>
+				  <td>DSMI
+			SANTA LUZIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DSEG</td>
+				  <td>DIVISAO
+			DE SEGURAN&Ccedil;A E VIGILANCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			AN&Aacute;LISE E ATENDIMENTO DE MATERIAL PERMANENTE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>35VTRJ</td>
+				  <td>35a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>36VTRJ</td>
+				  <td>36a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>3VTCAM</td>
+				  <td>3a
+			VT DE CAMPOS DOS GOYTACAZES</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>3VTNI</td>
+				  <td>3a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>3VTNT</td>
+				  <td>3a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEALM-SOB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ALMOXARIFADO - SOBRAS DE INVENT&Aacute;RIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DGCJ</td>
+				  <td>DIRETORIA
+			GERAL COORDENACAO JUDICIARIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SED</td>
+				  <td>SECRETARIA
+			DE DISTRIBUI&Ccedil;&Atilde;O</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>3VTRJ</td>
+				  <td>3a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>43VTRJ</td>
+				  <td>43a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>56VTRJ</td>
+				  <td>56a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEPRE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE PROT.DE RECLAMA&Ccedil;&Otilde;ES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SJU</td>
+				  <td>SECRETARIA
+			JUDICI&Aacute;RIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DIPCO</td>
+				  <td>DIVIS&Atilde;O
+			DE PLANEJAMENTO E CONTRATA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEOPS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PESQUISA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DEPE</td>
+				  <td>DIVIS&Atilde;O
+			DE ENSINO E PESQUISA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>60VTRJ</td>
+				  <td>60a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>64VTRJ</td>
+				  <td>64a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>65VTRJ</td>
+				  <td>65a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>67VTRJ</td>
+				  <td>67a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>6VTNT</td>
+				  <td>6a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>6VTRJ</td>
+				  <td>6a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>73VTRJ</td>
+				  <td>73a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>74VTRJ</td>
+				  <td>74a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>7VTDC</td>
+				  <td>7a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEPESE</td>
+				  <td>SERVI&Ccedil;O
+			DE PESQUISA EDUCACIONAL</td>
+				  <td>SERVICO</td>
+				</tr>
+				<tr>
+				  <td>SECACO</td>
+				  <td>SERVI&Ccedil;O
+			DE CADASTRO E CONTROLE</td>
+				  <td>SERVICO</td>
+				</tr>
+				<tr>
+				  <td>82VTRJ</td>
+				  <td>82a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>OUV</td>
+				  <td>OUVIDORIA</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>DALC</td>
+				  <td>DIVISAO
+			AUDITORIA DE LICITA&Ccedil;&Otilde;ES E CONTRATOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SAUTI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AUDITORIA DE TECNOLOGIA DA INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAOB</td>
+				  <td>SECAO
+			DE AUDITORIA DE OBRAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAUD</td>
+				  <td>SECAO
+			AUDITORIA DE CONCESS&Atilde;O DE DIREITOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAFO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			AUDITORIA<span style="">&nbsp;
+				  </span>FINANCEIRA E
+			OR&Ccedil;AMENTARIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAPA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AUDITORIA PATRIMONIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>COPJ</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE PROJETOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>COMIN2010</td>
+				  <td>COMISS&Atilde;O
+			ANUAL DE INVENT&Aacute;RIO PERMANENTE - 2010</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV</td>
+				  <td>SETOR
+			DE BENS MOVEIS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-SJM</td>
+				  <td>SECAO
+			PROTOCOLO EXPEDICAO S JOAO MERITI</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SERCA</td>
+				  <td>SECAO
+			DE RECEPCAO E APOIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECCAD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CADASTRAMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CBIB</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE ACERVOS BIBLIOGR&Aacute;FICOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIGAB</td>
+				  <td>DIVIS&Atilde;O
+			DE GERENCIAMENTO DE ACERVO BIBLIOGR&Aacute;FICO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CGAA</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE ACERVOS ARQUIVISTICOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>INV2010-NLOC</td>
+				  <td>INV2010-ATIVOS
+			BENS N&Atilde;O LOCALIZADOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEARN-II</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO DE NITEROI II</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>TRT-GF</td>
+				  <td>SETORES
+			VIRTUAIS GOMES FREIRE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>NUGAM</td>
+				  <td>NUCLEO
+			DE GESTAO AMBIENTAL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-CAAD</td>
+				  <td>DESEMB
+			CARLOS ALBERTO ARAUJO DRUMMOND</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECSEG-NT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - NITER&Oacute;I</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CORC</td>
+				  <td>COORDENADORIA
+			DE ORGANIZA&Ccedil;&Atilde;O DO CONHECIMENTO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-NI</td>
+				  <td>SETOR
+			DE ARQUIVO DE NOVA IGUA&Ccedil;U</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>AS-EPMC</td>
+				  <td>DESEMB
+			ELMA PEREIRA DE MELO CARVALHO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JATS</td>
+				  <td>DESEMB
+			JOSE ANTONIO TEIXEIRA DA SILVA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JLFS</td>
+				  <td>DESEMB
+			JOSE LEOPOLDO FELIX DE SOUZA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JMMP</td>
+				  <td>DESEMB
+			JOSE MARIA DE MELLO PORTO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-LAPM</td>
+				  <td>DESEMB
+			LUIZ AUGUSTO PIMENTA DE MELLO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-MAP</td>
+				  <td>DESEMB
+			MARCOS ANTONIO PALACIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-MOC</td>
+				  <td>DESEMB
+			MARCOS DE OLIVEIRA CAVALCANTE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DIAGC</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO A GEST&Atilde;O CONTRATUAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DICOD</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTRATOS E DOCUMENTOS DE REFER&Ecirc;NCIA </td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEC</td>
+				  <td>DIVIS&Atilde;O
+			DE PESQUISA DE MERCADO E CONTRAT DIRETAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEP</td>
+				  <td>SECRETARIA
+			DE ADMINISTRA&Ccedil;&Atilde;O DE PESSOAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SECARQ-GP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO DE GEST&Atilde;O DE PESSOAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SJU-1</td>
+				  <td>SECRETARIA
+			JUDICI&Aacute;RIA DE 1&ordf; INST&Acirc;NCIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>CEATUS-1</td>
+				  <td>CENTRAL
+			DE ATENDIMENTO AO USU&Aacute;RIO - LAVRADIO</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>DIAPU-1</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO USU&Aacute;RIO DE 1&ordf; INST&Acirc;NCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIDIS-1</td>
+				  <td>DIVIS&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE FEITOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIMAN-RJ</td>
+				  <td>DIVIS&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAPU-NI</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO USU&Aacute;RIO DE NOVA IGUA&Ccedil;U</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDACAR</td>
+				  <td>GAB
+			DES. ANTONIO CARLOS DE AZEVEDO RODRIGUES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDDV</td>
+				  <td>GAB
+			DES. DAMIR VRCIBRADIC</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DPROS</td>
+				  <td>DIVIS&Atilde;O
+			DE PROMO&Ccedil;&Atilde;O DE SA&Uacute;DE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEX-NI</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO E EXPEDI&Ccedil;&Atilde;O - NOVA IGUA&Ccedil;U</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDEPVL</td>
+				  <td>GAB
+			DES. EVANDRO PEREIRA VALADAO LOPES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDFERS</td>
+				  <td>GAB
+			DES. FLAVIO ERNESTO RODRIGUES SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDGBLR</td>
+				  <td>GAB
+			DES. GISELLE BONDIM LOPES RIBEIRO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDICAF</td>
+				  <td>GAB
+			DES. IVAN DA COSTA ALEM&Atilde;O FERREIRA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>CCOT</td>
+				  <td>COORDENADORIA
+			DE CONTRATA&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIFOA</td>
+				  <td>DIVIS&Atilde;O
+			DE FORMALIZA&Ccedil;&Atilde;O DE AJUSTES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIF-NI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROTOC. E DIST. DE FEITOS - NOVA IGUA&Ccedil;U</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEDIM-DC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - DUQUE D CAXIAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GDMAC</td>
+				  <td>GAB
+			DES. MARCELO ANTERO DE CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDNTB</td>
+				  <td>GAB
+			DES. NELSON TOMAZ BRAGA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>CMAP</td>
+				  <td>COORDENADORIA
+			DE MATERIAL E PATRIMONIO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIGEM</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE MATERIAIS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAPS-GAB39</td>
+				  <td>DIAPS-GAB39</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DICO</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTRATA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEALG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AOS PR&Eacute;DIOS LAVRADIO E GOMES FREIRE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEMOB-DIST</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE BENS - DIST</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-DC</td>
+				  <td>SECAO
+			DE PROTOCOLO E EXPEDI&Ccedil;&Atilde;O - DUQUE DE CAXIAS</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SCOTE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE DE MANDADOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETRED</td>
+				  <td>SETOR
+			DE RECEBIMENTO E DEVOLU&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>GDTSG</td>
+				  <td>GAB
+			DES. TANIA DA SILVA GARCIA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-ATFBC</td>
+				  <td>GAB
+			JUIZ ALEXANDRE TEIXEIRA DE FREITAS B. CUNHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-CJC</td>
+				  <td>GAB
+			JUIZ CELIO JUA&Ccedil;ABA CAVALCANTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-DLCN</td>
+				  <td>GAB
+			JUIZA DORIS LUISE DE CASTRO NEVES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-EG</td>
+				  <td>GAB
+			JUIZ EDILSON GONCALVES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-EPVL</td>
+				  <td>GAB
+			JUIZ EVANDRO P VALADAO LOPES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-FERS</td>
+				  <td>GAB
+			JUIZ FLAVIO ERNESTO RODRIGUES SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DMAC</td>
+				  <td>DIVIS&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O - CAPITAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECCOP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE COPA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIS-2</td>
+				  <td>SECAO
+			DE DISTRIBUI&Ccedil;&Atilde;O DE 2&ordf; INSTANCIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SCALJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE C&Aacute;LCULOS JUDICIAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECAB</td>
+				  <td>SECAO
+			DE CONTROLE E BAIXA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETCAR</td>
+				  <td>SETOR
+			DE CARGA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>GJ-ISG</td>
+				  <td>GAB
+			JUIZ IZIDORO SOLER GUELMAN</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JGF</td>
+				  <td>GAB
+			JUIZ JOSE GERALDO DA FONSECA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JLGLV</td>
+				  <td>GAB
+			JUIZ JOSE LUIZ DA GAMA L VALENTINO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MBC</td>
+				  <td>GAB
+			JUIZ MERY BUCKER CAMINHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MOC</td>
+				  <td>GAB
+			JUIZ MARCOS DE OLIVEIRA CAVALCANTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-NAP</td>
+				  <td>GAB
+			JUIZ CONV NURIA DE ANDRADE PERIS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SMO</td>
+				  <td>SECRETARIA
+			DE MANUTEN&Ccedil;&Atilde;O E OBRAS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SECMAI-DC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE DUQUE DE CAXIAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIOB</td>
+				  <td>DIVIS&Atilde;O
+			DE OBRAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIOP</td>
+				  <td>DIVIS&Atilde;O
+			DE OPERA&Ccedil;&Otilde;ES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DMAN</td>
+				  <td>DIVIS&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CAEI</td>
+				  <td>COORDENADORIA
+			DE APOIO EXTERNO E INSTITUCIONAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>ST8</td>
+				  <td>SECRETARIA
+			DA 8A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>GJ-PRCF</td>
+				  <td>GAB
+			JUIZ PAULO R C DA FONSECA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V2</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 2</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V6</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 6</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV2</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 2</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETMAI-NI</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O DE NOVA IGUA&Ccedil;U</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DEFIN</td>
+				  <td>DIVIS&Atilde;O
+			DE EXECU&Ccedil;&Atilde;O FINANCEIRA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SP</td>
+				  <td>SECRETARIA
+			DO T. PLENO, O.ESP., DIS. COLETIVOS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SL-SESSAO1</td>
+				  <td>SALA
+			DE SESSAO1</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SL-SESSAO3</td>
+				  <td>SALA
+			DE SESSAO3</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>11VTRJ</td>
+				  <td>11a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SECOP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTABILIDADE P&Uacute;BLICA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIFIS</td>
+				  <td>DIVIS&Atilde;O
+			DE ACOMPANHAMENTO E FISCALIZA&Ccedil;&Atilde;O DE OBRAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>PAV-VA</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB<span style="">&nbsp;
+				  </span>DE VALEN&Ccedil;A -
+			VT-BP</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>DIADD</td>
+				  <td>DIVIS&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE DADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DISET</td>
+				  <td>DIVIS&Atilde;O
+			DE SUPORTE &Agrave;S ESTA&Ccedil;&Otilde;ES DE TRABALHO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>1VTRB</td>
+				  <td>1a
+			VT DE RIO BONITO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTRES</td>
+				  <td>1a
+			VT DE RESENDE</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTRJ</td>
+				  <td>1a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTSG</td>
+				  <td>1a
+			VT DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTSJM</td>
+				  <td>1a
+			VT DE SAO JOAO DE MERITI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>TERCEIROS
+			CSTU</td>
+				  <td>TERCEIRIZADA
+			- CSTU</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DGIN</td>
+				  <td>DIVISAO
+			DE GEST&Atilde;O DE INFRAESTRUTURA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEGAR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GERENCIA DE ATIVOS DE REDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DGSP</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE SISTEMAS E PORTAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DITE</td>
+				  <td>DIVISAO
+			DE TELECOMUNICACOES E REDES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETEL</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE TELEFONIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>AUG.SEVERO</td>
+				  <td>DSMI
+			AUGUSTO SEVERO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECAM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE DE MATERIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>2VTNT</td>
+				  <td>2a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>34VTRJ</td>
+				  <td>34a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SERIM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE REGULARIZA&Ccedil;&Atilde;O E CADASTRO DE BENS
+			IM&Oacute;VEIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETASS</td>
+				  <td>SETOR
+			DE ASSISTENCIA SOCIAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIABPROV</td>
+				  <td>DIVIS&Atilde;O
+			DE<span style="">&nbsp;
+				  </span>ASSIST E
+			BENEF&Iacute;CIOS provisoriamente</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPA</td>
+				  <td>DIVIS&Atilde;O
+			DE PAGAMENTO DE PESSOAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPAM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PAGAMENTO DE MAGISTRADOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPAS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PAGAMENTO DE SERVIDORES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DLEG</td>
+				  <td>DIVISAO
+			LEGISLACAO E NORMAS DE PESSOAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DGCJ-GAB</td>
+				  <td>GABINETE
+			DA DIRETORIA GERAL DE COORDEN JUDICIARIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>42VTRJ</td>
+				  <td>42a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>46VTRJ</td>
+				  <td>46a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>4VTCAM</td>
+				  <td>4a
+			VT DE CAMPOS DOS GOYTACAZES</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>4VTSG</td>
+				  <td>4a
+			VT DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>54VTRJ</td>
+				  <td>54a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>59VTRJ</td>
+				  <td>59a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>5VTNI</td>
+				  <td>5a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEDAR-RJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DISTRIBUICAO AUTOM DE RECLAMACOES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEDEC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEV</td>
+				  <td>DIVIS&Atilde;O
+			DE PROJETOS E EVENTOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>EJ1-GAB</td>
+				  <td>GABINETE
+			DA ESCOLA JUDICIAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>ESACS RJ</td>
+				  <td>ESCOLA
+			DE ADMINISTRA&Ccedil;&Atilde;O E
+			CAPACITA&Ccedil;&Atilde;O DO SERVIDOR</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>75VTRJ</td>
+				  <td>75a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DICAP</td>
+				  <td>DIVIS&Atilde;O
+			DE CAPACITA&Ccedil;&Atilde;O PROFISSIONAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIACE</td>
+				  <td>DIVIS&Atilde;O
+			DE ACOMPANHAMENTO DE EST&Aacute;GIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>CEDIDO</td>
+				  <td>SEP
+			CEDIDO A OUTRO ORGAO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>DAEM</td>
+				  <td>DIVISAO
+			DE ADMINISTRACAO DA EMATRA-RJ</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>81VTRJ</td>
+				  <td>81a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SECOI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CORREI&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-CG</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS CAMPOS</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-NT</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS DE NITEROI</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>FALECIDOS</td>
+				  <td>FALECIDOS</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>CALC</td>
+				  <td>COORDENADORIA<span
+			 style="">&nbsp; </span>DE
+			AUDITORIA LICITA&Ccedil;&Otilde;ES E CONTRATOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>CAUP</td>
+				  <td>COORDENADORIA
+			DE AUDITORIA DE PESSOAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SAUCO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AUDITORIA DE COMPRAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SAPPE</td>
+				  <td>SECAO
+			AUDITORIA PAGTO E PROV DE PESSOAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CEST</td>
+				  <td>COORDENADORIA
+			DE ESTAT&Iacute;STICA</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SDE-GAB</td>
+				  <td>GABINETE
+			DA SECR DE DESENVOLVIMENTO INSTITUCIONAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SG</td>
+				  <td>SECRETARIA
+			GERAL DA PRESIDENCIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DF-SG</td>
+				  <td>DIRETOR
+			DE FORO - S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DINF-MSGLAV</td>
+				  <td>DIVIS&Atilde;O
+			DE INFRA-ESTRUTURA - MSGLAV</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DIAJ-DEPRO</td>
+				  <td>DEPOSITO
+			PROVISORIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-AS</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - AUGUSTO SEVERO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEMOV-RA</td>
+				  <td>SECAO
+			DE DEPOSITO DE BENS MOVEIS - RAMOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>ALMOX DSMI</td>
+				  <td>DSMI
+			ALMOXARIFADO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>INV2008-ABB</td>
+				  <td>INV2008-ATIVOS
+			BENS A BAIXAR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-PE</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS PETROPOLIS</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-VR</td>
+				  <td>SECAO
+			DE PROTOCOLO EXPED VOLTA REDONDA</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SESEG-INT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGILANCIA - INTERIOR</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETCOPA</td>
+				  <td>SETOR
+			DE COPA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DICON</td>
+				  <td>DIVIS&Atilde;O
+			DE CONCILIA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DAPSA</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO PJe E SAPWEB</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>INV2008-SLD</td>
+				  <td>INV2008-SEM
+			LOCALIZA&Ccedil;&Atilde;O E DESCONCILIADO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SERCA-AS</td>
+				  <td>SETOR
+			DE RECEPCAO AUGUSTO SEVERO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-ACAR</td>
+				  <td>DESEMB
+			ANTONIO CARLOS DE A RODRIGUES</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-AMSM</td>
+				  <td>DESEMB
+			ANA MARIA SOARES DE MORAES</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-AS</td>
+				  <td>DESEMB
+			ALOYSIO SANTOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECSEG-L/G</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA-LAVRADIO/G.FREIRE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECMEI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GEST&Atilde;O DE MEMORIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEP</td>
+				  <td>DIVIS&Atilde;O
+			DE PESQUISA E PUBLICA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEARN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO JUDICIAL - NITER&Oacute;I</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-3</td>
+				  <td>SETOR
+			DE ARQUIVO 3 (NT)</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETAB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE TRATAMENTO DE ACERVO BIBLIOGR&Aacute;FICO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>AS-IDRA</td>
+				  <td>DESEMB
+			IVAN DIAS RODRIGUES ALVES</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JCNC</td>
+				  <td>DESEMB
+			JOSE CARLOS NOVIS CESAR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-MGCVP</td>
+				  <td>DESEMB
+			MARIA DAS GRACAS C V PARANHOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-MLLS</td>
+				  <td>DESEMB
+			MARIA DE LOURDES A SALLABERRY</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-TBSF</td>
+				  <td>DESEMB
+			THEOCRITO BORGES DOS SANTOS FILHO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DIRPC</td>
+				  <td>DIVIS&Atilde;O
+			DE INSTRU&Ccedil;&Atilde;O DE REAJ E PENALID CONTRATUAIS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPPI</td>
+				  <td>DIVIS&Atilde;O
+			PREPARO DE PAGTO<span style="">&nbsp;
+				  </span>INATIVOS E PENSIONISTAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIONC4</td>
+				  <td>DIONC4</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEP-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE ADMINISTRA&Ccedil;&Atilde;O DE PESSOAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>CFEI-1</td>
+				  <td>COORDENADORIA
+			DE FEITOS DE 1&ordf; INSTANCIA</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIAPU-DC</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO USU&Aacute;RIO DE DUQUE DE CAXIAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDAGZ</td>
+				  <td>GAB
+			DES. ANGELO GALV&Atilde;O ZAMORANO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDEMCT</td>
+				  <td>GAB
+			DES. EDITH MARIA CORREA TOURINHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>AFASTADO</td>
+				  <td>AFASTADO
+			AGUARDANDO CONCLUS&Atilde;O DE PROCESSO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>CEMASE</td>
+				  <td>CENTRAL
+			DE ATENDIMENTO AO MAGISTRADO E SERVIDOR</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>DIBEN</td>
+				  <td>DIVIS&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE BENEF&Iacute;CIOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPER</td>
+				  <td>DIVIS&Atilde;O
+			DE ATENDIMENTO PERICIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETPAG</td>
+				  <td>SETOR
+			DE CONCILIA&Ccedil;&Atilde;O E PAGAMENTO DE
+			BENEF&Iacute;CIOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SPROV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROVIMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPIP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			PREPARO DE PAGTO DE INATIVOS E PENSIONISTAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIDIF-NI</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOC. E DIST. DE FEITOS - NOVA IGUA&Ccedil;U</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DIPEX-NT</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO E EXPEDI&Ccedil;&Atilde;O - NITER&Oacute;I</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-DC</td>
+				  <td>DIVIS&Atilde;O
+			APOIO AS VARAS DO TRABALHO- DUQUE D CAXIAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-ITG</td>
+				  <td>DIVIS&Atilde;O
+			APOIO AS VARAS DO TRABALHO- ITAGUAI</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDJNAN</td>
+				  <td>GAB
+			DES. JOSE NASCIMENTO ARAUJO NETTO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDLDB</td>
+				  <td>GAB
+			DES. LEONARDO DIAS BORGES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SAPERPROV</td>
+				  <td>SGP
+			SE&Ccedil;&Atilde;O DE ATENDIMENTO PERICIAL provisoriamente</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GDRLD</td>
+				  <td>GAB
+			DES. ROQUE LUCARELLI DATTOLI</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SECEXP-SEDE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE EXPEDI&Ccedil;&Atilde;O DO ED&Iacute;FICIO SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIALM</td>
+				  <td>DIVIS&Atilde;O
+			DE ALMOXARIFADO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECOM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE COMPRAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECEM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE EXPEDI&Ccedil;&Atilde;O E MALOTE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETRA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE TRANSPORTES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SJU-1-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA JUDICI&Aacute;RIA DE 1&ordf; INST&Acirc;NCIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SJU-2</td>
+				  <td>SECRETARIA
+			JUDICI&Aacute;RIA DE 2&ordf; INST&Acirc;NCIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DIAPU-2</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO USU&Aacute;RIO DE 2&ordf; INSTANCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDSGCLS</td>
+				  <td>GAB
+			DES. SAYONARA GRILLO COUTINHO L. DA SILVA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDVAC</td>
+				  <td>GAB
+			DES. VALMIR DE ARAUJO CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-GRFM</td>
+				  <td>GAB
+			JUIZA GLORIA REGINA FERREIRA MELLO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DMANP-AC</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO MANUTEN&Ccedil;&Atilde;O PREDIAL-ANT&Ocirc;NIO
+			CARLOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DMANP-L/G</td>
+				  <td>DIVIS&Atilde;O
+			APOIO MANUT PREDIAL-LAVRADIO/GOMES FREIRE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPRO-2</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO DE 2&ordf; INSTANCIA</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>CSEP</td>
+				  <td>COORDENADORIA
+			DE SERVICOS PROCESSUAIS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SADIS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AUTUA&Ccedil;&Atilde;O E DISTRIBUI&Ccedil;&Atilde;O
+			DE 2&ordf; INSTANCIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DSEP</td>
+				  <td>DIVISAO
+			DE SERVICOS PROCESSUAIS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECEX</td>
+				  <td>SECAO
+			DE EXPEDICAO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERAG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE RECURSO DE AGRAVO DE INSTRUMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEREC</td>
+				  <td>SECAO
+			DE RECURSOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-JCNC</td>
+				  <td>GAB
+			JUIZ JOSE CARLOS NOVIS CESAR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JLFS</td>
+				  <td>GAB
+			JUIZ JOSE LEOPOLDO FELIX DE SOUZA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-JMMP</td>
+				  <td>GAB
+			JUIZ JOSE MARIA DE MELLO PORTO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MACM</td>
+				  <td>GAB
+			JUIZA MARIA APARECIDA C MAGALHAES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MSMP</td>
+				  <td>GAB
+			JUIZ MARIO SERGIO MEDEIROS PINHEIRO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SECMAE-L/G</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O EQUIPAMENTOS-LAVRADIO/G.FREIRE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERLAN</td>
+				  <td>SETOR
+			DE LANTERNAGEM</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SERMEC</td>
+				  <td>SETOR
+			DE MEC&Acirc;NICA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETELV</td>
+				  <td>SETOR
+			DE EL&Eacute;TRICA DE VE&Iacute;CULOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SPREC</td>
+				  <td>SECAO
+			DE PRECATORIOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SPR</td>
+				  <td>SECRETARIA-GERAL
+			DA PRESID&Ecirc;NCIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DAOCE</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO OPERACIONAL E CERIMONIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>ST6</td>
+				  <td>SECRETARIA
+			DA 6A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>ST7</td>
+				  <td>SECRETARIA
+			DA 7A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>ST9</td>
+				  <td>SECRETARIA
+			DA 9A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>SUAEI</td>
+				  <td>SUPERVIS&Atilde;O
+			DE APOIO EXTERNO E INSTITUCIONAL</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>GJ-RLD</td>
+				  <td>GAB
+			JUIZ ROQUE LUCARELLI DATTOLI</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-TBSF</td>
+				  <td>GAB
+			JUIZ THEOCRITO B. DOS SANTOS FILHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SERPIN</td>
+				  <td>SETOR
+			DE PINTURA (PR&Eacute;DIOS)</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETHID</td>
+				  <td>SETOR
+			DE HIDRAULICA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SMO-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE MANUTEN&Ccedil;&Atilde;O E OBRAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIPOD</td>
+				  <td>DIVIS&Atilde;O
+			DE PROCESSAMENTO DE DESPESAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DCON</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTABILIDADE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GJV7</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 7</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>NUDESG</td>
+				  <td>NUCLEO
+			DE ACOMP. DO DESEMP. DO SISTEMA DE GEST&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>AIC</td>
+				  <td>ASSESSORIA
+			DE IMPRENSA E COMUNICA&Ccedil;&Atilde;O SOCIAL</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>DFIN</td>
+				  <td>DIVIS&Atilde;O
+			FINANCEIRA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEORC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE OR&Ccedil;AMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SPLOR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PLANEJAMENTO OR&Ccedil;AMENT&Aacute;RIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-OF</td>
+				  <td>SETOR
+			DE ARQUIVO DE FINAN&Ccedil;AS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIPOB</td>
+				  <td>DIVIS&Atilde;O
+			DE PLANEJAMENTO E OR&Ccedil;AMENTO DE OBRAS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIQUA</td>
+				  <td>DIVIS&Atilde;O
+			DE QUALIDADE DE SOLU&Ccedil;&Otilde;ES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>19VTRJ</td>
+				  <td>19a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DIABD</td>
+				  <td>DIVIS&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE BANCO DE DADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIONC8</td>
+				  <td>DIVIS&Atilde;O
+			DE OPERA&Ccedil;&Atilde;O DE N&Uacute;CLEOS DE
+			COMPUTA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIONC9</td>
+				  <td>DIVIS&Atilde;O
+			DE OPERA&Ccedil;&Atilde;O DE N&Uacute;CLEOS DE
+			COMPUTA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>28VTRJ</td>
+				  <td>28a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>MANUT DSTU</td>
+				  <td>DSTU
+			MANUTENCAO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SETCOT</td>
+				  <td>SETOR
+			DE CONTROLE DE TELEFONIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SDEMP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DESENVOLVIMENTO E MANUTEN&Ccedil;&Atilde;O DO PORTAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECOD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONFIGURA&Ccedil;&Atilde;O E DESEMPENHO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESUP</td>
+				  <td>SECAO
+			DE SUPORTE TECNICO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>STI-SLA</td>
+				  <td>SALA
+			DE APOIO DA STI</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SCATL</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CATALOGACAO DE MATERIAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>2VTDC</td>
+				  <td>2a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTRES</td>
+				  <td>2a
+			VT DE RESENDE</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTSG</td>
+				  <td>2a
+			VT DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>32VTRJ</td>
+				  <td>32a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>39VTRJ</td>
+				  <td>39a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-SOB</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - SOBRAS DE INVENT&Aacute;RIO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEMOV-DF</td>
+				  <td>SETOR
+			DE BENS MOVEIS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECAD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CADASTRO DE FORNECEDORES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SRH</td>
+				  <td>SECRETARIA
+			DE RECURSOS HUMANOS</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SEDES</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AVALIA&Ccedil;&Atilde;O DE DESEMPENHO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>45VTRJ</td>
+				  <td>45a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>52VTRJ</td>
+				  <td>52a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DIST</td>
+				  <td>DIVIS&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEG-I</td>
+				  <td>SECAO
+			DE PROTOCOLO DE PRIMEIRA INSTANCIA</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SENSI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ENSINO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SAPAD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO ADMINISTRATIVO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>68VTRJ</td>
+				  <td>68a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>6VTSG</td>
+				  <td>6a
+			VT DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DCAP</td>
+				  <td>DIVIS&Atilde;O
+			DE CAPACITA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDCP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CAPACITA&Ccedil;&Atilde;O PROFISSIONAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>ESACS-GAB</td>
+				  <td>GABINETE
+			DA ESACS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>GP</td>
+				  <td>GABINETE
+			DA PRESIDENCIA DO TRT</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>EMATRA-RJ</td>
+				  <td>EMATRA-RJ</td>
+				  <td>OUTROS</td>
+				</tr>
+				<tr>
+				  <td>SESAC</td>
+				  <td>SECAO
+			ATIVIDADES ACADEM SECR EMATRA-RJ</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CADM</td>
+				  <td>COORDENADORIA
+			DE APOIO ADMINISTRATIVO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DINSP</td>
+				  <td>DIVIS&Atilde;O
+			DE INSPE&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEMON</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MONITORAMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECIN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE INSPE&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CEDIST-DC</td>
+				  <td>CENTRAL
+			DE DIST DE MANDADOS D. DE CAXIAS</td>
+				  <td>CENTRAL</td>
+				</tr>
+				<tr>
+				  <td>SASER</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AUDITORIA DE SERVI&Ccedil;OS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIDO</td>
+				  <td>DIVISAO
+			AUDIT DE DESEMPENHO OPERACIONAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DF-DC</td>
+				  <td>DIRETOR
+			DE FORO - DUQUE DE CAXIAS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DF-VR</td>
+				  <td>DIRETOR
+			DE FORO - VOLTA REDONDA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-GA</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - GAMBOA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>INV2008-ABNL</td>
+				  <td>INV2008-ATIVOS
+			BENS N&Atilde;O LOCALIZADOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SERDI-SJM</td>
+				  <td>SECAO
+			RECL DISTR FEITOS SAO JOAO MERITI</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>ACT</td>
+				  <td>ASSESSORIA
+			DE CONTRATA&Ccedil;&Otilde;ES</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>SETSEG-L/G</td>
+				  <td>SETOR
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA-LAVRADIO/G.FREIRE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETSEG-NT</td>
+				  <td>SETOR
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - NITER&Oacute;I</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIAPE</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO &Agrave; EXECU&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DCALC</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO C&Aacute;LCULO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECTAR-2</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO 2 (RJ2)</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECTAR-3</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO 3 (NT)</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>JDF-CF</td>
+				  <td>JUIZ
+			DIRETOR DO FORUM - CF</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SERVI-SEDE</td>
+				  <td>SETOR
+			DE VIGILANCIA DA SEDE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-ACA</td>
+				  <td>DESEMB
+			ANTONIO CARLOS AREAL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-ATFBC</td>
+				  <td>DESEMB
+			ALEXANDRE TEIXEIRA DE F B CUNHA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-DLCN</td>
+				  <td>DESEMB
+			DORIS LUISE DE CASTRO NEVES</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEARQ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-4</td>
+				  <td>SETOR
+			DE ARQUIVO 4 (NI)</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-RJ1</td>
+				  <td>SETOR
+			DE ARQUIVO DO RIO DE JANEIRO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>AS-DV</td>
+				  <td>DESEMB
+			DAMIR VRCIBRADIC</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JGF</td>
+				  <td>DESEMB
+			JOSE GERALDO DA FONSECA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JLGLV</td>
+				  <td>DESEMB
+			JOSE LUIZ DA GAMA L VALENTINO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-LAML</td>
+				  <td>DESEMB
+			LUIZ ALFREDO MAFRA LINO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-PRCF</td>
+				  <td>DESEMB
+			PAULO ROBERTO CAPANEMA DA FONSECA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-WVG</td>
+				  <td>DESEMB
+			WANDERLEY VALLADARES GASPAR</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DCOPE</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTROLE DE PESSOAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEMASE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ATENDIMENTO AO MAGISTRADO E SERVIDOR</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SGC-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DA GEST&Atilde;O DO CONHECIMENTO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DICOE</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO E CONTROLE DE FEITOS</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>GDAFG</td>
+				  <td>GAB
+			DES. ALBERTO FORTES GIL</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDCAAD</td>
+				  <td>GAB
+			DES. CARLOS ALBERTO ARAUJO DRUMMOND</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DRET</td>
+				  <td>DIVIS&Atilde;O
+			DE RECRUTAMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIPEX-DC</td>
+				  <td>DIVIS&Atilde;O
+			DE PROTOCOLO E EXPEDI&Ccedil;&Atilde;O - DUQUE DE CAXIAS</td>
+				  <td>DIVISAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SAPER</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ATENDIMENTO PERICIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DSADPROV</td>
+				  <td>DIVIS&Atilde;O
+			DE SA&Uacute;DE PROVISORIAMENTE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-GP</td>
+				  <td>SETOR
+			DE ARQUIVO DE GEST&Atilde;O DE PESSOAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECAGF</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DO FORO DA AV GOMES FREIRE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-PET</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - PETROPOLIS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-VR</td>
+				  <td>DIVIS&Atilde;O
+			APOIO AS VARAS DO TRABALHO - VOLTA REDONDA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DCOI</td>
+				  <td>DIVIS&Atilde;O
+			DE COORDENA&Ccedil;&Atilde;O DAS SE&Ccedil;&Otilde;ES
+			DO INTERIOR</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDIM-NT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - NITEROI</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GDMAP</td>
+				  <td>GAB
+			DES. MARCOS ANTONIO PALACIO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMASO</td>
+				  <td>GAB
+			DES. MARCELO AUGUSTO SOUTO DE OLIVEIRA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDRSVT</td>
+				  <td>GAB
+			DES. ROSANA SALIM VILLELA TRAVESEDO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETARC</td>
+				  <td>SETOR
+			DE AN&Aacute;LISE DE REAJUSTE CONTRATUAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SAPOP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO AO PREDIO SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETCOP</td>
+				  <td>SETOR
+			DE COPA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEMOB-EVENTOS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE BENS - EVENTOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DMAP</td>
+				  <td>DIVIS&Atilde;O
+			DE MATERIAL E PATRIMONIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIEX</td>
+				  <td>DIVIS&Atilde;O
+			DE EXECU&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEDEJ-RJ</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DEPOSITO JUDICIAL DO RJ</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETCER</td>
+				  <td>SETOR
+			DE CERTID&Otilde;ES E CLASSIFICA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIADP</td>
+				  <td>DIVIS&Atilde;O
+			AUTUA&Ccedil;&Atilde;O DISTRIBUI&Ccedil;&Atilde;O
+			PROTOC 2&ordf; INSTANCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-AOC</td>
+				  <td>GAB
+			JUIZA AURORA DE OLIVEIRA COENTRO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEPAD</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PADRONIZA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SMAPE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MATERIAL PERMANENTE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DMANP-A1</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO E MANUTEN&Ccedil;&Atilde;O PREDIAL - &Aacute;REA 1</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SMI-GAB</td>
+				  <td>GAB
+			SECRETARIA DE MANUTEN&Ccedil;&Atilde;O INFRAESTURA PREDIAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIAUD</td>
+				  <td>DIVIS&Atilde;O
+			DE AUTUA&Ccedil;&Atilde;O E DISTRIBUI&Ccedil;&Atilde;O
+			2&ordf; INSTANCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECEX-FCC</td>
+				  <td>SECAO
+			DE EXPEDICAO FORUM COQ COSTA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SOPI-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE OBRAS E PROJETOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>COBS</td>
+				  <td>COORDENADORIA
+			DE OBRAS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>SEPLA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PLANEJAMENTO E OR&Ccedil;AMENTO DE OBRAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPOB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROJETOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DAEIN</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO EXTERNO E INSTITUCIONAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>ST3</td>
+				  <td>SECRETARIA
+			DA 3A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>ST4</td>
+				  <td>SECRETARIA
+			DA 4A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>ST5</td>
+				  <td>SECRETARIA
+			DA 5A TURMA</td>
+				  <td>TURMA</td>
+				</tr>
+				<tr>
+				  <td>GJ-RLM</td>
+				  <td>GAB
+			JUIZ ROGERIO LUCAS MARTINS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-V7</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO N&ordm; 7</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-VAC</td>
+				  <td>GAB
+			JUIZ VALMIR DE ARAUJO CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-WVG</td>
+				  <td>GAB
+			JUIZ WANDERLEY VALLADARES GASPAR</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV1</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 1</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SETMAE-L/G</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O EQUIPAMENTOS-LAVRADIO/G.FREIRE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETMAI-NT</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O DE NITER&Oacute;I</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEMAP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O PREDIAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DICEO</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTROLE E EXECU&Ccedil;&Atilde;O
+			OR&Ccedil;AMENT&Aacute;RIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SL-SESSAO2</td>
+				  <td>SALA
+			DE SESSAO2</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>T2PR</td>
+				  <td>SEGUNDA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>T3PR</td>
+				  <td>TERCEIRA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>OE</td>
+				  <td>ORGAO
+			ESPECIAL</td>
+				  <td>TRIBUNAL</td>
+				</tr>
+				<tr>
+				  <td>NUGESP</td>
+				  <td>N&Uacute;CLEO
+			DE GEST&Atilde;O DE PROJETOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>NUGESQ</td>
+				  <td>N&Uacute;CLEO
+			DE GEST&Atilde;O DA QUALIDADE</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>ARR</td>
+				  <td>ASSESSORIA
+			DE RECURSO DE REVISTA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>DPOR</td>
+				  <td>DIVIS&Atilde;O
+			DE PLANEJAMENTO E OR&Ccedil;AMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECEO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE E EXECU&Ccedil;&Atilde;O
+			OR&Ccedil;AMENT&Aacute;RIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAARQ</td>
+				  <td>SETOR
+			DE AUTUA&Ccedil;&Atilde;O E ARQUIVO DA SOF</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DAMAP</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO &Agrave; MANUTEN&Ccedil;&Atilde;O PREDIAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SOP-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA DE OBRAS E PROJETOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIANP</td>
+				  <td>DIVIS&Atilde;O
+			DE AN&Aacute;LISE E PROJETO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>14VTRJ</td>
+				  <td>14a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTCAM</td>
+				  <td>1a
+			VT DE CAMPOS DOS GOYTACAZES</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTITB</td>
+				  <td>1a
+			VT DE ITABORAI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTITP</td>
+				  <td>1a
+			VT DE ITAPERUNA</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>CGIN</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE INFRAESTRUTURA</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DGPIR</td>
+				  <td>DIVIS&Atilde;O
+			GERENCIA E PROJ DE INFRAESTRUTURA DE REDE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIONC</td>
+				  <td>DIVIS&Atilde;O
+			DE OPERA&Ccedil;&Atilde;O DE N&Uacute;CLEOS DE
+			COMPUTA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DISIN</td>
+				  <td>DIVIS&Atilde;O
+			DE SISTEMAS INSTITUCIONAIS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>1VTNF</td>
+				  <td>1a
+			VT DE NOVA FRIBURGO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>PAV-NF</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB - CANTAGALO<span
+			 style="">&nbsp; </span>VT-NF</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>1VTTE</td>
+				  <td>1a
+			VT DE TERESOPOLIS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>G.FREIRE</td>
+				  <td>DSTU
+			- GOMES FREIRE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SESET</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SUPORTE DE ESTA&Ccedil;&Otilde;ES DE TRABALHO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SGSAU</td>
+				  <td>SE&Ccedil;&Atilde;O
+			GEST&Atilde;O DOS SERVI&Ccedil;OS DE ATENDIMEN AO USUARIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECSIN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A DE TECNOLOGIA DA
+			INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DGCA</td>
+				  <td>DIRETORIA
+			GERAL DE COORDENA&Ccedil;&Atilde;O ADMINISTRATIVA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SES</td>
+				  <td>SECRETARIA
+			DE ENGENHARIA E SEGURAN&Ccedil;A PATRIMONIAL</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SESEG-LAV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGILANCIA - LAVRADIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>2VTSJM</td>
+				  <td>2a
+			VT DE SAO JOAO DE MERITI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>37VTRJ</td>
+				  <td>37a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEPAT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PATRIM&Ocirc;NIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETENF</td>
+				  <td>SETOR
+			DE ENFERMAGEM</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SPAPE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PAGAMENTO DE PENSIONISTAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SVAPE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AVERBA&Ccedil;&Atilde;O E CONCESS&Atilde;O DE APOSEN E
+			PENS&Otilde;ES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SRHPROV</td>
+				  <td>SECRETARIA
+			REC. HUMANOS provisoriamente</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIRC</td>
+				  <td>DIVIS&Atilde;O
+			DE RECLAMA&Ccedil;&Otilde;ES</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>44VTRJ</td>
+				  <td>44a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>4VTNT</td>
+				  <td>4a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>4VTRJ</td>
+				  <td>4a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>51VTRJ</td>
+				  <td>51a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SJU-GAB</td>
+				  <td>GABINETE
+			DA SECRETARIA JUDICI&Aacute;RIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DAPAD</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO ADMINISTRATIVO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>62VTRJ</td>
+				  <td>62a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>6VTDC</td>
+				  <td>6a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>71VTRJ</td>
+				  <td>71a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>CDES</td>
+				  <td>COORDENADORIA
+			DE DESENVOLVIMENTO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DDES</td>
+				  <td>DIVIS&Atilde;O
+			DE DESENVOLVIMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SESUPE</td>
+				  <td>SERVI&Ccedil;O
+			DE SUPORTE PEDAG&Oacute;GICO</td>
+				  <td>SERVICO</td>
+				</tr>
+				<tr>
+				  <td>SEAPLA</td>
+				  <td>SERVI&Ccedil;O
+			DE AVALIA&Ccedil;&Atilde;O E PLANEJAMENTO</td>
+				  <td>SERVICO</td>
+				</tr>
+				<tr>
+				  <td>SECONC</td>
+				  <td>SERVI&Ccedil;O
+			DE CONCURSO</td>
+				  <td>SERVICO</td>
+				</tr>
+				<tr>
+				  <td>OUTROS</td>
+				  <td>OUTROS</td>
+				  <td>OUTROS</td>
+				</tr>
+				<tr>
+				  <td>APOSENT</td>
+				  <td>APOSENTADOS</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>DESLIGADO</td>
+				  <td>DESLIGADO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEPUB</td>
+				  <td>SECAO
+			DE PUBLIC E DIVULG SECR EMATRA-RJ</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>EMATRA-GAB</td>
+				  <td>GABINETE
+			DA EMATRA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SESAD</td>
+				  <td>SECAO
+			DE ADMINISTRACAO SECRET EMATRA-RJ</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>7VTNI</td>
+				  <td>7a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>80VTRJ</td>
+				  <td>80a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SECMOP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O PROCESSUAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DCIN</td>
+				  <td>DIVIS&Atilde;O
+			DE CORREI&Ccedil;&Atilde;O E INSPE&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>VCR</td>
+				  <td>VICE-CORREGEDORIA
+			REGIONAL</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>DF</td>
+				  <td>DIRETOR
+			DE FORO</td>
+				  <td>DIRETORIA</td>
+				</tr>
+				<tr>
+				  <td>PR-CORSA</td>
+				  <td>COMISS&Atilde;O
+			DE RESPONSABILIDADE S&Oacute;CIO AMBIENTAL</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DACO</td>
+				  <td>DIVIS&Atilde;O
+			DE AUDITORIA CONT&Aacute;BIL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>EXTINTO</td>
+				  <td>RESOLUCAO
+			ADMINISTRATIVA PROVIS&Oacute;RIA</td>
+				  <td>FICTICIO</td>
+				</tr>
+				<tr>
+				  <td>DEPRO-CR</td>
+				  <td>DEPOSITO
+			PROVISORIO - CORREGEDORIA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SERDI-DC</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DUQUE DE CAXIAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERDI-MA</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DE MACAE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SERDI-NT</td>
+				  <td>SECAO
+			RECL DISTR FEITOS DE NITEROI</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETSEG-NI</td>
+				  <td>SETOR
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - NOVA IGUA&Ccedil;U</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SETSEG-SG</td>
+				  <td>SETOR
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - S&Atilde;O
+			GON&Ccedil;ALO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEREV</td>
+				  <td>SETOR
+			DE REVISTA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECCEX</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CENTRALIZA&Ccedil;&Atilde;O DA EXECU&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>COAJ</td>
+				  <td>COORDENADORIA
+			DE APOIO JUDICI&Aacute;RIO</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>INV2009-ABNL</td>
+				  <td>INV2009-ATIVOS
+			BENS N&Atilde;O LOCALIZADOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>JDF-DC</td>
+				  <td>JUIZ
+			DIRETOR DO FORUM - DC</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>JDF-SG</td>
+				  <td>JUIZ
+			DIRETOR DO FORUM - SG</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>TRT-AS</td>
+				  <td>SETORES
+			VIRTUAIS AUGUSTO SEVERO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>TRT-SEDE</td>
+				  <td>SETORES
+			VIRTUAIS ANTONIO CARLOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-AOC</td>
+				  <td>DESEMB
+			AURORA DE OLIVEIRA COENTRO</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECSEG-DC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E VIGIL&Acirc;NCIA - DUQUE DE CAXIAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIMAC</td>
+				  <td>DIVIS&Atilde;O
+			DE MATERIAL DE CONSUMO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECRUS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE RELACIONAMENTO COM USU&Aacute;RIO INT. E EXT.</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETARQ-RJ2</td>
+				  <td>SETOR
+			DE ARQUIVO DE DUQUE DE CAXIAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEABI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GERENCIAMENTO DE ACERVO BIBLIOGR&Aacute;FICO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>AS-EPVL</td>
+				  <td>DESEMB
+			EVANDRO PEREIRA VALADAO LOPES</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-FAZS</td>
+				  <td>DESEMB
+			FERNANDO ZORZENON DA SILVA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>AS-JFGF</td>
+				  <td>DESEMB
+			JORGE FERNANDO GONCALVES DA FONTE</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>DGEBI</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE BENS IM&Oacute;VEIS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SCO-GAB</td>
+				  <td>GABINETE
+			SECRETARIA DE ADMINISTRA&Ccedil;&Atilde;O DE CONTRATOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>DIONC3</td>
+				  <td>DIONC
+			3</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>INATIVOS</td>
+				  <td>FUNCIONARIOS
+			INATIVOS</td>
+				  <td>INATIVOS</td>
+				</tr>
+				<tr>
+				  <td>AFAST SUSP</td>
+				  <td>AFASTADO
+			POR SUSPENS&Atilde;O DE CONTRATO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>SECCER</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CERTID&Otilde;ES E CLASSIFICA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GDAFSC</td>
+				  <td>GAB
+			DES. ANGELA FIORENCIO SOARES DA CUNHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDALCM</td>
+				  <td>GAB
+			DES. ALVARO LUIZ CARVALHO MOREIRA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDATFBC</td>
+				  <td>GAB
+			DES. ALEXANDRE TEIXEIRA DE FREITAS B. CUNHA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDEPMC</td>
+				  <td>GAB
+			DES. ELMA PEREIRA DE MELO CARVALHO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>CORA</td>
+				  <td>COORDENADORIA
+			DE RECRUTAMENTO E AVALIA&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIVAC</td>
+				  <td>DIVIS&Atilde;O
+			DE AVALIA&Ccedil;&Atilde;O E ACOMPANHAMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAP</td>
+				  <td>DIVIS&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE PESSOAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SAEST</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ADMINISTRA&Ccedil;&Atilde;O DE EST&Aacute;GIOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DRAV</td>
+				  <td>DIVIS&Atilde;O
+			DE RECRUTAMENTO E AVALIA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-CF</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO - CABO FRIO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-NF</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AS VARAS DO TRABALHO-N.FRIBURGO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>GDERS</td>
+				  <td>GAB
+			DES.<span style="">&nbsp;
+				  </span>ENOQUE RIBEIRO DOS
+			SANTOS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDGTA</td>
+				  <td>GAB
+			DES. GUSTAVO TADEU ALKMIM</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDJFGF</td>
+				  <td>GAB
+			DES. JORGE FERNANDO GON&Ccedil;ALVES DA FONTE</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEVAC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE AVALIA&Ccedil;&Atilde;O E ACOMPANHAMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SPROS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROMO&Ccedil;&Atilde;O DE SA&Uacute;DE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SGPPROV</td>
+				  <td>SECRETARIA
+			GEST&Atilde;O DE PESSOAS provisoriamente</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIAPS</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO AO PREDIO SEDE</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DIVAP-SJM</td>
+				  <td>DIVIS&Atilde;O
+			APOIO AS VARAS DO TRABALHO- S.JOAO MERITI</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEG-PET</td>
+				  <td>SALA
+			DE SEGURAN&Ccedil;A DE PETR&Oacute;POLIS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>GDMGCVP</td>
+				  <td>GAB
+			DES. MARIA DAS GRACAS CABRAL VIEGAS PARANHOS</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GDMLALS</td>
+				  <td>GAB
+			DES. MARIA DE LOURDES D'A. LIMA SALLABERRY</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEMOB-TERCEIROS</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MOVIMENTA&Ccedil;&Atilde;O DE BENS -TERCEIRIZADOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SEDIM-SG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS - S&Atilde;O
+			GON&Ccedil;ALO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEX-NI</td>
+				  <td>SECAO
+			DE PROTOCOLO E EXPEDICAO NOVA IGUACU</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DIFE-1</td>
+				  <td>DIVISAO
+			DE FEITOS DE 1&ordf; INSTANCIA</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECOE</td>
+				  <td>SECAO
+			DE PROTOCOLO E CONTROLE DE FEITOS</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEPRI</td>
+				  <td>SECAO
+			DE PROTOCOLO INTEGRADO</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>DMAD</td>
+				  <td>DIVIS&Atilde;O
+			DE CONTROLE E DISTRIBUI&Ccedil;&Atilde;O DE MANDADOS</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECAPE-2</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ATENDIMENTO AO USU&Aacute;RIO do PJe - SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-ACAR</td>
+				  <td>GAB
+			JUIZ ANTONIO CARLOS A RODRIGUES</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEGEM</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE GEST&Atilde;O DE MATERIAIS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIRAG</td>
+				  <td>DIVIS&Atilde;O
+			DE RECURSO DE AGRAVO DE INSTRUMENTO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SECCAR</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CARGA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEAUT</td>
+				  <td>SECAO
+			DE AUTUACAO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPRO-2</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROTOCOLO DE 2&ordf; INSTANCIA</td>
+				  <td>SECAO
+			PROTOCOLO</td>
+				</tr>
+				<tr>
+				  <td>SEACI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE APOIO A CONCILIA&Ccedil;&Atilde;O</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEORP</td>
+				  <td>SECAO
+			PROCESSUAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>GJ-JRDAA</td>
+				  <td>GAB
+			JUIZ JOSE RICARDO DAMIAO DE ARAUJO AREOSA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-LCTB</td>
+				  <td>GAB
+			JUIZ LUIZ CARLOS TEIXEIRA BOMFIM</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MASO</td>
+				  <td>GAB
+			JUIZ MARCELO AUGUSTO SOUTO DE OLIVEIRA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MLLS</td>
+				  <td>GAB
+			JUIZA MARIA DE LOURDES D'A. LIMA SALLABERRY</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MLN</td>
+				  <td>GAB
+			JUIZA MARCIA LEITE NERY</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJ-MLP</td>
+				  <td>GAB
+			JUIZA MIRIAN LIPPI PACHECO</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SECMAI-NI</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE NOVA IGUA&Ccedil;U</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECMAI-NT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE NITER&Oacute;I</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECMAP-L/G</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O PREDIAL-LAVRADIO/G.FREIRE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEORB</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE OBRAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SPROP</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROJETOS E PLANEJAMENTO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPIVE</td>
+				  <td>SETOR
+			DE PINTURA DE VE&Iacute;CULOS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEATUS-2</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ATENDIMENTO AO USU&Aacute;RIO - SEDE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CDIS</td>
+				  <td>COORDEN
+			DISSEMIN SEGUR TRAB E RESP SOCIOAMBIENTAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>NUCECI</td>
+				  <td>N&Uacute;CLEO
+			DE CENTRALIZA&Ccedil;&Atilde;O DE
+			EXECU&Ccedil;&Atilde;O E CONCILIA&Ccedil;&Atilde;O</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>VP</td>
+				  <td>SECRETARIA
+			DA VICE-PRESIDENCIA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SVP</td>
+				  <td>SECRETARIA
+			DA VICE-PRESIDENCIA</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>GJ-TSG</td>
+				  <td>GAB
+			JUIZA TANIA DA SILVA GARCIA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>SEMAE</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE MANUTEN&Ccedil;&Atilde;O DE EQUIPAMENTOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETMAI-DC</td>
+				  <td>SETOR
+			DE MANUTEN&Ccedil;&Atilde;O DE DUQUE DE CAXIAS</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SREPA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE REPAROS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SL-SESSAO5</td>
+				  <td>SALA
+			DE SESSAO5</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>T10PR</td>
+				  <td>DECIMA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>T8PR</td>
+				  <td>OITAVA
+			TURMA</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>GJV6</td>
+				  <td>GABINETE
+			DE JUIZ CONVOCADO No 6</td>
+				  <td>GABINETE</td>
+				</tr>
+				<tr>
+				  <td>NUAGES</td>
+				  <td>NUCLEO
+			DE APOIO AO SISTEMA DE GESTAO</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>AJU</td>
+				  <td>ASSESSORIA
+			JURIDICA DA PRESIDENCIA</td>
+				  <td>ASSESSORIA</td>
+				</tr>
+				<tr>
+				  <td>SEFIN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE EXECU&Ccedil;&Atilde;O FINANCEIRA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SECARQ-OF</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE ARQUIVO DE FINAN&Ccedil;AS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DIMPE</td>
+				  <td>DIVIS&Atilde;O
+			DE IMPLEMENTA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>COAS</td>
+				  <td>COORDENADORIA
+			DE AN&Aacute;LISE DE SOLU&Ccedil;&Otilde;ES</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>17VTRJ</td>
+				  <td>17a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>1VTCOR</td>
+				  <td>1a
+			VT DE CORDEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>PAV-ITP</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB<span style="">&nbsp;
+				  </span>DE S.A. DE
+			P&Aacute;DUA -VT-ITP</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>1VTMAG</td>
+				  <td>1a
+			VT DE MAGE</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SSTI</td>
+				  <td>SECRETARIA
+			DE SOLU&Ccedil;&Otilde;ES EM TECNOLOGIA DA
+			INFORMA&Ccedil;&Atilde;O</td>
+				  <td>SECRETARIA</td>
+				</tr>
+				<tr>
+				  <td>SECCOT</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE CONTROLE DE TELEFONIA</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CGNC</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE N&Uacute;CLEOS DE
+			COMPUTA&Ccedil;&Atilde;O</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>CGSP</td>
+				  <td>COORDENADORIA
+			DE GEST&Atilde;O DE SISTEMAS E PORTAL</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>1VTMAR</td>
+				  <td>1a
+			VT DE MARIC&Aacute;</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>21VTRJ</td>
+				  <td>21a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>26VTRJ</td>
+				  <td>26a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SETEC</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE TELECOMUNICA&Ccedil;&Otilde;ES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>DGNC</td>
+				  <td>DIVIS&Atilde;O
+			DE GEST&Atilde;O DE N&Uacute;CLEOS DE
+			COMPUTA&Ccedil;&Atilde;O</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPRO</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SEGURAN&Ccedil;A E PRODUTIVIDADE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEOPE</td>
+				  <td>SECAO
+			DE OPERACAO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>EMPRESA</td>
+				  <td>DSMI
+			EMPRESA CONTRATADA</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SESHA</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE SUPORTE A HARDWARE</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SESVI-LV</td>
+				  <td>SECAO
+			DE SEG E VIG EDIF MARQUES LAVRADIO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEVIG-NT</td>
+				  <td>SECAO
+			SEG VIG FORUM MIN GERALDO MENEZES</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SES-GAB</td>
+				  <td>GABINETE
+			SECR ENGENHARIA E SEGURAN&Ccedil;A PATRIMONIAL</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>2VTRJ</td>
+				  <td>2a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>2VTVR</td>
+				  <td>2a
+			VT DE VOLTA REDONDA</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>33VTRJ</td>
+				  <td>33a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>DEMOV-AC</td>
+				  <td>DEP&Oacute;SITO
+			DE BENS MOVEIS - ANTONIO CARLOS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SECLAB</td>
+				  <td>SETOR
+			DE CLASSIFICACAO DE BENS</td>
+				  <td>AGORA</td>
+				</tr>
+				<tr>
+				  <td>SETAOD</td>
+				  <td>SETOR
+			DE ATENDIMENTO ODONTOL&Oacute;GICO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SETFIS</td>
+				  <td>SETOR
+			DE FISIOTERAPIA</td>
+				  <td>SETOR</td>
+				</tr>
+				<tr>
+				  <td>SEPEN</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE LOTA&Ccedil;&Atilde;O DE PENSIONISTAS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SPINA</td>
+				  <td>SE&Ccedil;AO
+			DE PAGAMENTO DE INATIVOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>3VTSG</td>
+				  <td>3a
+			VT DE S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>40VTRJ</td>
+				  <td>40a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>41VTRJ</td>
+				  <td>41a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>57VTRJ</td>
+				  <td>57a
+			VT DO RIO DE JANEIRO</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>5VTDC</td>
+				  <td>5a
+			VT DE DUQUE DE CAXIAS</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>SEDMA-SG</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DISTRIB DE FEITOS E MANDADOS - S&Atilde;O GON&Ccedil;ALO</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEATE</td>
+				  <td>SECAO
+			DE ATENDIMENTO PROCESSUAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEG</td>
+				  <td>SECAO
+			DE PROTOCOLO GERAL</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>CEPE</td>
+				  <td>COORDENADORIA
+			DE ENSINO PROJETOS E EVENTOS</td>
+				  <td>COORDENADORIA</td>
+				</tr>
+				<tr>
+				  <td>DIENS</td>
+				  <td>DIVIS&Atilde;O
+			DE ENSINO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>SEPEV</td>
+				  <td>SE&Ccedil;&Atilde;O
+			DE PROJETOS E EVENTOS</td>
+				  <td>SECAO</td>
+				</tr>
+				<tr>
+				  <td>6VTNI</td>
+				  <td>6a
+			VT DE NOVA IGUA&Ccedil;U</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>PAV-NT</td>
+				  <td>POSTO
+			AVAN&Ccedil;ADO JUST TRAB - MARIC&Aacute;<span
+			 style="">&nbsp; </span>VT-NIT</td>
+				  <td>POSTO
+			AVANCADO</td>
+				</tr>
+				<tr>
+				  <td>DIAAD</td>
+				  <td>DIVIS&Atilde;O
+			DE APOIO ADMINISTRATIVO</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>DSAO</td>
+				  <td>DIVISAO
+			DE SUPORTE ADMINISTRATIVO E OPERACIONAL</td>
+				  <td>DIVISAO</td>
+				</tr>
+				<tr>
+				  <td>EXEPROV</td>
+				  <td>SEP
+			EXERC&Iacute;CIO PROVIS&Oacute;RIO</td>
+				  <td>SEM
+			SETOR</td>
+				</tr>
+				<tr>
+				  <td>7VTNT</td>
+				  <td>7a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>8VTNT</td>
+				  <td>8a
+			VT DE NITEROI</td>
+				  <td>VARA</td>
+				</tr>
+				<tr>
+				  <td>JCJ-EXT</td>
+				  <td>JCJ
+			EXTINTA</td>
+				  <td>JUNTA</td>
+				</tr>
+			
+			</tbody>
+		</table>
+			
+	</form>
+</div>
+
+</body>
+</html>
