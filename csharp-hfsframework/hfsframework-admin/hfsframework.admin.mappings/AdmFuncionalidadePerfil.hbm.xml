@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmFuncionalidadePerfil" table="adm_funcionalidade_perfil">
+    <composite-id name="Id" class="AdmFuncionalidadePerfilPK">
+      <key-property name="FuncionalidadeSeq" column="fpl_fun_seq" />
+      <key-property name="PerfilSeq" column="fpl_prf_seq" />
+    </composite-id>
+  </class>
+
+</hibernate-mapping>

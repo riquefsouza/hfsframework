@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmUsuario" table="adm_usuario">
+    <composite-id name="Id" class="AdmUsuarioPK">
+      <key-property name="Matricula" column="usu_matricula" />
+      <key-property name="Ip" column="usu_ip" />
+    </composite-id>
+    <property name="Login">
+      <column name="usu_login" sql-type="varchar" length="60" not-null="true" />
+    </property>
+    <property name="Nome">
+      <column name="usu_nome" sql-type="varchar" length="60" not-null="true" />
+    </property>
+    <property name="Data">
+      <column name="usu_data" sql-type="timestamp" length="22" not-null="true" />
+    </property>
+    <property name="Cpf">
+      <column name="usu_cpf" sql-type="numeric" length="11" not-null="false" />
+    </property>
+    <property name="Email">
+      <column name="usu_email" sql-type="varchar" length="255" not-null="false" />
+    </property>
+    <property name="LdapDN">
+      <column name="usu_ldap_dn" sql-type="varchar" length="255" not-null="false" />
+    </property>
+    <property name="Senha">
+      <column name="usu_senha" sql-type="varchar" length="128" not-null="false" />
+    </property>
+  </class>
+
+</hibernate-mapping>

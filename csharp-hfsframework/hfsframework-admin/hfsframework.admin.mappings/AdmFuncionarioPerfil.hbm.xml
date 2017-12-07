@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmFuncionarioPerfil" table="adm_funcionario_perfil">
+    <composite-id name="Id" class="AdmFuncionarioPerfilPK">
+      <key-property name="CodFuncionario" column="usp_fun_codigo" />
+      <key-property name="PerfilSeq" column="usp_prf_seq" />
+    </composite-id>
+
+    <many-to-one name="AdmPerfil" class="AdmPerfil" insert="false" update="false" lazy="false">
+      <column name="usp_prf_seq" not-null="true" />
+    </many-to-one>
+  </class>
+
+  <query name="AdmFuncionarioPerfil.deleteByPerfil">
+    <![CDATA[
+      DELETE FROM AdmFuncionarioPerfil fp WHERE fp.Id.PerfilSeq = ?
+    ]]>
+  </query>
+  
+  <query name="AdmFuncionarioPerfil.deleteByCodFuncionario">
+    <![CDATA[
+      DELETE FROM AdmFuncionarioPerfil fp WHERE fp.Id.CodFuncionario = ?
+    ]]>
+  </query>
+
+</hibernate-mapping>

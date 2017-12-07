@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmParametro" table="adm_parametro">
+    <id name="Id">
+      <column name="par_seq" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_parametro_seq</param>
+      </generator>
+    </id>
+    <property name="Valor">
+      <column name="par_valor" sql-type="varchar" length="4000" not-null="false" />
+    </property>
+    <property name="Descricao">
+      <column name="par_descricao" sql-type="varchar" length="255" not-null="true" />
+    </property>
+    <property name="Codigo">
+      <column name="par_codigo" sql-type="varchar" length="255" not-null="true" />
+    </property>
+    <property name="IdAdmParametroCategoria">
+      <column name="par_pmc_seq" sql-type="bigint" not-null="true" />
+    </property>
+
+    <many-to-one name="AdmParametroCategoria" class="AdmParametroCategoria" insert="false" update="false" lazy="false">
+      <column name="par_pmc_seq" not-null="true" />
+    </many-to-one>
+
+  </class>
+
+</hibernate-mapping>

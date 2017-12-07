@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmFuncionario" table="adm_funcionario">
+    <id name="Id">
+      <column name="fun_codigo" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_funcionario_seq</param>
+      </generator>
+    </id>
+    <property name="Nome">
+      <column name="fun_nome" sql-type="varchar" length="60" not-null="true" />
+    </property>
+    <property name="Cpf">
+      <column name="fun_cpf" sql-type="numeric" length="11" not-null="false" />
+    </property>
+    <property name="Email">
+      <column name="fun_email" sql-type="varchar" length="100" not-null="false" />
+    </property>
+    <property name="Telefone">
+      <column name="fun_telefone" sql-type="varchar" length="20" not-null="false" />
+    </property>
+    <property name="Celular">
+      <column name="fun_celular" sql-type="varchar" length="20" not-null="false" />
+    </property>
+    <property name="CodCargoPrincipal">
+      <column name="fun_car_seq" sql-type="bigint" not-null="true" />
+    </property>
+    <property name="Setor">
+      <column name="fun_set_sigla" sql-type="varchar" length="15" not-null="true" />
+    </property>
+    <property name="DataAdmissao">
+      <column name="fun_data_admissao" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="DataSaida">
+      <column name="fun_data_saida" sql-type="datetime" not-null="false" />
+    </property>
+    <property name="Ativo">
+      <column name="fun_ativo" sql-type="char" length="1" not-null="false" />
+    </property>
+
+    <many-to-one name="AdmCargoPrincipal" class="AdmCargo" insert="false" update="false" lazy="false">
+      <column name="fun_car_seq" not-null="true" />
+    </many-to-one>
+  </class>
+
+  <query name="AdmFuncionario.findByMatriculaAndCPF">
+    <![CDATA[
+      SELECT f FROM AdmFuncionario f WHERE f.Id = ? AND f.Cpf = ?
+    ]]>
+  </query>
+
+</hibernate-mapping>

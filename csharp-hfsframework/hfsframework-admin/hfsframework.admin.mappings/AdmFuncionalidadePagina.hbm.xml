@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmFuncionalidadePagina" table="adm_funcionalidade_pagina">
+    <composite-id name="Id" class="AdmFuncionalidadePaginaPK">
+      <key-property name="FuncionalidadeSeq" column="fpg_fun_seq" />
+      <key-property name="PaginaSeq" column="fpg_pag_seq" />
+    </composite-id>
+  </class>
+
+</hibernate-mapping>

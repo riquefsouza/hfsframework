@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmSetor" table="adm_setor">
+    <id name="Id">
+      <column name="set_sigla" sql-type="varchar" length="15" not-null="true"/>
+    </id>
+    <property name="NomeSetor">
+      <column name="set_nome" sql-type="varchar" length="50" not-null="false" />
+    </property>
+    <property name="PaiSetor">
+      <column name="set_pai" sql-type="varchar" length="15" not-null="false" />
+    </property>
+    <property name="TipoSetor">
+      <column name="set_tipo" sql-type="varchar" length="20" not-null="false" />
+    </property>
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmCargoFuncionario" table="adm_cargo_funcionario">
+    <composite-id name="Id" class="AdmCargoFuncionarioPK">
+      <key-property name="CodCargo" column="cfn_car_seq" />
+      <key-property name="CodFuncionario" column="cfn_fun_codigo" />
+    </composite-id>
+    <property name="DataExercicio">
+      <column name="cfn_data_exercicio" sql-type="timestamp" not-null="false" />
+    </property>
+    <property name="DataDesligamento">
+      <column name="cfn_data_desligamento" sql-type="timestamp" not-null="false" />
+    </property>
+    <property name="DataPosse">
+      <column name="cfn_data_posse" sql-type="timestamp" not-null="false" />
+    </property>
+    <property name="Situacao">
+      <column name="cfn_situacao" sql-type="varchar" length="1" not-null="false" />
+    </property>
+    <property name="Presidente">
+      <column name="cfn_presidente" sql-type="char" length="1" not-null="false" />
+    </property>
+    <property name="DiretorGeral">
+      <column name="cfn_diretor_geral" sql-type="varchar" length="1" not-null="false" />
+    </property>
+    <property name="ResponsavelOrcamento">
+      <column name="cfn_responsavel_orcamento" sql-type="char" length="1" not-null="false" />
+    </property>
+    <property name="ChefeSepo">
+      <column name="cfn_chefe_sepo" sql-type="char" length="1" not-null="false" />
+    </property>
+  </class>
+
+  <query name="AdmCargoFuncionario.findCargoByCodFuncionario">
+    <![CDATA[
+      SELECT cf.Id.CodCargo FROM AdmCargoFuncionario cf WHERE cf.Id.CodFuncionario=?
+    ]]>
+  </query>
+
+  <query name="AdmCargoFuncionario.findFuncionarioByCodCargo">
+    <![CDATA[
+      SELECT cf.Id.CodFuncionario FROM AdmCargoFuncionario cf WHERE cf.Id.CodCargo=?
+    ]]>
+  </query>
+
+</hibernate-mapping>

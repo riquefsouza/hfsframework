@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmCargoPerfil" table="adm_cargo_perfil">
+    <composite-id name="Id" class="AdmCargoPerfilPK">
+      <key-property name="CodCargo" column="cgp_car_seq" />
+      <key-property name="PerfilSeq" column="cgp_prf_seq" />
+    </composite-id>
+
+    <many-to-one name="AdmPerfil" class="AdmPerfil" insert="false" update="false" lazy="false">
+      <column name="cgp_prf_seq" not-null="true" />
+    </many-to-one>
+
+  </class>
+
+  <query name="AdmCargoPerfil.findPerfilByCodCargo">
+    <![CDATA[
+      SELECT cp.AdmPerfil FROM AdmCargoPerfil cp WHERE cp.Id.CodCargo=?
+    ]]>
+  </query>
+ 
+  <query name="AdmCargoPerfil.deleteByPerfil">
+    <![CDATA[
+      DELETE FROM AdmCargoPerfil cp WHERE cp.Id.PerfilSeq = ?
+    ]]>
+  </query>
+
+  <query name="AdmCargoPerfil.deleteByCodCargo">
+    <![CDATA[
+      DELETE FROM AdmCargoPerfil cp WHERE cp.Id.CodCargo=?
+    ]]>
+  </query>
+
+</hibernate-mapping>

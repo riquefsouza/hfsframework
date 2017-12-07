@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmPerfil" table="adm_perfil">
+    <id name="Id">
+      <column name="prf_seq" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_perfil_seq</param>
+      </generator>
+    </id>
+    <property name="Descricao">
+      <column name="prf_descricao" sql-type="varchar" length="255" not-null="false" />
+    </property>
+    <property name="Geral">
+      <column name="prf_geral" sql-type="char" length="1" not-null="false" />
+    </property>
+    <property name="Administrador">
+      <column name="prf_administrador" sql-type="char" length="1" not-null="false" />
+    </property>
+
+    <bag name="AdmFuncionalidades" table="adm_funcionalidade_perfil" lazy="false">
+      <key column="fpl_prf_seq" not-null="true"/>
+      <many-to-many class="AdmFuncionalidade" column="fpl_fun_seq"/>
+    </bag>
+
+    <bag name="AdmPaginas" table="adm_pagina_perfil" lazy="false">
+      <key column="pgl_prf_seq" not-null="true"/>
+      <many-to-many class="AdmPagina" column="pgl_pag_seq"/>
+    </bag>
+
+    <bag name="AdmCargos" table="adm_cargo_perfil" lazy="false">
+      <key column="cgp_prf_seq" not-null="true"/>
+      <many-to-many class="AdmCargo" column="cgp_car_seq"/>
+    </bag>
+
+    <bag name="AdmFuncionarios" table="adm_funcionario_perfil" lazy="false">
+      <key column="usp_prf_seq" not-null="true"/>
+      <many-to-many class="AdmFuncionario" column="usp_fun_codigo"/>
+    </bag>
+    
+  </class>
+
+</hibernate-mapping>

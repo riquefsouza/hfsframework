@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmPagina" table="adm_pagina">
+    <id name="Id">
+      <column name="pag_seq" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_pagina_seq</param>
+      </generator>
+    </id>
+    <property name="ManagedBean">
+      <column name="pag_mb" sql-type="varchar" length="255" not-null="false" />
+    </property>
+    <property name="Url">
+      <column name="pag_url" sql-type="varchar" length="255" not-null="true" />
+    </property>
+
+    <bag name="AdmFuncionalidades" table="adm_funcionalidade_pagina" lazy="false">
+      <key column="fpg_pag_seq" not-null="true"/>
+      <many-to-many class="AdmFuncionalidade" column="fpg_fun_seq"/>
+    </bag>
+
+    <bag name="AdmPerfils" table="adm_pagina_perfil" lazy="false">
+      <key column="pgl_pag_seq" not-null="true"/>
+      <many-to-many class="AdmPerfil" column="pgl_prf_seq"/>
+    </bag>
+    
+  </class>
+
+</hibernate-mapping>

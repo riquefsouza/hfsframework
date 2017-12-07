@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmMenu" table="adm_menu">
+    <id name="Id">
+      <column name="mnu_seq" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_menu_seq</param>
+      </generator>
+    </id>
+    <property name="Descricao">
+      <column name="mnu_descricao" sql-type="varchar" length="255" not-null="true" />
+    </property>
+    <property name="Ordem">
+      <column name="mnu_ordem" sql-type="numeric" length="3" not-null="false" />
+    </property>
+    <property name="IdFuncionalidade">
+      <column name="mnu_fun_seq" sql-type="bigint" not-null="true" />
+    </property>
+
+    <many-to-one name="AdmFuncionalidade" class="AdmFuncionalidade" insert="false" update="false" lazy="false">
+      <column name="mnu_fun_seq" not-null="true" />
+    </many-to-one>
+    
+    <many-to-one name="AdmMenuPai" class="AdmMenu" insert="false" update="false" lazy="false">
+      <column name="mnu_pai_seq" not-null="true" />
+    </many-to-one>
+
+    <bag name="AdmSubMenus" table="adm_menu" lazy="false">
+      <key column="mnu_pai_seq" not-null="true"/>
+      <one-to-many class="AdmMenu" />
+    </bag>
+
+  </class>
+
+  <query name="AdmMenu.getDescricaoById">
+    <![CDATA[
+      SELECT c.Descricao FROM AdmMenu c WHERE c.Id = ?
+    ]]>
+  </query>
+  <query name="AdmMenu.countNovo">
+    <![CDATA[
+      SELECT COUNT(c) FROM AdmMenu c WHERE LOWER(c.Descricao) = ?
+    ]]>
+  </query>
+  <query name="AdmMenu.countAntigo">
+    <![CDATA[
+      SELECT COUNT(c) FROM AdmMenu c WHERE LOWER(c.Descricao) <> ? AND LOWER(c.Descricao) = ?
+    ]]>
+  </query>
+  <query name="AdmMenu.findMenuRaiz">
+    <![CDATA[
+      SELECT m FROM AdmMenu m left join m.AdmMenuPai mp left join m.AdmFuncionalidade f WHERE m.AdmMenuPai IS NULL ORDER BY m.Ordem, mp.Ordem
+    ]]>
+  </query>
+  <query name="AdmMenu.findMenuRaizByDescricao">
+    <![CDATA[
+      SELECT m FROM AdmMenu m left join m.AdmMenuPai mp left join m.AdmFuncionalidade f WHERE m.AdmMenuPai IS NULL AND m.Descricao = ? ORDER BY m.Ordem, mp.Ordem      
+    ]]>
+  </query>
+  <query name="AdmMenu.countMenuByFuncionalidade">
+    <![CDATA[
+      SELECT COUNT(m) FROM AdmMenu m WHERE m.AdmFuncionalidade = ?
+    ]]>
+  </query>
+  <query name="AdmMenu.findMenusFilhos">
+    <![CDATA[
+      SELECT m FROM AdmMenu m left join m.AdmMenuPai mp WHERE m.AdmMenuPai = ? ORDER BY m.Ordem, mp.Ordem
+    ]]>
+  </query>
+  <query name="AdmMenu.findAdminMenuPaiByFuncionalidade">
+    <![CDATA[
+      SELECT t FROM AdmMenu t WHERE t.Id IN (SELECT m.AdmMenuPai.Id FROM AdmMenu m WHERE m.AdmFuncionalidade = ? AND m.AdmMenuPai IS NULL AND m.Id <= 14) ORDER BY t.Id, t.Ordem
+    ]]>
+  </query>
+  <query name="AdmMenu.findMenuPaiByFuncionalidade">
+    <![CDATA[
+      SELECT t FROM AdmMenu t WHERE t.Id IN (SELECT m.AdmMenuPai.Id FROM AdmMenu m WHERE m.AdmFuncionalidade = ? AND m.AdmMenuPai IS NULL AND m.Id > 14) ORDER BY t.Id, t.Ordem
+    ]]>
+  </query>
+  <query name="AdmMenu.findPaginaByMenu">
+    <![CDATA[
+      SELECT m.AdmFuncionalidade.AdmPaginaInicial FROM AdmMenu m WHERE m.AdmFuncionalidade = ? AND m.Id = ?
+    ]]>
+  </query>
+
+</hibernate-mapping>

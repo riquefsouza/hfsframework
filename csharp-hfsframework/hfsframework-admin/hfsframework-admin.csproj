@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D107FD3E-21C8-4CD9-9D92-8E5CF60D7234}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>hfsframework_admin</RootNamespace>
+    <AssemblyName>hfsframework-admin</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>lib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>lib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq">
+      <HintPath>lib\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching">
+      <HintPath>lib\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="hfsframework.admin.data\AdmCargoFuncionarioRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmCargoPerfilRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmCargoRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmFuncionalidadePaginaRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmFuncionalidadePerfilRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmFuncionalidadeRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmFuncionarioPerfilRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmFuncionarioRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmLogColunaRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmMenuRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmPaginaPerfilRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmPaginaRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmParametroCategoriaRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmParametroRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmPerfilRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmSetorRepository.cs" />
+    <Compile Include="hfsframework.admin.data\AdmUsuarioRepository.cs" />
+    <Compile Include="hfsframework.admin.model\AdmCargo.cs" />
+    <Compile Include="hfsframework.admin.model\AdmCargoFuncionario.cs" />
+    <Compile Include="hfsframework.admin.model\AdmCargoFuncionarioPK.cs" />
+    <Compile Include="hfsframework.admin.model\AdmCargoPerfil.cs" />
+    <Compile Include="hfsframework.admin.model\AdmCargoPerfilPK.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionalidade.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionalidadePagina.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionalidadePaginaPK.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionalidadePerfil.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionalidadePerfilPK.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionario.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionarioPerfil.cs" />
+    <Compile Include="hfsframework.admin.model\AdmFuncionarioPerfilPK.cs" />
+    <Compile Include="hfsframework.admin.model\AdmLogColuna.cs" />
+    <Compile Include="hfsframework.admin.model\AdmMenu.cs" />
+    <Compile Include="hfsframework.admin.model\AdmPagina.cs" />
+    <Compile Include="hfsframework.admin.model\AdmPaginaPerfil.cs" />
+    <Compile Include="hfsframework.admin.model\AdmPaginaPerfilPK.cs" />
+    <Compile Include="hfsframework.admin.model\AdmParametro.cs" />
+    <Compile Include="hfsframework.admin.model\AdmParametroCategoria.cs" />
+    <Compile Include="hfsframework.admin.model\AdmPerfil.cs" />
+    <Compile Include="hfsframework.admin.model\AdmSetor.cs" />
+    <Compile Include="hfsframework.admin.model\AdmUsuario.cs" />
+    <Compile Include="hfsframework.admin.model\AdmUsuarioPK.cs" />
+    <Compile Include="hfsframework.admin\AdmCargoBC.cs" />
+    <Compile Include="hfsframework.admin\AdmCargoFuncionarioBC.cs" />
+    <Compile Include="hfsframework.admin\AdmCargoPerfilBC.cs" />
+    <Compile Include="hfsframework.admin\AdmFuncionalidadeBC.cs" />
+    <Compile Include="hfsframework.admin\AdmFuncionalidadePaginaBC.cs" />
+    <Compile Include="hfsframework.admin\AdmFuncionalidadePerfilBC.cs" />
+    <Compile Include="hfsframework.admin\AdmFuncionarioBC.cs" />
+    <Compile Include="hfsframework.admin\AdmFuncionarioPerfilBC.cs" />
+    <Compile Include="hfsframework.admin\AdmLogColunaBC.cs" />
+    <Compile Include="hfsframework.admin\AdmMenuBC.cs" />
+    <Compile Include="hfsframework.admin\AdmPaginaBC.cs" />
+    <Compile Include="hfsframework.admin\AdmPaginaPerfilBC.cs" />
+    <Compile Include="hfsframework.admin\AdmParametroBC.cs" />
+    <Compile Include="hfsframework.admin\AdmParametroCategoriaBC.cs" />
+    <Compile Include="hfsframework.admin\AdmPerfilBC.cs" />
+    <Compile Include="hfsframework.admin\AdmSetorBC.cs" />
+    <Compile Include="hfsframework.admin\AdmUsuarioBC.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmCargo.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\hfsframework-base\hfsframework-base.csproj">
+      <Project>{1de65211-7865-4afb-af0c-0ebc85d5bfc3}</Project>
+      <Name>hfsframework-base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmCargoFuncionario.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmCargoPerfil.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmFuncionalidade.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmFuncionalidadePagina.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmFuncionalidadePerfil.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmFuncionario.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmFuncionarioPerfil.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmLogColuna.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmMenu.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmPagina.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmPaginaPerfil.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmParametro.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmParametroCategoria.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmPerfil.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmSetor.hbm.xml" />
+    <EmbeddedResource Include="hfsframework.admin.mappings\AdmUsuario.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmFuncionalidade" table="adm_funcionalidade">
+    <id name="Id">
+      <column name="fun_seq" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_funcionalidade_seq</param>
+      </generator>
+    </id>
+
+    <property name="Descricao">
+      <column name="fun_descricao" sql-type="varchar" length="255" not-null="true" />
+    </property>
+
+    <many-to-one name="AdmPaginaInicial" class="AdmPagina" insert="false" update="false" lazy="false">
+      <column name="fun_pag_seq" not-null="true" />
+    </many-to-one>
+
+    <bag name="AdmPaginas" table="adm_funcionalidade_pagina" lazy="false">
+      <key column="fpg_fun_seq" not-null="true"/>
+      <many-to-many class="AdmPagina" column="fpg_pag_seq"/>
+    </bag>
+
+    <bag name="AdmPerfils" table="adm_funcionalidade_perfil" lazy="false">
+      <key column="fpl_fun_seq" not-null="true"/>
+      <many-to-many class="AdmPerfil" column="fpl_prf_seq"/>
+    </bag>
+
+    <bag name="AdmMenus" table="adm_menu" lazy="false">
+      <key column="mnu_fun_seq" not-null="true"/>
+      <one-to-many class="AdmMenu" />
+    </bag>
+    
+  </class>
+
+  <query name="AdmFuncionalidade.getDescricaoById">
+    <![CDATA[
+      SELECT c.Descricao FROM AdmFuncionalidade c WHERE c.Id = ?
+    ]]>
+  </query>
+  <query name="AdmFuncionalidade.countNovo">
+    <![CDATA[
+      SELECT COUNT(c) FROM AdmFuncionalidade c WHERE LOWER(c.Descricao) = ?
+    ]]>
+  </query>
+  <query name="AdmFuncionalidade.countAntigo">
+    <![CDATA[
+      SELECT COUNT(c) FROM AdmFuncionalidade c WHERE LOWER(c.Descricao) <> ? AND LOWER(c.Descricao) = ?
+    ]]>
+  </query>
+  <query name="AdmFuncionalidade.findPerfisPorFuncionalidade">
+    <![CDATA[
+      SELECT distinct p FROM AdmFuncionalidade f inner join f.AdmPerfils p where f = ?
+    ]]>
+  </query>
+  <query name="AdmFuncionalidade.findPaginasPorFuncionalidade">
+    <![CDATA[
+      SELECT distinct p FROM AdmFuncionalidade f inner join f.AdmPaginas p where f = ?
+    ]]>
+  </query>
+  <query name="AdmFuncionalidade.findPerfisPorURL">
+    <![CDATA[
+      SELECT distinct p FROM AdmFuncionalidade f inner join f.AdmPerfils p left join f.AdmPaginaInicial i left join f.AdmPaginas pag WHERE i.Url = ? or pag.Url = ?    
+    ]]>
+  </query>
+
+</hibernate-mapping>

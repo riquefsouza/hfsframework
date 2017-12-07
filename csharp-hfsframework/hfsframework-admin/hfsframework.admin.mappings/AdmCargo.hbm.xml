@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="hfsframework-admin"
+                   namespace="hfsframework.admin.model">
+
+  <class name="AdmCargo" table="adm_cargo">
+    <id name="Id">
+      <column name="car_seq" sql-type="bigint" not-null="true"/>
+      <generator class="sequence">
+        <param name="sequence">adm_cargo_seq</param>
+      </generator>
+    </id>
+    <property name="NomeCargo">
+      <column name="car_descricao" sql-type="nvarchar" length="60" not-null="true" />
+    </property>
+  </class>
+
+  <query name="AdmCargo.getDescricaoById">
+    <![CDATA[
+      SELECT c.NomeCargo FROM AdmCargo c WHERE c.Id = ?
+    ]]>
+  </query>
+
+  <query name="AdmCargo.countNovo">
+    <![CDATA[
+      SELECT COUNT(c) FROM AdmCargo c WHERE LOWER(c.NomeCargo) = ?
+    ]]>
+  </query>
+
+  <query name="AdmCargo.countAntigo">
+    <![CDATA[
+      SELECT COUNT(c) FROM AdmCargo c WHERE LOWER(c.NomeCargo) <> ? AND LOWER(c.NomeCargo) = ?
+    ]]>
+  </query>
+
+</hibernate-mapping>
