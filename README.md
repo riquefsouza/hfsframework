@@ -1,5 +1,6 @@
 # hfsframework
 HFS Framework with Primefaces
+
 It was developed to be used in the construction of complete web systems.
 
 The characteristics of the framework are:
