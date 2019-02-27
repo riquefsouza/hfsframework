@@ -39,8 +39,9 @@
 		<picketlink.version>2.7.1.Final</picketlink.version>
 		
 		<!-- apache poi e pdfbox -->
-		<poi-ooxml.version>3.16</poi-ooxml.version>
-		<pdfbox.version>2.0.7</pdfbox.version>
+		<poi-ooxml.version>4.0.1</poi-ooxml.version>
+		<pdfbox.version>2.0.13</pdfbox.version>
+		<jasperreports.version>6.7.0</jasperreports.version>		
 	</properties>
 
 	<dependencyManagement>
@@ -284,7 +285,7 @@
 		<dependency>
 		    <groupId>net.sf.jasperreports</groupId>
 		    <artifactId>jasperreports</artifactId>
-		    <version>6.4.0</version>
+		    <version>${jasperreports.version}</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>olap4j</artifactId>

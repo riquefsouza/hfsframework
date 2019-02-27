@@ -469,7 +469,7 @@ CREATE TABLE public.log_adm_funcionario_perfil
   usp_prf_seq bigint,
   usp_fun_codigo bigint,
   CONSTRAINT log_adm_funcionario_perfil_pkey PRIMARY KEY (id)
-)
+);
  
 CREATE SEQUENCE public.log_adm_funcionario_perfil_seq
   INCREMENT 1
