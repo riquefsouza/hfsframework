@@ -57,6 +57,8 @@ insert into ADM_PAGINA (pag_seq, pag_url, pag_mb)
 values (22, 'admin/admLogColuna/editarAdmLogColuna.xhtml', 'br.com.hfsframework.admin.view.admLogColuna.AdmLogColunaMB');
 insert into ADM_PAGINA (pag_seq, pag_url, pag_mb)
 values (23, 'admin/visualizarArqLogServidor.xhtml', 'br.com.hfsframework.admin.view.VisualizarArqLogServidorMB');
+insert into ADM_PAGINA (pag_seq, pag_url, pag_mb)
+values (24, 'alterarSenha.xhtml', 'br.com.hfsframework.security.AlterarSenhaMB');
 
 insert into ADM_FUNCIONALIDADE (fun_seq, fun_pag_seq, fun_descricao)
 values (1, 1, 'Categoria dos Parâmetros de Configuração (Administrativo)');
