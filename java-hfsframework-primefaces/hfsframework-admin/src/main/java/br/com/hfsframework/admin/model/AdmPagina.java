@@ -25,8 +25,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -53,14 +51,7 @@ public class AdmPagina implements Serializable {
 
 	/** The id. */
 	@Id
-	@GenericGenerator(name = "ADM_PAGINA_ID_GENERATOR",
-	strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-    parameters = {
-    	@Parameter(name = "sequence_name", value = "ADM_PAGINA_SEQ"),
-        @Parameter(name = "initial_value", value = "1"),
-        @Parameter(name = "increment_size", value = "1")
-	})				
-	@SequenceGenerator(name="ADM_PAGINA_ID_GENERATOR")
+	@SequenceGenerator(name="ADM_PAGINA_ID_GENERATOR", sequenceName="ADM_PAGINA_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ADM_PAGINA_ID_GENERATOR")
 	@Column(name="PAG_SEQ")
 	private Long id;

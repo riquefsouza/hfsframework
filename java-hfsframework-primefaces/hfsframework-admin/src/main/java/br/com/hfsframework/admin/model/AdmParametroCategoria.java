@@ -25,8 +25,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -49,14 +47,7 @@ public class AdmParametroCategoria implements Serializable {
 
 	/** The id. */
 	@Id
-	@GenericGenerator(name = "ADM_PARAMETRO_CATEGORIA_ID_GENERATOR",
-	strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
-    parameters = {
-    	@Parameter(name = "sequence_name", value = "ADM_PARAMETRO_CATEGORIA_SEQ"),
-        @Parameter(name = "initial_value", value = "1"),
-        @Parameter(name = "increment_size", value = "1")
-	})				
-	@SequenceGenerator(name="ADM_PARAMETRO_CATEGORIA_ID_GENERATOR")
+	@SequenceGenerator(name="ADM_PARAMETRO_CATEGORIA_ID_GENERATOR", sequenceName="ADM_PARAMETRO_CATEGORIA_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ADM_PARAMETRO_CATEGORIA_ID_GENERATOR")
 	@Column(name="PMC_SEQ")
 	private Long id;
