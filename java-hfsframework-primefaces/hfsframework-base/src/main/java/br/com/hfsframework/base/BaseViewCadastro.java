@@ -8,6 +8,7 @@ package br.com.hfsframework.base;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -187,23 +188,28 @@ public abstract class BaseViewCadastro<T, I extends Serializable,
 	 *            the mensagem erro
 	 */
 	public void excluir(T entidade, String contemErro, String mensagemErro) {
-		if (entidade == null) {
-			gerarMensagemErro(SELECIONAR_REGISTRO);
-			return;
-		}
-		try {
-			businessController.delete(entidade);
-			atualizaListaDataTable();
-		} catch (Exception e) {
-			if (e.getCause().toString().contains(contemErro)) {
-				gerarMensagemErro(e, ERRO_DELETE + mensagemErro);
-			} else {
-				gerarMensagemErro(e, ERRO_DELETE);
-			}
-			return;
-		}
+	    if (entidade == null) {
+	        gerarMensagemErro(SELECIONAR_REGISTRO);
+	        return;
+	    }
+	    try {
+	        businessController.delete(entidade);
+	        atualizaListaDataTable();
+	    } catch (Exception e) {
+	        if (!contemErro.isEmpty() && !mensagemErro.isEmpty()){
+	            if (e.getCause().toString().contains(contemErro)) {
+	                //gerarMensagemErro(e, ERRO_DELETE + mensagemErro);
+	                addMessageAlertaDialog(mensagemErro);
+	            }                
+	        } else if (!mensagemErro.isEmpty()){
+	            addMessageAlertaDialog(mensagemErro);
+	        } else {
+	            gerarMensagemErro(e, ERRO_DELETE);
+	        }
+	        return;
+	    }
 	}
-
+	
 	/**
 	 * Excluir.
 	 *
@@ -234,9 +240,12 @@ public abstract class BaseViewCadastro<T, I extends Serializable,
 	 *            the contem erro
 	 * @param mensagemErro
 	 *            the mensagem erro
+	 * @param fnc
+	 *            the fnc
 	 * @return the string
 	 */
-	protected String salvar(I id, String descricao, String contemErro, String mensagemErro) {
+	protected String salvar(I id, String descricao, String contemErro, 
+			String mensagemErro, Callable<String> fnc) {
 		
 		
 		if (descricao!=null){
@@ -266,6 +275,10 @@ public abstract class BaseViewCadastro<T, I extends Serializable,
 				setEntidade((T) this.businessController.update(getEntidade()));
 			}
 			
+			if (fnc!=null){
+				fnc.call();
+			}
+			
 			this.modoSalvo = true;
 			
 		} catch (Exception e) {
@@ -278,6 +291,7 @@ public abstract class BaseViewCadastro<T, I extends Serializable,
 			}
 			return null;
 		}
+		
 		atualizaListaDataTable();
 		return getPaginaListar();
 	}
@@ -292,7 +306,7 @@ public abstract class BaseViewCadastro<T, I extends Serializable,
 	 * @return the string
 	 */
 	protected String salvar(I id, String descricao) {
-		return this.salvar(id, descricao, "", "");
+		return this.salvar(id, descricao, "", "", null);
 	}
 
 	/**
@@ -303,7 +317,20 @@ public abstract class BaseViewCadastro<T, I extends Serializable,
 	 * @return the string
 	 */
 	protected String salvar(I id) {
-		return this.salvar(id, null, "", "");
+		return this.salvar(id, null, "", "", null);
+	}
+
+	/**
+	 * Salvar.
+	 *
+	 * @param id
+	 *            the id
+	 * @param fnc
+	 *            the fnc
+	 * @return the string
+	 */
+	protected String salvar(I id, Callable<String> fnc) {
+		return this.salvar(id, null, "", "", fnc);
 	}
 
 	/**

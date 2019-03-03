@@ -4,7 +4,7 @@
  * @version 1.0
  * @since 2017
  */
-package br.com.hfsframework.admin;
+package br.com.hfsframework.admin.business;
 
 import br.com.hfsframework.admin.data.AdmCargoRepository;
 import br.com.hfsframework.admin.model.AdmCargo;

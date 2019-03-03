@@ -26,7 +26,8 @@
 		<class>br.com.hfsframework.admin.model.AdmFuncionario</class>
 		<class>br.com.hfsframework.admin.model.AdmSetor</class>
 		<class>br.com.hfsframework.admin.model.AdmCargoFuncionarioPK</class>
-		
+		<class>br.com.hfsframework.admin.audit.AdmAuditoriaRevisao</class>
+				
 		<shared-cache-mode>ALL</shared-cache-mode>
 		
 		<properties>

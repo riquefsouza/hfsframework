@@ -6,6 +6,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui" template="/layout/layout.xhtml">
 
+	<ui:define name="tituloPagina"> - Administrar Perfil</ui:define>
+	
 	<ui:define name="conteudo-maior">
 		<h:form id="listarAdmPerfil">
 			<fieldset id="fieldsetListarAdmPerfil">
@@ -74,7 +76,7 @@
 						styleClass="btn btn-danger disableSubmit" type="button" />
 				</p:confirmDialog>
 
-				<p:dataTable var="item" rowKey="#{item.id}" id="table"
+				<p:dataTable var="item" rowKey="#{item.id}" id="table" reflow="true"
 					selection="#{admPerfilMB.bean}" selectionMode="single"
 					value="#{admPerfilMB.listaBean}" rows="#{aplicacaoConfig.dtLinhas}" rowsPerPageTemplate="#{aplicacaoConfig.dtModeloLinhasPorPagina}"
 					paginator="true" paginatorPosition="#{aplicacaoConfig.dtPosicaoPaginador}"					

@@ -51,10 +51,14 @@ import br.com.hfsframework.security.model.PerfilVO;
 	@NamedQuery(name = "AdmPerfil.findFuncionariosPorPerfil", query = "SELECT distinct fp.id.codFuncionario FROM AdmPerfil p, AdmFuncionarioPerfil fp where p.id = fp.id.perfilSeq AND p = ?1"),
 	@NamedQuery(name = "AdmPerfil.findFuncionalidadesPorPerfil", query = "SELECT distinct f FROM AdmPerfil p inner join p.admFuncionalidades f  where p = ?1"),
 	@NamedQuery(name = "AdmPerfil.findPerfisPorFuncionario", query = "SELECT distinct p FROM AdmPerfil p, AdmFuncionarioPerfil fp where p.id = fp.id.perfilSeq AND fp.id.codFuncionario = ?1"),	
-	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmPerfil.findMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmPerfil.findAdminMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
-	@NamedQuery(name = "AdmPerfil.findMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem")
+	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 14) ORDER BY t.ordem, t.id"),
+	@NamedQuery(name = "AdmPerfil.findMenuPaiByPerfil", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 14) ORDER BY t.ordem, t.id"),
+	@NamedQuery(name = "AdmPerfil.findAdminMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id <= 14 AND m.admMenuPai = ?2 ORDER BY m.ordem, m.id"),
+	@NamedQuery(name = "AdmPerfil.findMenuByPerfil", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p = ?1 AND m.id > 14 AND m.admMenuPai = ?2 ORDER BY m.ordem, m.id"),
+	@NamedQuery(name = "AdmPerfil.findAdminMenuPaiByIdPerfis", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 14) ORDER BY t.id, t.ordem"),
+	@NamedQuery(name = "AdmPerfil.findMenuPaiByIdPerfis", query="SELECT DISTINCT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 14) ORDER BY t.ordem, t.id"),
+	@NamedQuery(name = "AdmPerfil.findAdminMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id <= 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem"),
+	@NamedQuery(name = "AdmPerfil.findMenuByIdPerfis", query="SELECT DISTINCT m FROM AdmPerfil p INNER JOIN p.admFuncionalidades f INNER JOIN f.admMenus m WHERE p.id IN ?1 AND m.id > 14 AND m.admMenuPai = ?2 ORDER BY m.id, m.ordem")	
 })
 public class AdmPerfil implements Serializable {
 

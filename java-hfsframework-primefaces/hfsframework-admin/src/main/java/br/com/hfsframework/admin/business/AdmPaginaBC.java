@@ -4,16 +4,16 @@
  * @version 1.0
  * @since 2017
  */
-package br.com.hfsframework.admin;
+package br.com.hfsframework.admin.business;
 
-import br.com.hfsframework.admin.data.AdmParametroRepository;
-import br.com.hfsframework.admin.model.AdmParametro;
+import br.com.hfsframework.admin.data.AdmPaginaRepository;
+import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.base.BaseBusinessController;
 
 /**
- * The Class AdmParametroBC.
+ * The Class AdmPaginaBC.
  */
-public class AdmParametroBC extends BaseBusinessController<AdmParametro, Long, AdmParametroRepository> {
+public class AdmPaginaBC extends BaseBusinessController<AdmPagina, Long, AdmPaginaRepository> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -44,15 +44,5 @@ public class AdmParametroBC extends BaseBusinessController<AdmParametro, Long, A
 		Long existe = repositorio.countAntigo(antigo.toLowerCase(), novo.toLowerCase());
 		return (existe > 0);
 	}
-		
-	/**
-	 * Gets the valor by codigo.
-	 *
-	 * @param codigo
-	 *            the codigo
-	 * @return the valor by codigo
-	 */
-	public String getValorByCodigo(String codigo){
-		return repositorio.getValorByCodigo(codigo);
-	}
+	
 }

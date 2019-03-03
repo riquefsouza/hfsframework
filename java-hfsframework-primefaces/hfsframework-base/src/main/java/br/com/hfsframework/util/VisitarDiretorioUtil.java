@@ -7,8 +7,9 @@
 package br.com.hfsframework.util;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * The Class VisitarDiretorioUtil.
@@ -19,10 +20,10 @@ public final class VisitarDiretorioUtil {
 	private static VisitarDiretorioUtil instancia;
 
 	/** The lista dir. */
-	private ArrayList<String> listaDir;
+	private List<String> listaDir;
 	
 	/** The lista file. */
-	private ArrayList<File> listaFile;
+	private List<File> listaFile;
 
 	/**
 	 * Instantiates a new visitar diretorio.
@@ -49,7 +50,7 @@ public final class VisitarDiretorioUtil {
 	 *
 	 * @return o the lista dir
 	 */
-	public ArrayList<String> getListaDir() {
+	public List<String> getListaDir() {
 		return listaDir;
 	}
 
@@ -58,7 +59,7 @@ public final class VisitarDiretorioUtil {
 	 *
 	 * @return o the lista file
 	 */
-	public ArrayList<File> getListaFile() {
+	public List<File> getListaFile() {
 		return listaFile;
 	}
 
@@ -74,14 +75,17 @@ public final class VisitarDiretorioUtil {
 	public boolean ListarDiretorio(String sCaminho, final String sExtensao) {
 		listaDir.clear();
 		listaFile.clear();
-		FilenameFilter filtro = new FilenameFilter() {
-			public boolean accept(File dir, String name) {
-				return name.endsWith(sExtensao);
-			}
-		};
-		visitaTodosDiretoriosArquivos(new File(sCaminho), filtro);
+		visitaTodosDiretoriosArquivos(new File(sCaminho));
 		listaDir.remove(0); // sempre vai remover o primeiro caminho
 		listaFile.remove(0);
+		
+		listaDir = listaDir.stream()
+				.filter(item -> item.endsWith(sExtensao))
+				.collect(Collectors.toList());
+		listaFile = listaFile.stream()
+				.filter(item -> item.getAbsolutePath().endsWith(sExtensao))
+				.collect(Collectors.toList());
+		
 		return (listaDir.size() > 0);
 	}
 
@@ -110,26 +114,6 @@ public final class VisitarDiretorioUtil {
 	private void processaTodosDiretoriosArquivos(File dir) {
 		listaFile.add(dir);
 		listaDir.add(dir.getAbsolutePath());
-	}
-
-	/**
-	 * Visita todos diretorios arquivos.
-	 *
-	 * @param dir
-	 *            the dir
-	 * @param filtro
-	 *            the filtro
-	 */
-	private void visitaTodosDiretoriosArquivos(File dir, FilenameFilter filtro) {
-		processaTodosDiretoriosArquivos(dir);
-
-		if (dir.isDirectory()) {
-			String[] children = dir.list(filtro);
-			for (int i = 0; i < children.length; i++) {
-				visitaTodosDiretoriosArquivos(new File(dir, children[i]),
-						filtro);
-			}
-		}
 	}
 
 	/**

@@ -17,7 +17,7 @@ import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.AdmUsuarioBC;
+import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.admin.model.AdmUsuarioPK;
 import br.com.hfsframework.base.BaseViewConsulta;

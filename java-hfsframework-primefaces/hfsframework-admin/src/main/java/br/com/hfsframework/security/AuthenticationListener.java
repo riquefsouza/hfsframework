@@ -14,8 +14,6 @@ import org.picketlink.authentication.event.LoggedInEvent;
 import org.picketlink.authentication.event.LoginFailedEvent;
 import org.picketlink.authentication.event.PostLoggedOutEvent;
 
-import br.com.hfsframework.security.Pages;
-
 /**
  * The listener interface for receiving authentication events. The class that is
  * interested in processing a authentication event implements this interface,

@@ -217,7 +217,7 @@ public class BaseRelatorioExporter {
 
 		try {
 			if (VisitarDiretorioUtil.getInstancia().ListarDiretorio(dirResto)) {
-				ArrayList<File> lista = VisitarDiretorioUtil.getInstancia().getListaFile();
+				List<File> lista = VisitarDiretorioUtil.getInstancia().getListaFile();
 				List<String> arquivos = new ArrayList<String>();
 				List<String> dirs = new ArrayList<String>();
 

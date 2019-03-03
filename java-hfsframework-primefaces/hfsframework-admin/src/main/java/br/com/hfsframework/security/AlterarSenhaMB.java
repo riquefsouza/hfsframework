@@ -16,7 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 import org.primefaces.context.RequestContext;
 
-import br.com.hfsframework.admin.AdmUsuarioBC;
+import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.base.BaseViewController;
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.util.MensagemBundleProvedor;

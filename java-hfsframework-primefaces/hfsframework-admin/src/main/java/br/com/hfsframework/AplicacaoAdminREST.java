@@ -3,7 +3,6 @@ package br.com.hfsframework;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import br.com.hfsframework.admin.rest.AdmCargoFuncionarioREST;

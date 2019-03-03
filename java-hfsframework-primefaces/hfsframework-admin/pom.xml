@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfsframework-admin</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<name>HFS Framework Admin</name>
 	<description>HFS Framework Admin</description>
 	
@@ -76,7 +76,7 @@
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>hfsframework-base</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
 			<type>jar</type>
 		</dependency>
 

@@ -12,7 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.hfsframework.admin.AdmFuncionalidadeBC;
+import br.com.hfsframework.admin.business.AdmFuncionalidadeBC;
 import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.base.IBaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.BaseViewRelatorio;

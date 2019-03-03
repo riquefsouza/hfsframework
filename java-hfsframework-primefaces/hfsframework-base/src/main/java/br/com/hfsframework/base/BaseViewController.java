@@ -27,6 +27,7 @@ import org.primefaces.context.RequestContext;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
+import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.util.ExcecaoUtil;
 import br.com.hfsframework.util.ExporterUtil;
@@ -274,4 +275,20 @@ public abstract class BaseViewController {
 		getSessao().setAttribute("usuarioAutenticado", usu);
 	}
 	
+	private String getIdMenu() {
+		Map<String, String> params = context.getExternalContext().getRequestParameterMap();
+		String sIdMenu = params.get("id");
+		if (sIdMenu != null && !sIdMenu.isEmpty()) {
+			return sIdMenu;
+		}
+		return "";
+	}
+	
+	public MenuVO getMenuAtual(){
+		String idMenu = getIdMenu();
+		if (!idMenu.isEmpty())
+			return getUsuarioAutenticado().getMenu(idMenu);
+		else 
+			return null;
+	}
 }

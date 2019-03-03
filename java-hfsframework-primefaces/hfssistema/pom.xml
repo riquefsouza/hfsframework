@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfssistema</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<packaging>war</packaging>
 	<name>HFS Sistema</name>
 
@@ -43,7 +43,9 @@
 		<pdfbox.version>2.0.13</pdfbox.version>
 		<jasperreports.version>6.7.0</jasperreports.version>
 		
-		<commons-fileupload.version>1.4</commons-fileupload.version>		
+		<commons-fileupload.version>1.4</commons-fileupload.version>
+		
+		<timestamp>${maven.build.timestamp}</timestamp>	
 	</properties>
 
 	<dependencyManagement>
@@ -78,7 +80,7 @@
 		<dependency>
 			<groupId>br.com</groupId>
 			<artifactId>hfsframework-admin</artifactId>
-			<version>1.0</version>
+			<version>1.0.1</version>
 			<type>jar</type>
 		</dependency>
 
@@ -712,8 +714,28 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>pdf</nonFilteredFileExtension>
+						<nonFilteredFileExtension>jasper</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
         
 		</plugins>
+		
+		<resources>
+	        <resource>
+	            <directory>src/main/resources</directory>
+	            <filtering>true</filtering>
+	        </resource>
+		</resources>
+		
 	</build>
 
 	<profiles>

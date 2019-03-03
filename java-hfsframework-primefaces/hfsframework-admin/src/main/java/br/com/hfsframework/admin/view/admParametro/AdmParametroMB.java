@@ -19,7 +19,7 @@ import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.AdmParametroBC;
+import br.com.hfsframework.admin.business.AdmParametroBC;
 import br.com.hfsframework.admin.data.AdmParametroCategoriaRepository;
 import br.com.hfsframework.admin.model.AdmParametro;
 import br.com.hfsframework.admin.model.AdmParametroCategoria;

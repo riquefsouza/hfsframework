@@ -8,10 +8,10 @@
 	    <ul class="nav navbar-nav">
 	      <ui:repeat var="itemMenu" value="#{sistemaMB.listaMenus}">
 	      <li class="dropdown">
-	      	<a style="color: black;" class="dropdown-toggle" data-toggle="dropdown" href="#">#{itemMenu.descricao}<span class="caret"></span></a>
+	      	<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{itemMenu.descricao}<span class="caret"></span></a>
 	        <ul class="dropdown-menu">
 			  <ui:repeat var="submenu" value="#{itemMenu.subMenus}">	        
-	          <li><a href="#{request.contextPath}/private/#{submenu.url}">#{submenu.descricao}</a></li>
+	          <li><a href="#{request.contextPath}/private/#{submenu.url}?id=#{submenu.id}">#{submenu.descricao}</a></li>
 	          </ui:repeat>
 	        </ul>
 	      </li>
@@ -19,16 +19,16 @@
 
 	      <ui:repeat var="itemMenu" value="#{sistemaMB.listaAdminMenus}">
 	      <li class="dropdown" style="#{aplicacaoConfig.mostrarMenuAdministrativo ? '' : 'display:none;'}">
-	      	<a style="color: black;" class="dropdown-toggle" data-toggle="dropdown" href="#">#{itemMenu.descricao}<span class="caret"></span></a>
+	      	<a class="dropdown-toggle" data-toggle="dropdown" href="#">#{itemMenu.descricao}<span class="caret"></span></a>
 	        <ul class="dropdown-menu">
 			  <ui:repeat var="submenu" value="#{itemMenu.subMenus}">	        
-	          <li><a href="#{request.contextPath}/private/#{submenu.url}">#{submenu.descricao}</a></li>
+	          <li><a href="#{request.contextPath}/private/#{submenu.url}?id=#{submenu.id}">#{submenu.descricao}</a></li>
 	          </ui:repeat>
 	        </ul>
 	      </li>
 	      </ui:repeat>
 
-          <li><a style="color: black; #{aplicacaoConfig.habilitarLDAP ? 'display:none;' : ''}" 
+          <li><a style="#{aplicacaoConfig.habilitarLDAP ? 'display:none;' : ''}" 
           		href="#{request.contextPath}/private/alterarSenha.xhtml">Alterar Senha</a></li>
 	      
 	    </ul>

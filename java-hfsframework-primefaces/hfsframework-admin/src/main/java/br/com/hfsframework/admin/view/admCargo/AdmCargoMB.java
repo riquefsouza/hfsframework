@@ -18,9 +18,9 @@ import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.AdmCargoBC;
-import br.com.hfsframework.admin.AdmCargoFuncionarioBC;
-import br.com.hfsframework.admin.AdmCargoPerfilBC;
+import br.com.hfsframework.admin.business.AdmCargoBC;
+import br.com.hfsframework.admin.business.AdmCargoFuncionarioBC;
+import br.com.hfsframework.admin.business.AdmCargoPerfilBC;
 import br.com.hfsframework.admin.model.AdmCargo;
 import br.com.hfsframework.admin.model.AdmFuncionario;
 import br.com.hfsframework.admin.model.AdmPerfil;

@@ -12,7 +12,7 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.hfsframework.admin.AdmLogColunaBC;
+import br.com.hfsframework.admin.business.AdmLogColunaBC;
 import br.com.hfsframework.admin.model.AdmLogColuna;
 import br.com.hfsframework.base.IBaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.BaseViewRelatorio;

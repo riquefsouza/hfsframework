@@ -15,7 +15,7 @@ import org.omnifaces.util.Beans;
 import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
-import br.com.hfsframework.admin.AdmLogColunaBC;
+import br.com.hfsframework.admin.business.AdmLogColunaBC;
 import br.com.hfsframework.admin.model.AdmLogColuna;
 
 /**

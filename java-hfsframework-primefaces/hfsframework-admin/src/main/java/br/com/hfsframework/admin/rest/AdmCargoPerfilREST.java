@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.PathSegment;
 
-import br.com.hfsframework.admin.AdmCargoPerfilBC;
+import br.com.hfsframework.admin.business.AdmCargoPerfilBC;
 import br.com.hfsframework.admin.model.AdmCargoPerfil;
 import br.com.hfsframework.admin.model.AdmCargoPerfilPK;
 import br.com.hfsframework.util.exceptions.TransacaoException;

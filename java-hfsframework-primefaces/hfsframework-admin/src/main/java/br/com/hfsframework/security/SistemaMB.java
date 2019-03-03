@@ -7,6 +7,7 @@
 package br.com.hfsframework.security;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,9 +19,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import br.com.hfsframework.AplicacaoConfig;
 import br.com.hfsframework.AplicacaoUtil;
-import br.com.hfsframework.admin.AdmFuncionarioBC;
-import br.com.hfsframework.admin.AdmPerfilBC;
-import br.com.hfsframework.admin.AdmUsuarioBC;
+import br.com.hfsframework.admin.business.AdmFuncionarioBC;
+import br.com.hfsframework.admin.business.AdmPerfilBC;
+import br.com.hfsframework.admin.business.AdmUsuarioBC;
+import br.com.hfsframework.admin.business.ModoTesteBC;
 import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.base.BaseViewController;
 import br.com.hfsframework.security.model.MenuVO;
@@ -74,6 +76,9 @@ public class SistemaMB extends BaseViewController implements Serializable {
 	/** The usuario logado. */
 	private AdmUsuario usuarioLogado;
 	
+	@Inject
+	private ModoTesteBC modoTesteBC;
+	
 	/**
 	 * Inicia o.
 	 */
@@ -97,8 +102,10 @@ public class SistemaMB extends BaseViewController implements Serializable {
 	 * @param senha
 	 *            the senha
 	 * @return true, if successful
+	 * @throws Exception
+	 *             the exception
 	 */
-	public boolean autenticar(String login, String senha) {
+	public boolean autenticar(String login, String senha) throws Exception {
 		if (aplicacaoConfig.isHabilitarLDAP()) {
 			if (autenticarViaLDAP(login, senha)) {
 				setPropriedades(login);
@@ -125,8 +132,10 @@ public class SistemaMB extends BaseViewController implements Serializable {
 	 *
 	 * @param login
 	 *            the new propriedades
+	 * @throws Exception
+	 *             the exception
 	 */
-	private void setPropriedades(String login) {
+	private void setPropriedades(String login) throws Exception {
 		this.usuarioAutenticado.setUserName(login);
 		if (!aplicacaoUtil.isDebugMode() && aplicacaoConfig.isHabilitarControlePerfil()) {
 			
@@ -140,13 +149,20 @@ public class SistemaMB extends BaseViewController implements Serializable {
 			this.usuarioAutenticado.setListaPermissao(admPerfilBC.getPermissao(usuarioAutenticado));
 
 			if (!this.usuarioAutenticado.getListaPermissao().isEmpty()){
+				
+				List<Long> listaIdPerfis = new ArrayList<Long>();
+				for (PermissaoVO permissao: this.usuarioAutenticado.getListaPermissao()) {
+					listaIdPerfis.add(permissao.getPerfil().getId());
+				}
+
 				this.usuarioAutenticado.setListaMenus(
-						admPerfilBC.findMenuPaiByPerfil(
-								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+						admPerfilBC.findMenuPaiByPerfil(listaIdPerfis));
 				
 				this.usuarioAutenticado.setListaAdminMenus(
-						admPerfilBC.findAdminMenuPaiByPerfil(
-								this.usuarioAutenticado.getListaPermissao().get(0).getPerfil()));
+						admPerfilBC.findAdminMenuPaiByPerfil(listaIdPerfis));
+				
+			} else {
+				throw new Exception("Usuário sem perfil associado!");
 			}
 			
 			try {
@@ -161,6 +177,8 @@ public class SistemaMB extends BaseViewController implements Serializable {
 							this.usuarioAutenticado.getFuncionario().getCpf(),
 							usuarioAutenticado.getFuncionario().getEmail(), "").toUsuarioVO());
 				}
+				
+				this.usuarioAutenticado = modoTesteBC.iniciar(this.usuarioAutenticado);				
 					
 				aplicacaoUtil.setUsuarioAutenticado(this.usuarioAutenticado);
 				

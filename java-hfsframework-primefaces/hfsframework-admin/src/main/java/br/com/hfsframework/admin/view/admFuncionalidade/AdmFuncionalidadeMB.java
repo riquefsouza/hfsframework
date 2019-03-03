@@ -20,9 +20,9 @@ import org.primefaces.model.DualListModel;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.AdmFuncionalidadeBC;
-import br.com.hfsframework.admin.AdmPaginaBC;
-import br.com.hfsframework.admin.AdmPerfilBC;
+import br.com.hfsframework.admin.business.AdmFuncionalidadeBC;
+import br.com.hfsframework.admin.business.AdmPaginaBC;
+import br.com.hfsframework.admin.business.AdmPerfilBC;
 import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;

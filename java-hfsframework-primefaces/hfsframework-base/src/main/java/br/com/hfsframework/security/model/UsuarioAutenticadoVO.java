@@ -50,6 +50,8 @@ public class UsuarioAutenticadoVO implements Serializable {
 	/** The usuario. */
 	private UsuarioVO usuario;
 	
+	private boolean modoTeste;
+	
 	/**
 	 * Instantiates a new usuario.
 	 */
@@ -63,6 +65,8 @@ public class UsuarioAutenticadoVO implements Serializable {
 		this.listaAdminMenus = new ArrayList<MenuVO>();
 				
 		limpar();
+		
+		this.modoTeste = false;
 	}
 
 	/**
@@ -466,6 +470,36 @@ public class UsuarioAutenticadoVO implements Serializable {
 				+ ", listaPermissao=" + listaPermissao + ", listaMenus=" + listaMenus + ", listaAdminMenus="
 				+ listaAdminMenus + ", funcionario=" + funcionario + ", usuario=" + usuario + "]";
 	}
-	
+
+	public MenuVO getMenu(String sidMenu){
+		MenuVO menu = null;
+		Long idMenu = new Long(sidMenu);
+		
+		menu = listaMenus.stream()
+			.flatMap(pai -> pai.getSubMenus().stream())			
+			.filter(submenu -> submenu.getId().equals(idMenu))
+			.findFirst()
+			.orElse(null);
+
+		if (menu == null) { 
+			menu = listaAdminMenus.stream()
+					.flatMap(pai -> pai.getSubMenus().stream())			
+					.filter(submenu -> submenu.getId().equals(idMenu))
+					.findFirst()
+					.orElse(null);			
+		}
+		
+		return menu;
+	}
+
+	public boolean isModoTeste() {
+		return modoTeste;
+	}
+
+	public void setModoTeste(boolean modoTeste) {
+		this.modoTeste = modoTeste;
+	}
 	
 }
+
+

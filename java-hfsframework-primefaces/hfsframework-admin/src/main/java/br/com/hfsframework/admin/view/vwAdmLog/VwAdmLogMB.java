@@ -19,8 +19,8 @@ import org.apache.deltaspike.core.api.scope.ViewAccessScoped;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.VwAdmLogBC;
-import br.com.hfsframework.admin.VwAdmLogValorBC;
+import br.com.hfsframework.admin.business.VwAdmLogBC;
+import br.com.hfsframework.admin.business.VwAdmLogValorBC;
 import br.com.hfsframework.admin.model.VwAdmLog;
 import br.com.hfsframework.admin.model.VwAdmLogValor;
 import br.com.hfsframework.base.BaseViewConsulta;

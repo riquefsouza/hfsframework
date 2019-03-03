@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Named;
 
@@ -56,6 +57,47 @@ public final class DataUtil implements Serializable {
 	}
 
 	/**
+	 * Gets the mes from date.
+	 *
+	 * @param data
+	 *            the data
+	 * @return the mes from date
+	 */
+	public static String getMesFromDate(Date data){
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(data);
+		int month = cal.get(Calendar.MONTH);
+		return meses[month];
+	}
+
+	/**
+	 * Gets the date from mes.
+	 *
+	 * @param data
+	 *            the data
+	 * @param smes
+	 *            the smes
+	 * @return the date from mes
+	 */
+	public static Date getDateFromMes(Date data, String smes){
+		int nmes = -1;
+		
+		if (smes!=null && !smes.isEmpty()) {
+			for (int i = 0; i < meses.length; i++) {
+				if (meses[i].equals(smes)){
+					nmes = i;
+					break;
+				}
+			}
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(data);
+			cal.set(Calendar.MONTH, nmes);
+			return cal.getTime();
+		} else
+			return null;
+	}
+	
+	/**
 	 * Gets the data padrao.
 	 *
 	 * @return the data padrao
@@ -80,12 +122,25 @@ public final class DataUtil implements Serializable {
 	 */
 	public static List<Integer> getListaAno() {
 		List<Integer> listaAno = new ArrayList<Integer>();
-		for (int i = 1990; i <= 2100; i++) {
+		for (int i = 2017; i <= 2100; i++) {
 			listaAno.add(i);
 		}
 		return listaAno;
 	}
 
+	/**
+	 * Gets the lista ano string.
+	 *
+	 * @return the lista ano string
+	 */
+	public static List<String> getListaAnoString() {
+		List<String> listaAno = new ArrayList<String>();
+		for (int i = 1990; i <= 2100; i++) {
+			listaAno.add(Integer.toString(i));
+		}
+		return listaAno;
+	}
+	
 	/**
 	 * Formatar.
 	 *
@@ -102,10 +157,32 @@ public final class DataUtil implements Serializable {
 		if (Padrao.isEmpty()) {
 			Padrao = DATA_PADRAO;
 		}
-		SimpleDateFormat formatD = new SimpleDateFormat(Padrao);
+		SimpleDateFormat formatD = new SimpleDateFormat(Padrao, new Locale("pt","BR"));
 		return formatD.format(Data).toLowerCase();
 	}
+	
+	/**
+	 * Formatar.
+	 *
+	 * @param Data
+	 *            the data
+	 * @return the string
+	 */
+	public String formatar(Date Data) {
+		return Formatar(Data, "");
+	}
 
+	/**
+	 * Formatar DH.
+	 *
+	 * @param Data
+	 *            the data
+	 * @return the string
+	 */
+	public String formatarDH(Date Data) {
+		return Formatar(Data, DATA_HORA_PADRAO);
+	}
+	
 	/**
 	 * To long.
 	 *
@@ -766,7 +843,7 @@ public final class DataUtil implements Serializable {
 	 */
 	public static Date getPrimeiroDiadoAno(int ano) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(ano, 0, 1);
+		calendar.set(ano, Calendar.JANUARY, 1, 0, 0, 0);
 		return calendar.getTime();
 	}
 
@@ -863,7 +940,21 @@ public final class DataUtil implements Serializable {
 	 */
 	public static Integer getMesData(Date data) {
 		Calendar c = GregorianCalendar.getInstance();
-		c.setTime(data);
-		return Integer.valueOf(c.get(2) + 1);
+		c.setTime(data);		
+		return Integer.valueOf(c.get(Calendar.MONTH));
 	}
+	
+	/**
+	 * Gets the dia data.
+	 *
+	 * @param data
+	 *            the data
+	 * @return the dia data
+	 */
+	public static Integer getDiaData(Date data) {
+		Calendar c = GregorianCalendar.getInstance();
+		c.setTime(data);		
+		return Integer.valueOf(c.get(Calendar.DAY_OF_MONTH));
+	}	
+	
 }

@@ -4,16 +4,16 @@
  * @version 1.0
  * @since 2017
  */
-package br.com.hfsframework.admin;
+package br.com.hfsframework.admin.business;
 
-import br.com.hfsframework.admin.data.AdmParametroCategoriaRepository;
-import br.com.hfsframework.admin.model.AdmParametroCategoria;
+import br.com.hfsframework.admin.data.AdmFuncionalidadeRepository;
+import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.base.BaseBusinessController;
 
 /**
- * The Class AdmParametroCategoriaBC.
+ * The Class AdmFuncionalidadeBC.
  */
-public class AdmParametroCategoriaBC extends BaseBusinessController<AdmParametroCategoria, Long, AdmParametroCategoriaRepository> {
+public class AdmFuncionalidadeBC extends BaseBusinessController<AdmFuncionalidade, Long, AdmFuncionalidadeRepository> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -45,4 +45,5 @@ public class AdmParametroCategoriaBC extends BaseBusinessController<AdmParametro
 		return (existe > 0);
 	}
 	
+
 }

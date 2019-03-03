@@ -20,7 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.hfsframework.admin.AdmPaginaBC;
+import br.com.hfsframework.admin.business.AdmPaginaBC;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 

@@ -16,7 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.hfsframework.admin.VwAdmLogBC;
+import br.com.hfsframework.admin.business.VwAdmLogBC;
 import br.com.hfsframework.admin.model.VwAdmLog;
 
 /**

@@ -7,15 +7,11 @@
 package br.com.hfsframework;
 
 import java.io.Serializable;
-import java.lang.management.ManagementFactory;
 
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 
@@ -29,7 +25,7 @@ public final class AplicacaoUtil implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** The log. */
-	private static Logger log = LogManager.getLogger(AplicacaoUtil.class);
+	//private static Logger log = LogManager.getLogger(AplicacaoUtil.class);
 		
 	/**
 	 * Instantiates a new aplicacao util.

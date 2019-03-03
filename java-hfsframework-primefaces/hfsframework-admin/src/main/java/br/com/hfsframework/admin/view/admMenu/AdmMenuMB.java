@@ -23,8 +23,8 @@ import org.primefaces.model.TreeNode;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.AdmFuncionalidadeBC;
-import br.com.hfsframework.admin.AdmMenuBC;
+import br.com.hfsframework.admin.business.AdmFuncionalidadeBC;
+import br.com.hfsframework.admin.business.AdmMenuBC;
 import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.base.BaseViewConsulta;

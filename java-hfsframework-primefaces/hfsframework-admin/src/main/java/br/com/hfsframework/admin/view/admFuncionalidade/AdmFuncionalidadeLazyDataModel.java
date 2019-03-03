@@ -13,7 +13,7 @@ import java.util.Map;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-import br.com.hfsframework.admin.AdmFuncionalidadeBC;
+import br.com.hfsframework.admin.business.AdmFuncionalidadeBC;
 import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.base.BaseLazyModel;
 

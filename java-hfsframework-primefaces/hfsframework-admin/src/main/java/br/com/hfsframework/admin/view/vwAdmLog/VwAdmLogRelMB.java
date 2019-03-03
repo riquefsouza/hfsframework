@@ -13,8 +13,8 @@ import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.hfsframework.admin.VwAdmLogBC;
-import br.com.hfsframework.admin.VwAdmLogValorBC;
+import br.com.hfsframework.admin.business.VwAdmLogBC;
+import br.com.hfsframework.admin.business.VwAdmLogValorBC;
 import br.com.hfsframework.admin.model.VwAdmLog;
 import br.com.hfsframework.base.IBaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.BaseViewRelatorio;
