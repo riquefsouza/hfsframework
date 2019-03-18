@@ -27,8 +27,9 @@
 		<wildfly-security.version>10.1.0.Final</wildfly-security.version>
 		
 		<!-- primefaces -->
-		<primefaces.version>6.1</primefaces.version>
-		<primefaces-extensions.version>6.1.0</primefaces-extensions.version>
+		<primefaces.version>6.2</primefaces.version>
+		<primefaces-extensions.version>6.2.10</primefaces-extensions.version>
+		<primefaces-extensions-codemirror.version>6.1.1</primefaces-extensions-codemirror.version>
 		<primefaces-themes.version>1.0.10</primefaces-themes.version>
 		<itext.version>2.1.7</itext.version>
 		<omnifaces.version>2.6.2</omnifaces.version>
@@ -240,24 +241,9 @@
 		<dependency>
 		    <groupId>org.primefaces.extensions</groupId>
 		    <artifactId>resources-codemirror</artifactId>
-			<version>${primefaces-extensions.version}</version>
-		</dependency>		
-<!-- 		
-		<dependency>
-		    <groupId>org.primefaces.extensions</groupId>
-		    <artifactId>all-themes</artifactId>
-		    <version>${primefaces-themes.version}</version>
+			<version>${primefaces-extensions-codemirror.version}</version>
 		</dependency>
-
-		<dependency>
-		    <groupId>org.primefaces.themes</groupId>
-		    <artifactId>all-themes</artifactId>
-		    <version>1.0.10</version>
-			<scope>system</scope>
-			<systemPath>C:\demoiselle3\maven3-local-repo\org\primefaces\themes\all-themes\1.0.10\all-themes-1.0.10.jar</systemPath>
-		</dependency>
--->		
-
+		
 		<dependency>
 		    <groupId>com.lowagie</groupId>
 		    <artifactId>itext</artifactId>
