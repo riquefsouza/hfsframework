@@ -14,16 +14,12 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 import br.com.hfsframework.admin.data.AdmPerfilRepository;
-import br.com.hfsframework.admin.model.AdmCargo;
-import br.com.hfsframework.admin.model.AdmCargoPerfil;
-import br.com.hfsframework.admin.model.AdmCargoPerfilPK;
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
-import br.com.hfsframework.admin.model.AdmFuncionario;
-import br.com.hfsframework.admin.model.AdmFuncionarioPerfil;
-import br.com.hfsframework.admin.model.AdmFuncionarioPerfilPK;
 import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
+import br.com.hfsframework.admin.model.AdmUsuario;
+import br.com.hfsframework.admin.model.AdmUsuarioPerfil;
+import br.com.hfsframework.admin.model.AdmUsuarioPerfilPK;
 import br.com.hfsframework.base.BaseBusinessController;
 import br.com.hfsframework.security.model.MenuVO;
 import br.com.hfsframework.security.model.PerfilVO;
@@ -43,21 +39,13 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	@Inject
 	private AdmMenuBC admMenuBC;
 	
-	/** The adm funcionario BC. */
+	/** The adm usuario BC. */
 	@Inject
-	private AdmFuncionarioBC admFuncionarioBC;
+	private AdmUsuarioBC admUsuarioBC;
 	
-	/** The adm cargo BC. */
+	/* The adm usuario perfil BC. */
 	@Inject
-	private AdmCargoBC admCargoBC;
-	
-	/* The adm funcionario perfil BC. */
-	@Inject
-	private AdmFuncionarioPerfilBC admFuncionarioPerfilBC;
-
-	/** The adm cargo perfil BC. */
-	@Inject
-	private AdmCargoPerfilBC admCargoPerfilBC;
+	private AdmUsuarioPerfilBC admUsuarioPerfilBC;
 
 	/* (non-Javadoc)
 	 * @see br.com.hfsframework.base.BaseBusinessController#load(java.io.Serializable)
@@ -65,22 +53,20 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	@Override
 	public AdmPerfil load(Long id) {
 		AdmPerfil item = repositorio.findBy(id);		
-		item.setAdmFuncionarios(this.findFuncionariosPorPerfil(item));
-		item.setAdmCargos(this.findCargosPorPerfil(item));
+		item.setAdmUsuarios(this.findUsuariosPorPerfil(item));
 		return item;
 	}
 	
 	/**
-	 * Atribui o adm funcionario cargo.
+	 * Atribui o adm usuario cargo.
 	 *
 	 * @param lista
 	 *            the lista
 	 * @return the list
 	 */
-	private List<AdmPerfil> setAdmFuncionarioCargo(List<AdmPerfil> lista) {
+	private List<AdmPerfil> setAdmUsuarioCargo(List<AdmPerfil> lista) {
 		for (AdmPerfil item : lista) {
-			item.setAdmFuncionarios(this.findFuncionariosPorPerfil(item));
-			item.setAdmCargos(this.findCargosPorPerfil(item));
+			item.setAdmUsuarios(this.findUsuariosPorPerfil(item));
 		}
 		
 		return lista;
@@ -92,46 +78,30 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	@Override
 	public List<AdmPerfil> findAll() {
 		List<AdmPerfil> lista = repositorio.findAll();		
-		return setAdmFuncionarioCargo(lista);
+		return setAdmUsuarioCargo(lista);
 	}
 	
 	/**
-	 * Atribui o cargos funcionarios.
+	 * Atribui o cargos usuarios.
 	 *
 	 * @param bean
 	 *            the bean
 	 */
-	private void setCargosFuncionarios(AdmPerfil bean) {
-		AdmCargoPerfil admCargoPerfil; 
-		AdmCargoPerfilPK admCargoPerfilPK;
-		
-		for (AdmCargo cargo : bean.getAdmCargos()) {
+	private void setPerfisUsuarios(AdmPerfil bean) {
+		AdmUsuarioPerfil admUsuarioPerfil; 
+		AdmUsuarioPerfilPK admUsuarioPerfilPK;
 
-			admCargoPerfilPK = new AdmCargoPerfilPK();
-			admCargoPerfilPK.setPerfilSeq(bean.getId());
-			admCargoPerfilPK.setCodCargo(cargo.getId());
+		for (AdmUsuario usuario : bean.getAdmUsuarios()) {
 			
-			admCargoPerfil = new AdmCargoPerfil();
-			admCargoPerfil.setId(admCargoPerfilPK);
-			admCargoPerfil.setAdmPerfil(bean);
+			admUsuarioPerfilPK = new AdmUsuarioPerfilPK();
+			admUsuarioPerfilPK.setPerfilSeq(bean.getId());
+			admUsuarioPerfilPK.setUsuarioSeq(usuario.getId());
 			
-			admCargoPerfilBC.insert(admCargoPerfil);
-		}
-
-		AdmFuncionarioPerfil admFuncionarioPerfil; 
-		AdmFuncionarioPerfilPK admFuncionarioPerfilPK;
-
-		for (AdmFuncionario funcionario : bean.getAdmFuncionarios()) {
+			admUsuarioPerfil = new AdmUsuarioPerfil();
+			admUsuarioPerfil.setId(admUsuarioPerfilPK);
+			admUsuarioPerfil.setAdmPerfil(bean);
 			
-			admFuncionarioPerfilPK = new AdmFuncionarioPerfilPK();
-			admFuncionarioPerfilPK.setPerfilSeq(bean.getId());
-			admFuncionarioPerfilPK.setCodFuncionario(funcionario.getId());
-			
-			admFuncionarioPerfil = new AdmFuncionarioPerfil();
-			admFuncionarioPerfil.setId(admFuncionarioPerfilPK);
-			admFuncionarioPerfil.setAdmPerfil(bean);
-			
-			admFuncionarioPerfilBC.insert(admFuncionarioPerfil);
+			admUsuarioPerfilBC.insert(admUsuarioPerfil);
 		}
 	}
 
@@ -142,8 +112,7 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	@Transactional
 	public void delete(AdmPerfil bean) throws TransacaoException {
 		super.delete(bean);		
-		admCargoPerfilBC.deleteByPerfil(bean.getId());
-		admFuncionarioPerfilBC.deleteByPerfil(bean.getId());
+		admUsuarioPerfilBC.deleteByPerfil(bean.getId());
 	}
 
 
@@ -155,7 +124,7 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	public AdmPerfil insert(AdmPerfil bean) throws TransacaoException {
 		AdmPerfil novo = super.insert(bean);
 		if (novo!=null) {
-			setCargosFuncionarios(novo);
+			setPerfisUsuarios(novo);
 		}
 		return novo;
 	}
@@ -168,13 +137,11 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	public AdmPerfil update(AdmPerfil bean) throws TransacaoException {
 		AdmPerfil alterado = super.update(bean);
 
-		admCargoPerfilBC.deleteByPerfil(bean.getId());
-		admFuncionarioPerfilBC.deleteByPerfil(bean.getId());
+		admUsuarioPerfilBC.deleteByPerfil(bean.getId());
 		
-		//admCargoPerfilBC.deleteByCargos(bean.getAdmCargos());
-		admFuncionarioPerfilBC.deleteByFuncionarios(bean.getAdmFuncionarios());
+		admUsuarioPerfilBC.deleteByUsuarios(bean.getAdmUsuarios());
 		
-		setCargosFuncionarios(bean);
+		setPerfisUsuarios(bean);
 		
 		return alterado;
 	}	
@@ -216,9 +183,9 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	public HashSet<AdmPerfil> getPapeis(UsuarioAutenticadoVO usuarioAutenticado) {
 		HashSet<AdmPerfil> hs = new HashSet<AdmPerfil>();
 
-		AdmFuncionario admFuncionario = new AdmFuncionario(usuarioAutenticado.getFuncionario());		
-		List<AdmPerfil> lst = repositorio.findPerfisPorFuncionario(admFuncionario.getId());		
-		lst = setAdmFuncionarioCargo(lst);
+		AdmUsuario admUsuario = new AdmUsuario(usuarioAutenticado.getUsuario());		
+		List<AdmPerfil> lst = repositorio.findPerfisPorUsuario(admUsuario.getId());		
+		lst = setAdmUsuarioCargo(lst);
 		
 		for (AdmPerfil g : lst) {
 			hs.add(g);
@@ -239,28 +206,14 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	public List<PermissaoVO> getPermissao(UsuarioAutenticadoVO usuarioAutenticado) {
 		List<PermissaoVO> lista = new ArrayList<PermissaoVO>();
 		PermissaoVO permissao;
-		List<AdmPagina> paginasFuncionalidade;
 		
-		AdmFuncionario admFuncionario = new AdmFuncionario(usuarioAutenticado.getFuncionario());
-		List<AdmPerfil> perfis = repositorio.findPerfisPorFuncionario(admFuncionario.getId());
-		perfis = setAdmFuncionarioCargo(perfis);
+		AdmUsuario admUsuario = new AdmUsuario(usuarioAutenticado.getUsuario());
+		List<AdmPerfil> perfis = repositorio.findPerfisPorUsuario(admUsuario.getId());
+		perfis = setAdmUsuarioCargo(perfis);
 		
 		for (AdmPerfil perfil : perfis) {
 			permissao = new PermissaoVO();
 			permissao.setPerfil(perfil.toPerfilVO());
-
-			for (AdmFuncionalidade admFuncionalidade : perfil.getAdmFuncionalidades()) {
-				permissao.getFuncionalidades().add(admFuncionalidade.toFuncionalidadeVO());	
-			}
-			
-			paginasFuncionalidade = new ArrayList<AdmPagina>();
-			for (AdmFuncionalidade admFuncionalidade : perfil.getAdmFuncionalidades()) {
-				paginasFuncionalidade.add(admFuncionalidade.getAdmPaginaInicial());	
-			}
-			
-			for (AdmPagina admPaginaFunc : paginasFuncionalidade) {
-				permissao.getPaginasFuncionalidade().add(admPaginaFunc.toPaginaVO());	
-			}
 			
 			for (AdmPagina admPagina : perfil.getAdmPaginas()) {
 				permissao.getPaginas().add(admPagina.toPaginaVO());
@@ -329,36 +282,18 @@ public class AdmPerfilBC extends BaseBusinessController<AdmPerfil, Long, AdmPerf
 	}
 	
 	/**
-	 * Find funcionarios por perfil.
+	 * Find usuarios por perfil.
 	 *
 	 * @param perfil
 	 *            the perfil
 	 * @return the list
 	 */
-	public List<AdmFuncionario> findFuncionariosPorPerfil(AdmPerfil perfil){
-		List<AdmFuncionario> lista = new ArrayList<AdmFuncionario>();
-		List<Long> listaCod = repositorio.findFuncionariosPorPerfil(perfil);
+	public List<AdmUsuario> findUsuariosPorPerfil(AdmPerfil perfil){
+		List<AdmUsuario> lista = new ArrayList<AdmUsuario>();
+		List<Long> listaCod = repositorio.findUsuariosPorPerfil(perfil);
 		
 		for (Long item : listaCod) {
-			lista.add(admFuncionarioBC.load(item));
-		}
-		
-		return lista;
-	}
-	
-	/**
-	 * Find cargos por perfil.
-	 *
-	 * @param perfil
-	 *            the perfil
-	 * @return the list
-	 */
-	public List<AdmCargo> findCargosPorPerfil(AdmPerfil perfil){
-		List<AdmCargo> lista = new ArrayList<AdmCargo>();
-		List<Long> listaCod = repositorio.findCargosPorPerfil(perfil);
-		
-		for (Long item : listaCod) {
-			lista.add(admCargoBC.load(item));
+			lista.add(admUsuarioBC.load(item));
 		}
 		
 		return lista;

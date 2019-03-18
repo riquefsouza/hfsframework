@@ -22,10 +22,10 @@ public class MenuVO implements Serializable, Comparable<MenuVO> {
 	private String descricao;
 
 	private Integer ordem;
+	
+	private Long idPagina;
 
-	private Long idFuncionalidade;
-
-	private FuncionalidadeVO funcionalidade;
+	private PaginaVO pagina;	
 
 	private MenuVO menuPai;
 
@@ -43,8 +43,8 @@ public class MenuVO implements Serializable, Comparable<MenuVO> {
 		this.id = null;
 		this.descricao = null;
 		this.ordem = null;
-		this.idFuncionalidade = null;
-		this.funcionalidade = new FuncionalidadeVO();
+		this.idPagina = null;
+		this.pagina = new PaginaVO();
 		this.menuPai = null;
 		this.subMenus.clear();
 	}
@@ -105,25 +105,26 @@ public class MenuVO implements Serializable, Comparable<MenuVO> {
 	public void setOrdem(Integer ordem) {
 		this.ordem = ordem;
 	}
-
+	
 	/**
-	 * Pega o the adm funcionalidade.
+	 * Pega o the adm pagina.
 	 *
-	 * @return o the adm funcionalidade
+	 * @return o the adm pagina
 	 */
-	public FuncionalidadeVO getFuncionalidade() {
-		return this.funcionalidade;
+	public PaginaVO getPagina() {
+		return this.pagina;
 	}
 
 	/**
-	 * Atribui o the adm funcionalidade.
+	 * Atribui o the adm pagina.
 	 *
-	 * @param funcionalidade
-	 *            o novo the adm funcionalidade
+	 * @param pagina
+	 *            o novo the adm pagina
 	 */
-	public void setFuncionalidade(FuncionalidadeVO funcionalidade) {
-		this.funcionalidade = funcionalidade;
+	public void setPagina(PaginaVO pagina) {
+		this.pagina = pagina;
 	}
+	
 
 	/**
 	 * Pega o the adm menu.
@@ -252,7 +253,7 @@ public class MenuVO implements Serializable, Comparable<MenuVO> {
 	 * @return true, if is sub menu
 	 */
 	public boolean isSubMenu() {
-		return getFuncionalidade() == null;
+		return getPagina() == null;
 	}
 
 	/*
@@ -266,21 +267,12 @@ public class MenuVO implements Serializable, Comparable<MenuVO> {
 	}
 
 	/**
-	 * Gets the managed bean.
-	 *
-	 * @return the managed bean
-	 */
-	public String getManagedBean() {
-		return this.funcionalidade != null ? this.funcionalidade.getPaginaInicial().getManagedBean() : null;
-	}
-
-	/**
 	 * Gets the url.
 	 *
 	 * @return the url
 	 */
 	public String getUrl() {
-		return this.funcionalidade != null ? this.funcionalidade.getPaginaInicial().getUrl() : null;
+		return this.pagina != null ? this.pagina.getUrl() : null;
 	}
 
 	/* (non-Javadoc)
@@ -292,22 +284,22 @@ public class MenuVO implements Serializable, Comparable<MenuVO> {
 	}
 
 	/**
-	 * Pega o the id funcionalidade.
+	 * Pega o the id pagina.
 	 *
-	 * @return o the id funcionalidade
+	 * @return o the id pagina
 	 */
-	public Long getIdFuncionalidade() {
-		return idFuncionalidade;
+	public Long getIdPagina() {
+		return idPagina;
 	}
 
 	/**
-	 * Atribui o the id funcionalidade.
+	 * Atribui o the id pagina.
 	 *
-	 * @param idFuncionalidade
-	 *            o novo the id funcionalidade
+	 * @param idPagina
+	 *            o novo the id pagina
 	 */
-	public void setIdFuncionalidade(Long idFuncionalidade) {
-		this.idFuncionalidade = idFuncionalidade;
+	public void setIdPagina(Long idPagina) {
+		this.idPagina = idPagina;
 	}
-
+	
 }

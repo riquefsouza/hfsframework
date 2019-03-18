@@ -112,13 +112,13 @@
 
 						<div class="row">
 							<div class="col-md-12 form-group">
-								<p:outputLabel for="funcionalidade" value="Funcionalidade:" />
+								<p:outputLabel for="pagina" value="Página:" />
 								<p:selectOneMenu
-									value="#{admMenuMB.novoItemMenu.admFuncionalidade}"
-									converter="admFuncionalidadeConverter"
-									id="funcionalidade" label="Funcionalidade" filter="true" filterMatchMode="contains">
+									value="#{admMenuMB.novoItemMenu.admPagina}"
+									converter="admPaginaConverter"
+									id="pagina" label="Página" filter="true" filterMatchMode="contains">
 									<f:selectItem value="#{null}" itemLabel="" />
-									<f:selectItems value="#{admMenuMB.listaAdmFuncionalidade}"
+									<f:selectItems value="#{admMenuMB.listaAdmPagina}"
 										var="item" itemValue="#{item}" itemLabel="#{item.descricao}" />
 									<p:ajax listener="#{admMenuMB.sugerirNomeItemMenu()}"
 										update="descricao" />

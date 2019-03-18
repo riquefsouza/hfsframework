@@ -46,43 +46,6 @@ public interface VwAdmLogRepository extends EntityRepository<VwAdmLog, Long> {
 	List<VwAdmLog> findByFiltros(String entidade, String usuario, String ip, String operacao, String chave,
 			Long dataInicio, Long dataFim);
 
-	/**
-	 * Checa se é contem chave.
-	 *
-	 * @param tabela
-	 *            the tabela
-	 * @param id
-	 *            the id
-	 * @param chave
-	 *            the chave
-	 * @param valor
-	 *            the valor
-	 * @return the object
-	 */
-	@Query(named = "VwAdmLog.isContemChave" , isNative = true)
-	Object isContemChave(String tabela, long id, String chave, String valor);
 
-	/**
-	 * Detalhar.
-	 *
-	 * @param tabela
-	 *            the tabela
-	 * @param id
-	 *            the id
-	 * @return the list
-	 */
-	@Query(named = "VwAdmLog.detalhar" , isNative = true)
-	List<Object> detalhar(String tabela, String id);
-
-	/**
-	 * Primary keys.
-	 *
-	 * @param tabela
-	 *            the tabela
-	 * @return the list
-	 */
-	@Query(named = "VwAdmLog.primaryKeys" , isNative = true)
-	List<Object> primaryKeys(String tabela);
-	
 	
 }

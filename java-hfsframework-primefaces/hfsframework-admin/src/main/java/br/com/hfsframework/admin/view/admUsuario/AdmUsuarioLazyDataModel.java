@@ -15,18 +15,17 @@ import org.primefaces.model.SortOrder;
 
 import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.admin.model.AdmUsuario;
-import br.com.hfsframework.admin.model.AdmUsuarioPK;
 import br.com.hfsframework.base.BaseLazyModel;
 
 public class AdmUsuarioLazyDataModel extends LazyDataModel<AdmUsuario> {
 	
 	private static final long serialVersionUID = 1L;
 
-	private BaseLazyModel<AdmUsuario, AdmUsuarioPK, AdmUsuarioBC> baseLazyModel;
+	private BaseLazyModel<AdmUsuario, Long, AdmUsuarioBC> baseLazyModel;
 
 	public AdmUsuarioLazyDataModel(AdmUsuarioBC bc) {
 		super();
-		this.baseLazyModel = new BaseLazyModel<AdmUsuario, AdmUsuarioPK, AdmUsuarioBC>(bc);
+		this.baseLazyModel = new BaseLazyModel<AdmUsuario, Long, AdmUsuarioBC>(bc);
 	}
 
 	@Override

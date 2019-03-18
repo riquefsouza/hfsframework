@@ -1,0 +1,73 @@
+CREATE TABLE public.adm_usuario (
+	usu_matricula int8 NOT NULL,
+	usu_login varchar(60) NOT NULL,
+	usu_nome varchar(60) NOT NULL,
+	usu_data timestamp NOT NULL,
+	usu_cpf numeric(11) NULL,
+	usu_email varchar(255) NULL,
+	usu_ldap_dn varchar(255) NULL,
+	usu_senha varchar(128) NULL,
+	CONSTRAINT adm_usuario_pkey PRIMARY KEY (usu_matricula)
+);
+
+CREATE TABLE public.adm_usuario_ip (
+	uip_matricula int8 NOT NULL,
+	uip_ip varchar(15) NOT NULL,
+	uip_ativo bpchar(1) NULL,
+	CONSTRAINT adm_usuario_ip_pkey PRIMARY KEY (uip_matricula, uip_ip)
+);
+
+CREATE TABLE public.adm_usuario_perfil (
+	usp_prf_seq int8 NOT NULL,
+	usp_matricula int8 NOT NULL,
+	CONSTRAINT adm_usuario_perfil_pkey PRIMARY KEY (usp_prf_seq, usp_matricula),
+	CONSTRAINT adm_usuario_perfil_usp_matricula_fkey FOREIGN KEY (usp_matricula) REFERENCES adm_usuario(usu_matricula),
+	CONSTRAINT adm_usuario_perfil_usp_prf_seq_fkey FOREIGN KEY (usp_prf_seq) REFERENCES adm_perfil(prf_seq)
+);
+
+CREATE TABLE public.adm_menu (
+	mnu_seq int8 NOT NULL,
+	mnu_descricao varchar(255) NOT NULL,
+	mnu_pai_seq int8 NULL,
+	mnu_pag_seq int8 NULL,
+	mnu_ordem numeric(3) NULL,
+	CONSTRAINT adm_menu_pkey PRIMARY KEY (mnu_seq),
+	CONSTRAINT adm_menu_un UNIQUE (mnu_descricao),
+	CONSTRAINT adm_menu_adm_pagina_fk FOREIGN KEY (mnu_pag_seq) REFERENCES adm_pagina(pag_seq),
+	CONSTRAINT adm_menu_mnu_pai_seq_fkey FOREIGN KEY (mnu_pai_seq) REFERENCES adm_menu(mnu_seq)
+);
+
+CREATE SEQUENCE public.adm_usuario_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 999999999999999999
+  START 1
+  CACHE 1
+  CYCLE;
+
+update adm_pagina set pag_descricao='Categoria dos Parâmetros de Configuração (Administrativo)' where pag_seq=1;
+update adm_pagina set pag_descricao='Editar Categoria dos Parâmetros de Configuração (Administrativo)' where pag_seq=2;
+update adm_pagina set pag_descricao='Parâmetros de Configuração (Administrativo)' where pag_seq=3;
+update adm_pagina set pag_descricao='Editar Parâmetros de Configuração (Administrativo)' where pag_seq=4;
+update adm_pagina set pag_descricao='Administrar Perfil (Administrativo)' where pag_seq=5;
+update adm_pagina set pag_descricao='Editar Administrar Perfil (Administrativo)' where pag_seq=6;
+update adm_pagina set pag_descricao='Administrar Funcionalidade (Administrativo)' where pag_seq=7;
+update adm_pagina set pag_descricao='Editar Administrar Funcionalidade (Administrativo)' where pag_seq=8;
+update adm_pagina set pag_descricao='Administrar Página (Administrativo)' where pag_seq=9;
+update adm_pagina set pag_descricao='Editar Administrar Página (Administrativo)' where pag_seq=10;
+update adm_pagina set pag_descricao='Administrar Menu (Administrativo)' where pag_seq=11;
+update adm_pagina set pag_descricao='Editar Administrar Menu (Administrativo)' where pag_seq=12;
+update adm_pagina set pag_descricao='Administrar os Cargos (Administrativo)' where pag_seq=13;
+update adm_pagina set pag_descricao='Editar Administrar os Cargos (Administrativo)' where pag_seq=14;
+update adm_pagina set pag_descricao='Administrar os Funcionários (Administrativo)' where pag_seq=15;
+update adm_pagina set pag_descricao='Editar Administrar os Funcionários (Administrativo)' where pag_seq=16;
+update adm_pagina set pag_descricao='Administrar os Setores (Administrativo)' where pag_seq=17;
+update adm_pagina set pag_descricao='Editar Administrar os Setores (Administrativo)' where pag_seq=18;
+update adm_pagina set pag_descricao='Visualizar os Usuários (Administrativo)' where pag_seq=19;
+update adm_pagina set pag_descricao='Visualizar os Logs de Auditoria (Administrativo)' where pag_seq=20;
+update adm_pagina set pag_descricao='Administrar os Campos do Log de Auditoria (Administrativo)' where pag_seq=21;
+update adm_pagina set pag_descricao='Editar Administrar os Campos do Log de Auditoria (Administrativo)' where pag_seq=22;
+update adm_pagina set pag_descricao='Visualizar Arquivo de Log do Servidor (Administrativo)' where pag_seq=23;
+
+
+

@@ -19,7 +19,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import br.com.hfsframework.AplicacaoConfig;
 import br.com.hfsframework.AplicacaoUtil;
-import br.com.hfsframework.admin.business.AdmFuncionarioBC;
 import br.com.hfsframework.admin.business.AdmPerfilBC;
 import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.admin.business.ModoTesteBC;
@@ -52,10 +51,6 @@ public class SistemaMB extends BaseViewController implements Serializable {
 	/** The adm perfil BC. */
 	@Inject
 	private AdmPerfilBC admPerfilBC;
-
-	/** The vw adm funcionario BC. */
-	@Inject
-	private AdmFuncionarioBC admFuncionarioBC;
 
 	/** The aplicacao config. */
 	@Inject
@@ -140,12 +135,12 @@ public class SistemaMB extends BaseViewController implements Serializable {
 		if (!aplicacaoUtil.isDebugMode() && aplicacaoConfig.isHabilitarControlePerfil()) {
 			
 			if (aplicacaoConfig.isHabilitarLDAP()) 
-				this.usuarioAutenticado.setFuncionario(admFuncionarioBC.load(ldapUtil.getMatricula()).toFuncionarioVO());
+				this.usuarioAutenticado.setUsuario(admUsuarioBC.load(ldapUtil.getMatricula()).toUsuarioVO());
 			else
-				this.usuarioAutenticado.setFuncionario(admFuncionarioBC.load(usuarioLogado.getId().getMatricula()).toFuncionarioVO());
+				this.usuarioAutenticado.setUsuario(admUsuarioBC.load(usuarioLogado.getId()).toUsuarioVO());
 				
-			this.usuarioAutenticado.setDisplayName(this.usuarioAutenticado.getFuncionario().getNome());
-			this.usuarioAutenticado.setEmail(this.usuarioAutenticado.getFuncionario().getEmail());
+			this.usuarioAutenticado.setDisplayName(this.usuarioAutenticado.getUsuario().getNome());
+			this.usuarioAutenticado.setEmail(this.usuarioAutenticado.getUsuario().getEmail());
 			this.usuarioAutenticado.setListaPermissao(admPerfilBC.getPermissao(usuarioAutenticado));
 
 			if (!this.usuarioAutenticado.getListaPermissao().isEmpty()){
@@ -166,16 +161,19 @@ public class SistemaMB extends BaseViewController implements Serializable {
 			}
 			
 			try {
+				
 				if (aplicacaoConfig.isHabilitarLDAP()) {
-					this.usuarioAutenticado.setUsuario(admUsuarioBC.getUsuario(ldapUtil.getMatricula(),
-						ldapUtil.getLogin(), ldapUtil.getNome(),
-						this.usuarioAutenticado.getFuncionario().getCpf(),
-						ldapUtil.getEmail(), ldapUtil.getLdapDN()).toUsuarioVO());
+					this.usuarioAutenticado.setUsuario(admUsuarioBC.getUsuario(
+							ldapUtil.getMatricula(),
+							ldapUtil.getLogin(), ldapUtil.getNome(),
+							this.usuarioAutenticado.getUsuario().getCpf(),
+							ldapUtil.getEmail(), ldapUtil.getLdapDN()).toUsuarioVO());
 				} else {
-					this.usuarioAutenticado.setUsuario(admUsuarioBC.getUsuario(usuarioAutenticado.getFuncionario().getId(),
-							usuarioLogado.getLogin(), usuarioAutenticado.getFuncionario().getNome(),
-							this.usuarioAutenticado.getFuncionario().getCpf(),
-							usuarioAutenticado.getFuncionario().getEmail(), "").toUsuarioVO());
+					this.usuarioAutenticado.setUsuario(admUsuarioBC.getUsuario(
+							usuarioAutenticado.getUsuario().getId(),
+							usuarioLogado.getLogin(), usuarioAutenticado.getUsuario().getNome(),
+							this.usuarioAutenticado.getUsuario().getCpf(),
+							usuarioAutenticado.getUsuario().getEmail(), "").toUsuarioVO());
 				}
 				
 				this.usuarioAutenticado = modoTesteBC.iniciar(this.usuarioAutenticado);				
@@ -186,8 +184,7 @@ public class SistemaMB extends BaseViewController implements Serializable {
 				gerarMensagemErro(e, e.getMessage());
 			}
 			
-			this.log.info(this.usuarioAutenticado.getUserName() + " : Setor: "
-					+ this.usuarioAutenticado.getFuncionario().getSetor() + ", Perfis: "
+			this.log.info(this.usuarioAutenticado.getUserName() + ", Perfis: "
 					+ this.usuarioAutenticado.getListaPermissao().toString());
 			mostrarPerfilURL();
 			mostrarMenus();
@@ -199,10 +196,6 @@ public class SistemaMB extends BaseViewController implements Serializable {
 	 */
 	public void mostrarPerfilURL() {
 		for (PermissaoVO permissao : this.usuarioAutenticado.getListaPermissao()) {
-			for (PaginaVO pagFuncionalidade : permissao.getPaginasFuncionalidade()) {
-				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Funcionalidade Pagina inicial URL: "
-						+ pagFuncionalidade.getUrl());
-			}
 			for (PaginaVO admPagina : permissao.getPaginas()) {
 				log.info("Perfil: " + permissao.getPerfil().getDescricao() + " -> Pagina URL: " + admPagina.getUrl());
 			}

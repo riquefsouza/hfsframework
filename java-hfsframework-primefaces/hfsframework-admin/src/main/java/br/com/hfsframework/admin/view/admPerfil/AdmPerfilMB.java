@@ -20,16 +20,12 @@ import org.primefaces.model.DualListModel;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.business.AdmCargoBC;
-import br.com.hfsframework.admin.business.AdmFuncionalidadeBC;
-import br.com.hfsframework.admin.business.AdmFuncionarioBC;
 import br.com.hfsframework.admin.business.AdmPaginaBC;
 import br.com.hfsframework.admin.business.AdmPerfilBC;
-import br.com.hfsframework.admin.model.AdmCargo;
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
-import br.com.hfsframework.admin.model.AdmFuncionario;
+import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
+import br.com.hfsframework.admin.model.AdmUsuario;
 import br.com.hfsframework.base.BaseViewCadastro;
 import br.com.hfsframework.base.IBaseViewCadastro;
 import br.com.hfsframework.security.Pages;
@@ -45,37 +41,17 @@ public class AdmPerfilMB extends
 		BaseViewCadastro<AdmPerfil, Long, AdmPerfilBC, 
 		Pages.Secure.ListarAdmPerfil, Pages.Secure.EditarAdmPerfil>
 		implements IBaseViewCadastro<AdmPerfil> {
-
-	/** The adm cargo BC. */
-	@Inject
-	private AdmCargoBC admCargoBC;
-
-	/** The dual list adm cargo. */
-	private DualListModel<AdmCargo> dualListAdmCargo;
-
-	/** The lista adm cargo. */
-	private List<AdmCargo> listaAdmCargo;
-		
-	/** The vw adm funcionario BC. */
-	@Inject
-	private AdmFuncionarioBC admFuncionarioBC;
-
-	/** The dual list adm funcionario. */
-	private DualListModel<AdmFuncionario> dualListAdmFuncionario;
-
-	/** The lista adm funcionario. */
-	private List<AdmFuncionario> listaAdmFuncionario;
-		
-	/** The adm funcionalidade BC. */
-	@Inject
-	private AdmFuncionalidadeBC admFuncionalidadeBC;
-
-	/** The dual list adm funcionalidade. */
-	private DualListModel<AdmFuncionalidade> dualListAdmFuncionalidade;
-
-	/** The lista adm funcionalidade. */
-	private List<AdmFuncionalidade> listaAdmFuncionalidade;
 	
+	/** The vw adm usuario BC. */
+	@Inject
+	private AdmUsuarioBC admUsuarioBC;
+
+	/** The dual list adm usuario. */
+	private DualListModel<AdmUsuario> dualListAdmUsuario;
+
+	/** The lista adm usuario. */
+	private List<AdmUsuario> listaAdmUsuario;
+
 	/** The adm pagina BC. */
 	@Inject
 	private AdmPaginaBC admPaginaBC;
@@ -116,36 +92,14 @@ public class AdmPerfilMB extends
 	}
 
 	/**
-	 * Carregar adm funcionarios.
+	 * Carregar adm usuarios.
 	 */
-	private void carregarAdmFuncionarios() {
-		List<AdmFuncionario> listaAdmFuncionarioSelecionado = this.getBean().getId() == null ? new ArrayList<AdmFuncionario>()
-				: this.getBusinessController().findFuncionariosPorPerfil(this.getBean());
-		this.listaAdmFuncionario = admFuncionarioBC.findAll();
-		this.listaAdmFuncionario.removeAll(listaAdmFuncionarioSelecionado);
-		this.dualListAdmFuncionario = new DualListModel<AdmFuncionario>(this.listaAdmFuncionario, listaAdmFuncionarioSelecionado);
-	}
-	
-	/**
-	 * Carregar adm cargos.
-	 */
-	private void carregarAdmCargos() {
-		List<AdmCargo> listaAdmCargoSelecionado = this.getBean().getId() == null ? new ArrayList<AdmCargo>()
-				: this.getBusinessController().findCargosPorPerfil(this.getBean());
-		this.listaAdmCargo = admCargoBC.findAll();
-		this.listaAdmCargo.removeAll(listaAdmCargoSelecionado);
-		this.dualListAdmCargo = new DualListModel<AdmCargo>(this.listaAdmCargo, listaAdmCargoSelecionado);
-	}
-		
-	/**
-	 * Carregar adm funcionalidades.
-	 */
-	private void carregarAdmFuncionalidades() {
-		List<AdmFuncionalidade> listaAdmFuncionalidadeSelecionado = this.getBean().getId() == null ? new ArrayList<AdmFuncionalidade>()
-				: this.getBusinessController().getRepositorio().findFuncionalidadesPorPerfil(this.getBean());
-		this.listaAdmFuncionalidade = admFuncionalidadeBC.findAll();
-		this.listaAdmFuncionalidade.removeAll(listaAdmFuncionalidadeSelecionado);
-		this.dualListAdmFuncionalidade = new DualListModel<AdmFuncionalidade>(this.listaAdmFuncionalidade, listaAdmFuncionalidadeSelecionado);
+	private void carregarAdmUsuarios() {
+		List<AdmUsuario> listaAdmUsuarioSelecionado = this.getBean().getId() == null ? new ArrayList<AdmUsuario>()
+				: this.getBusinessController().findUsuariosPorPerfil(this.getBean());
+		this.listaAdmUsuario = admUsuarioBC.findAll();
+		this.listaAdmUsuario.removeAll(listaAdmUsuarioSelecionado);
+		this.dualListAdmUsuario = new DualListModel<AdmUsuario>(this.listaAdmUsuario, listaAdmUsuarioSelecionado);
 	}
 	
 	/* (non-Javadoc)
@@ -156,14 +110,8 @@ public class AdmPerfilMB extends
 		this.listaAdmPagina = admPaginaBC.findAll();
 	    this.dualListAdmPagina = new DualListModel<AdmPagina>(this.listaAdmPagina, new ArrayList<AdmPagina>());
 
-		this.listaAdmFuncionalidade = admFuncionalidadeBC.findAll();
-	    this.dualListAdmFuncionalidade = new DualListModel<AdmFuncionalidade>(this.listaAdmFuncionalidade, new ArrayList<AdmFuncionalidade>());
-
-		this.listaAdmFuncionario = admFuncionarioBC.findAll();
-	    this.dualListAdmFuncionario = new DualListModel<AdmFuncionario>(this.listaAdmFuncionario, new ArrayList<AdmFuncionario>());
-	    
-		this.listaAdmCargo = admCargoBC.findAll();
-		this.dualListAdmCargo = new DualListModel<AdmCargo>(this.listaAdmCargo, new ArrayList<AdmCargo>());
+		this.listaAdmUsuario = admUsuarioBC.findAll();
+	    this.dualListAdmUsuario = new DualListModel<AdmUsuario>(this.listaAdmUsuario, new ArrayList<AdmUsuario>());
 
 		return super.onIncluir(new AdmPerfil());
 	}
@@ -176,9 +124,7 @@ public class AdmPerfilMB extends
 		String retorno = super.onEditar(entidade);
 		if (entidade != null) {
 			carregarAdmPaginas();
-			carregarAdmFuncionalidades();
-			carregarAdmFuncionarios();
-			carregarAdmCargos();			
+			carregarAdmUsuarios();
 		}
 		return retorno;
 	}
@@ -189,9 +135,7 @@ public class AdmPerfilMB extends
 	@Override
 	public String salvar() {	
 		getBean().setAdmPaginas(this.dualListAdmPagina.getTarget());
-		getBean().setAdmFuncionalidades(this.dualListAdmFuncionalidade.getTarget());
-		getBean().setAdmFuncionarios(this.dualListAdmFuncionario.getTarget());		
-		getBean().setAdmCargos(this.dualListAdmCargo.getTarget());		
+		getBean().setAdmUsuarios(this.dualListAdmUsuario.getTarget());			
 		return super.salvar(getBean().getId(), getBean().getDescricao());
 	}
 
@@ -244,60 +188,22 @@ public class AdmPerfilMB extends
 	}
 
 	/**
-	 * Pega o the dual list adm cargo.
+	 * Gets the dual list adm usuario.
 	 *
-	 * @return o the dual list adm cargo
+	 * @return the dual list adm usuario
 	 */
-	public DualListModel<AdmCargo> getDualListAdmCargo() {
-		return dualListAdmCargo;
-	}
-
-	/**
-	 * Atribui o the dual list adm cargo.
-	 *
-	 * @param dualListAdmCargo
-	 *            o novo the dual list adm cargo
-	 */
-	public void setDualListAdmCargo(DualListModel<AdmCargo> dualListAdmCargo) {
-		this.dualListAdmCargo = dualListAdmCargo;
-	}
-
-	/**
-	 * Gets the dual list adm funcionario.
-	 *
-	 * @return the dual list adm funcionario
-	 */
-	public DualListModel<AdmFuncionario> getDualListAdmFuncionario() {
-		return dualListAdmFuncionario;
+	public DualListModel<AdmUsuario> getDualListAdmUsuario() {
+		return dualListAdmUsuario;
 	}
 		
 	/**
-	 * Sets the dual list adm funcionario.
+	 * Sets the dual list adm usuario.
 	 *
-	 * @param dualListAdmFuncionario
-	 *            the new dual list adm funcionario
+	 * @param dualListAdmUsuario
+	 *            the new dual list adm usuario
 	 */
-	public void setDualListAdmFuncionario(DualListModel<AdmFuncionario> dualListAdmFuncionario) {
-		this.dualListAdmFuncionario = dualListAdmFuncionario;
-	}
-		
-	/**
-	 * Gets the dual list adm funcionalidade.
-	 *
-	 * @return the dual list adm funcionalidade
-	 */
-	public DualListModel<AdmFuncionalidade> getDualListAdmFuncionalidade() {
-		return dualListAdmFuncionalidade;
-	}
-		
-	/**
-	 * Sets the dual list adm funcionalidade.
-	 *
-	 * @param dualListAdmFuncionalidade
-	 *            the new dual list adm funcionalidade
-	 */
-	public void setDualListAdmFuncionalidade(DualListModel<AdmFuncionalidade> dualListAdmFuncionalidade) {
-		this.dualListAdmFuncionalidade = dualListAdmFuncionalidade;
+	public void setDualListAdmUsuario(DualListModel<AdmUsuario> dualListAdmUsuario) {
+		this.dualListAdmUsuario = dualListAdmUsuario;
 	}
 	
 	/**

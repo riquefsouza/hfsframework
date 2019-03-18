@@ -6,7 +6,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui" template="/layout/layout.xhtml">
 
-	<ui:define name="tituloPagina"> - Visualizar os Usuários</ui:define>
+	<ui:define name="tituloPagina"> - Administrar Usuário</ui:define>
 	
 	<ui:define name="conteudo-maior">
 		<h:form id="listarAdmUsuario">
@@ -14,7 +14,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading" 
 						style="font-weight: bold;font-size: large;">
-						Visualizar os Usuários
+						Administrar Usuário
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -41,13 +41,41 @@
 				
 					<p:spacer width="10" height="10" />
 				
+					<p:commandButton value="Incluir" ajax="false" icon="ui-icon-circle-plus"
+						action="#{admUsuarioMB.onIncluir()}" id="btnIncluir"
+						styleClass="btn btn-success disableSubmit"
+						title="Incluir uma nova admParametroCategoria" />
+
+					<p:commandButton id="btnEditar" value="Editar" ajax="false" icon="ui-icon-circle-triangle-n"
+						styleClass="btn btn-warning disableSubmit"
+						action="#{admUsuarioMB.onEditar(admUsuarioMB.bean)}"
+						title="Editar admParametroCategoria">
+					</p:commandButton>
+
+					<p:commandButton id="btnExcluir" value="Excluir" icon="ui-icon-circle-minus"
+						styleClass="btn btn-danger disableSubmit"
+						action="#{admUsuarioMB.prepararParaExcluir(admUsuarioMB.bean)}"
+						title="Excluir admParametroCategoria" update="@form">
+					</p:commandButton>
+									
 					<p:commandButton value="Voltar" immediate="true" ajax="false" 
 						icon="ui-icon-circle-arrow-w"
 						action="#{admUsuarioMB.cancelar()}" id="btnVoltar"
 						styleClass="btn btn-primary disableSubmit" title="Voltar" />
 				</div>
 
-
+				<p:confirmDialog message="#{messages['texto_confirmacao_exclusao']}"
+					header="#{messages['titulo_confirmacao']}" severity="alert"
+					widgetVar="confirmation">
+					<p:commandButton value="Sim" update="@form"
+						oncomplete="PF('confirmation').hide()"
+						styleClass="btn btn-success disableSubmit"
+						action="#{admUsuarioMB.excluir(admUsuarioMB.bean)}" />
+					<p:spacer width="10" height="10" />
+					<p:commandButton value="Não" onclick="PF('confirmation').hide()"
+						styleClass="btn btn-danger disableSubmit" type="button" />
+				</p:confirmDialog>
+				
 				<p:dataTable var="item" rowKey="#{item.id}" id="table" reflow="true"
 					selection="#{admUsuarioMB.bean}" selectionMode="single"
 					value="#{admUsuarioMB.listaBean}" 
@@ -71,14 +99,6 @@
 						</h:commandLink>	
 					</f:facet>
 
-					<p:column headerText="Matrícula" sortBy="#{item.id.matricula}"
-						filterBy="#{item.id.matricula}" width="100">
-						<h:outputText value="#{item.id.matricula}" />
-					</p:column>
-					<p:column headerText="IP" sortBy="#{item.id.ip}"
-						filterBy="#{item.id.ip}" width="150">
-						<h:outputText value="#{item.id.ip}" />
-					</p:column>
 					<p:column headerText="Login" sortBy="#{item.login}"
 						filterBy="#{item.login}" width="150">
 						<h:outputText value="#{item.login}" />
@@ -86,13 +106,7 @@
 					<p:column headerText="Nome" sortBy="#{item.nome}"
 						filterBy="#{item.nome}" >
 						<h:outputText value="#{item.nome}" />
-					</p:column>
-					<p:column headerText="Data" sortBy="#{item.data}"
-						filterBy="#{item.data}" width="200">
-						<h:outputText value="#{item.data}">
-						 	<f:convertDateTime pattern="#{dataUtil.dataHoraPadrao}" locale="pt" />
-						</h:outputText>
-					</p:column>					
+					</p:column>			
 					<p:column headerText="CPF" sortBy="#{item.cpfFormatado}"
 						filterBy="#{item.cpfFormatado}" width="150">
 						<h:outputText value="#{item.cpfFormatado}" />
@@ -100,10 +114,6 @@
 					<p:column headerText="E-mail" sortBy="#{item.email}"
 						filterBy="#{item.email}">
 						<h:outputText value="#{item.email}" />
-					</p:column>
-					<p:column headerText="lDAP DN" sortBy="#{item.ldapDN}"
-						filterBy="#{item.ldapDN}" width="650">
-						<h:outputText value="#{item.ldapDN}" />
 					</p:column>
 				</p:dataTable>
 			</fieldset>

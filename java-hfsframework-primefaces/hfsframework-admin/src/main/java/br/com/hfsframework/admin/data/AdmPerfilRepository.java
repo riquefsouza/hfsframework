@@ -12,7 +12,6 @@ import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
 
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
@@ -56,16 +55,6 @@ public interface AdmPerfilRepository extends EntityRepository<AdmPerfil, Long> {
 	Long countAntigo(String antigo, String novo);
 	
 	/**
-	 * Find cargos por perfil.
-	 *
-	 * @param perfil
-	 *            the perfil
-	 * @return the list
-	 */
-	@Query(named = "AdmPerfil.findCargosPorPerfil")
-	List<Long> findCargosPorPerfil(AdmPerfil perfil);
-
-	/**
 	 * Find paginas por perfil.
 	 *
 	 * @param perfil
@@ -76,34 +65,24 @@ public interface AdmPerfilRepository extends EntityRepository<AdmPerfil, Long> {
 	List<AdmPagina> findPaginasPorPerfil(AdmPerfil perfil);
 
 	/**
-	 * Find funcionarios por perfil.
+	 * Find usuarios por perfil.
 	 *
 	 * @param perfil
 	 *            the perfil
 	 * @return the list
 	 */
-	@Query(named = "AdmPerfil.findFuncionariosPorPerfil")
-	List<Long> findFuncionariosPorPerfil(AdmPerfil perfil);
+	@Query(named = "AdmPerfil.findUsuariosPorPerfil")
+	List<Long> findUsuariosPorPerfil(AdmPerfil perfil);
 
 	/**
-	 * Find funcionalidades por perfil.
+	 * Find perfis por usuario.
 	 *
-	 * @param perfil
-	 *            the perfil
+	 * @param idUsuario
+	 *            the id usuario
 	 * @return the list
 	 */
-	@Query(named = "AdmPerfil.findFuncionalidadesPorPerfil")
-	List<AdmFuncionalidade> findFuncionalidadesPorPerfil(AdmPerfil perfil);
-	
-	/**
-	 * Find perfis por funcionario.
-	 *
-	 * @param idFuncionario
-	 *            the id funcionario
-	 * @return the list
-	 */
-	@Query(named = "AdmPerfil.findPerfisPorFuncionario")	
-	List<AdmPerfil> findPerfisPorFuncionario(Long idFuncionario);
+	@Query(named = "AdmPerfil.findPerfisPorUsuario")	
+	List<AdmPerfil> findPerfisPorUsuario(Long idUsuario);
 	
 	/**
 	 * Find admin menu pai by perfil.

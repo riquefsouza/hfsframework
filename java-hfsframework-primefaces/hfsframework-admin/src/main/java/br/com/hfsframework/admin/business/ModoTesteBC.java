@@ -15,8 +15,6 @@ import javax.inject.Inject;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import br.com.hfsframework.admin.model.AdmCargo;
-import br.com.hfsframework.admin.model.AdmSetor;
 import br.com.hfsframework.admin.model.ModoTesteVO;
 import br.com.hfsframework.security.model.UsuarioAutenticadoVO;
 import br.com.hfsframework.util.JSONListConverter;
@@ -33,14 +31,6 @@ public class ModoTesteBC implements Serializable {
 	/** The adm parametro BC. */
 	@Inject
 	private AdmParametroBC admParametroBC;
-	
-	/** The vw adm cargo BC. */
-	@Inject
-	private AdmCargoBC admCargoBC;
-
-	/** The vw adm setor BC. */
-	@Inject
-	private AdmSetorBC admSetorBC;
 	
 	/** The conv. */
 	@Inject
@@ -95,17 +85,7 @@ public class ModoTesteBC implements Serializable {
 		
 		if (mtvo.isPresent()){
 			usuario.setModoTeste(true);
-			
-			AdmSetor setor = admSetorBC.load(mtvo.get().getSetor());
-			if (setor!=null){
-				usuario.getFuncionario().setSetor(setor.getId());	
-			}
-			
-			AdmCargo cargo = admCargoBC.load(mtvo.get().getCargo());
-			if (cargo!=null){
-				usuario.getFuncionario().setCodCargoPrincipal(cargo.getId());
-				usuario.getFuncionario().setCargoPrincipal(cargo.toCargoVO());
-			}			
+		
 		}
 		
 		return usuario;

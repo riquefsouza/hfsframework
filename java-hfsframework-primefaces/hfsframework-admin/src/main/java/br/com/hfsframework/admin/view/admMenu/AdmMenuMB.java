@@ -23,9 +23,9 @@ import org.primefaces.model.TreeNode;
 import com.lowagie.text.BadElementException;
 import com.lowagie.text.DocumentException;
 
-import br.com.hfsframework.admin.business.AdmFuncionalidadeBC;
+import br.com.hfsframework.admin.business.AdmPaginaBC;
 import br.com.hfsframework.admin.business.AdmMenuBC;
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
+import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmMenu;
 import br.com.hfsframework.base.BaseViewConsulta;
 import br.com.hfsframework.base.IBaseViewConsulta;
@@ -45,9 +45,9 @@ public class AdmMenuMB
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The adm funcionalidade BC. */
+	/** The adm pagina BC. */
 	@Inject
-	private AdmFuncionalidadeBC admFuncionalidadeBC;
+	private AdmPaginaBC admPaginaBC;
 
 	/** The menu root. */
 	private TreeNode menuRoot;
@@ -58,22 +58,11 @@ public class AdmMenuMB
 	/** The novo item menu. */
 	private AdmMenu novoItemMenu;
 	
-	/** The lista adm funcionalidade. */
-	private List<AdmFuncionalidade> listaAdmFuncionalidade;
+	/** The lista adm pagina. */
+	private List<AdmPagina> listaAdmPagina;
 
 	/** The lista menus pai. */
 	private List<AdmMenu> listaMenusPai;
-	
-	/* The vw adm funcionario BC. *
-	@Inject
-	private AdmFuncionarioBC vwAdmFuncionarioBC;
-
-	** The dual list vw adm funcionario. *
-	private DualListModel<AdmFuncionarioDTO> dualListVwAdmFuncionario;
-
-	** The lista vw adm funcionario. *
-	private List<AdmFuncionarioDTO> listaVwAdmFuncionario;
-	*/
 	
 	/**
 	 * Instantiates a new adm menu MB.
@@ -92,22 +81,10 @@ public class AdmMenuMB
 		//atualizaListaDataTable();
 
 		atualizarArvoreMenus();
-		initListaFuncionalidade();
+		initListaPagina();
 		initListaMenusPai();
 		this.novoItemMenu = new AdmMenu();
 	}
-
-	/*
-	  Carregar vw adm funcionarios.
-	 
-	private void carregarVwAdmFuncionarios() {
-		List<AdmFuncionarioDTO> listaVwAdmFuncionarioSelecionado = this.getBean().getId() == null ? new ArrayList<AdmFuncionarioDTO>()
-				: this.getBusinessController().getRepositorio().findFuncionariosPorMenu(this.getBean());
-		this.listaVwAdmFuncionario = vwAdmFuncionarioBC.findAll();
-		this.listaVwAdmFuncionario.removeAll(listaVwAdmFuncionarioSelecionado);
-		this.dualListVwAdmFuncionario = new DualListModel<AdmFuncionarioDTO>(this.listaVwAdmFuncionario, listaVwAdmFuncionarioSelecionado);
-	}
-	*/
 	
 	/*
 	 * (non-Javadoc)
@@ -239,22 +216,22 @@ public class AdmMenuMB
 	}
 
 	/**
-	 * Pega o the lista adm funcionalidade.
+	 * Pega o the lista adm pagina.
 	 *
-	 * @return o the lista adm funcionalidade
+	 * @return o the lista adm pagina
 	 */
-	public List<AdmFuncionalidade> getListaAdmFuncionalidade() {
-		return listaAdmFuncionalidade;
+	public List<AdmPagina> getListaAdmPagina() {
+		return listaAdmPagina;
 	}
 
 	/**
-	 * Atribui o the lista adm funcionalidade.
+	 * Atribui o the lista adm pagina.
 	 *
-	 * @param listaAdmFuncionalidade
-	 *            o novo the lista adm funcionalidade
+	 * @param listaAdmPagina
+	 *            o novo the lista adm pagina
 	 */
-	public void setListaAdmFuncionalidade(List<AdmFuncionalidade> listaAdmFuncionalidade) {
-		this.listaAdmFuncionalidade = listaAdmFuncionalidade;
+	public void setListaAdmPagina(List<AdmPagina> listaAdmPagina) {
+		this.listaAdmPagina = listaAdmPagina;
 	}
 
 	/**
@@ -283,17 +260,17 @@ public class AdmMenuMB
 		this.listaMenusPai = new ArrayList<AdmMenu>();
 		List<AdmMenu> registrosCadastrados = this.getBusinessController().findAll();
 		for (AdmMenu menu : registrosCadastrados) {
-			if ((menu.getAdmSubMenus() != null) && (menu.getAdmFuncionalidade() == null)) {
+			if ((menu.getAdmSubMenus() != null) && (menu.getAdmPagina() == null)) {
 				this.listaMenusPai.add(menu);
 			}
 		}
 	}
 
 	/**
-	 * Inicia o lista funcionalidade.
+	 * Inicia o lista pagina.
 	 */
-	private void initListaFuncionalidade() {
-		this.listaAdmFuncionalidade = admFuncionalidadeBC.findAll();
+	private void initListaPagina() {
+		this.listaAdmPagina = admPaginaBC.findAll();
 	}
 
 	/**
@@ -339,8 +316,8 @@ public class AdmMenuMB
 	 * Sugerir nome item menu.
 	 */
 	public void sugerirNomeItemMenu() {
-		if ((getNovoItemMenu().getAdmFuncionalidade() != null) && (getNovoItemMenu().getDescricao() == null)) {
-			getNovoItemMenu().setDescricao(getNovoItemMenu().getAdmFuncionalidade().getDescricao());
+		if ((getNovoItemMenu().getAdmPagina() != null) && (getNovoItemMenu().getDescricao() == null)) {
+			getNovoItemMenu().setDescricao(getNovoItemMenu().getAdmPagina().getDescricao());
 		}
 	}
 
@@ -388,7 +365,7 @@ public class AdmMenuMB
 	 * @return the nome recursivo
 	 */
 	public static String getNomeRecursivo(AdmMenu m) {
-		return m.getAdmFuncionalidade() == null ? m.getDescricao()
+		return m.getAdmPagina() == null ? m.getDescricao()
 				: m.getAdmMenuPai() != null ? getNomeRecursivo(m.getAdmMenuPai()) + " -> " + m.getDescricao() : "";
 	}
 
@@ -461,10 +438,10 @@ public class AdmMenuMB
 					ordem = 1;
 				
 				this.novoItemMenu.setOrdem(ordem);
-				if (this.novoItemMenu.getAdmFuncionalidade()!=null){
-					this.novoItemMenu.setIdFuncionalidade(this.novoItemMenu.getAdmFuncionalidade().getId());
+				if (this.novoItemMenu.getAdmPagina()!=null){
+					this.novoItemMenu.setIdPagina(this.novoItemMenu.getAdmPagina().getId());
 				} else {
-					this.novoItemMenu.setIdFuncionalidade(null);
+					this.novoItemMenu.setIdPagina(null);
 				}
 				this.getBusinessController().salvarOuAtualizar(this.novoItemMenu);
 				this.novoItemMenu = new AdmMenu();

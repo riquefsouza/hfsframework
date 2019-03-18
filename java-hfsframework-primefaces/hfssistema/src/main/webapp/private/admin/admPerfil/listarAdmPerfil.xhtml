@@ -78,7 +78,8 @@
 
 				<p:dataTable var="item" rowKey="#{item.id}" id="table" reflow="true"
 					selection="#{admPerfilMB.bean}" selectionMode="single"
-					value="#{admPerfilMB.listaBean}" rows="#{aplicacaoConfig.dtLinhas}" rowsPerPageTemplate="#{aplicacaoConfig.dtModeloLinhasPorPagina}"
+					value="#{admPerfilMB.listaBean}" rows="#{aplicacaoConfig.dtLinhas}" 
+					rowsPerPageTemplate="#{aplicacaoConfig.dtModeloLinhasPorPagina}"
 					paginator="true" paginatorPosition="#{aplicacaoConfig.dtPosicaoPaginador}"					
 					paginatorTemplate="#{aplicacaoConfig.dtModeloPaginador}"
  					currentPageReportTemplate="#{aplicacaoConfig.dtModeloRelatorioPagina}"					
@@ -99,12 +100,13 @@
 					</f:facet>
 
 					<p:column headerText="Descrição" sortBy="#{item.descricao}"
+						style="width:25%"
 						filterBy="#{item.descricao}" filterMatchMode="contains">
 						<h:outputText value="#{item.descricao}" />
 					</p:column>
-					<p:column headerText="Funcionários" sortBy="#{item.admFuncionarios}"
-						filterBy="#{item.admFuncionarios}" filterMatchMode="contains">
-						<h:outputText value="#{item.admFuncionarios}" />
+					<p:column headerText="Usuários" sortBy="#{item.admUsuarios}"
+						filterBy="#{item.admUsuarios}" filterMatchMode="contains">
+						<h:outputText value="#{item.admUsuarios}" />
 					</p:column>
 				</p:dataTable>
 			</fieldset>

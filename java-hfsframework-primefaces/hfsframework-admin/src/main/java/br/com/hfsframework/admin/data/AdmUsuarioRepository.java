@@ -7,7 +7,6 @@
 package br.com.hfsframework.admin.data;
 
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.deltaspike.data.api.EntityRepository;
@@ -16,15 +15,17 @@ import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
 
 import br.com.hfsframework.admin.model.AdmUsuario;
-import br.com.hfsframework.admin.model.AdmUsuarioPK;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface AdmUsuarioRepository.
  */
 @Repository(forEntity = AdmUsuario.class)
-public interface AdmUsuarioRepository extends EntityRepository<AdmUsuario, AdmUsuarioPK> {
+public interface AdmUsuarioRepository extends EntityRepository<AdmUsuario, Long> {
 
+	@Query(named = "AdmUsuario.findByLogin")
+	AdmUsuario findByLogin(String login);
+	
 	/**
 	 * Login.
 	 *
@@ -39,19 +40,16 @@ public interface AdmUsuarioRepository extends EntityRepository<AdmUsuario, AdmUs
 	 * Update by login.
 	 *
 	 * @param cpf the cpf
-	 * @param data the data
 	 * @param email the email
 	 * @param ldapDN the ldap DN
 	 * @param nome the nome
-	 * @param matricula the matricula
-	 * @param ip the ip
+	 * @param id the id
 	 * @param login the login
 	 * @return the int
 	 */
 	@Modifying
-	@Query("UPDATE AdmUsuario as u SET u.cpf=?1, u.data=?2, u.email=?3, u.ldapDN=?4, u.nome=?5 WHERE u.id.matricula=?6 AND u.id.ip=?7 AND u.login = ?8")
-	int updateByLogin(BigDecimal cpf, Date data, String email, String ldapDN, String nome, 
-			Long matricula, String ip, String login);
+	@Query("UPDATE AdmUsuario as u SET u.cpf=?1, u.email=?2, u.ldapDN=?3, u.nome=?4 WHERE u.id=?5 AND u.login = ?6")
+	int updateByLogin(BigDecimal cpf, String email, String ldapDN, String nome,	Long id, String login);
 
 	/**
 	 * Update senha.

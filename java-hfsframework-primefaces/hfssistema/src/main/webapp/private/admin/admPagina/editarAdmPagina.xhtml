@@ -45,14 +45,14 @@
 						</div>
 						<div class="row">
 							<div class="col-md-8 form-group">
-								<p:outputLabel for="classePagina" value="Classe da Página" />
-								<p:inputText id="classePagina" label="Classe da Página" required="true"
-									value="#{admPaginaMB.bean.managedBean}" maxlength="255">
+								<p:outputLabel for="descricao" value="Descrição:" />
+								<p:inputText id="descricao" label="Descrição" required="true"
+									value="#{admPaginaMB.bean.descricao}" maxlength="255">
 								</p:inputText>
 							</div>
-						</div>
+						</div>						
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-md-4">
 								<p:outputLabel for="pickListPerfil" value="Perfil(s) da Página:" />
 								<p:pickList id="pickListPerfil"
 									value="#{admPaginaMB.dualListAdmPerfil}"
@@ -62,18 +62,6 @@
 									filterMatchMode="contains" styleClass="picklistMaior">
 									<f:facet name="sourceCaption">Disponíveis</f:facet>
 									<f:facet name="targetCaption">Autorizados</f:facet>
-								</p:pickList>
-							</div>
-							<div class="col-md-5">
-								<p:outputLabel for="pickListFuncionalidade" value="Funcionalidade(s) da Página:" />
-								<p:pickList id="pickListFuncionalidade"
-									value="#{admPaginaMB.dualListAdmFuncionalidade}"
-									converter="admFuncionalidadeConverter" var="item"
-									itemLabel="#{item.descricao}" itemValue="#{item}"
-									showSourceFilter="true" showTargetFilter="true"
-									filterMatchMode="contains" styleClass="picklistMaior">
-									<f:facet name="sourceCaption">Disponíveis</f:facet>
-									<f:facet name="targetCaption">Autorizadas</f:facet>
 								</p:pickList>
 							</div>
 						</div>

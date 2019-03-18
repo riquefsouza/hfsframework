@@ -14,19 +14,11 @@
 					<h:outputText value="IP:" />
 					<h:outputText value="#{sistemaMB.usuarioAutenticado.usuario.ip}" />
 				
-					<h:outputText value="Matrícula:" />
-					<h:outputText value="#{sistemaMB.usuarioAutenticado.usuario.matricula}" />
-
 					<h:outputText value="Login:" />
 					<h:outputText value="#{sistemaMB.usuarioAutenticado.usuario.login}" />
 
 					<h:outputText value="CPF:" />
 					<h:outputText value="#{sistemaMB.usuarioAutenticado.usuario.cpfFormatado}" />
-
-					<h:outputText value="Data Primeiro Login:" />						
-					<h:outputText value="#{sistemaMB.usuarioAutenticado.usuario.data}">
-					 	<f:convertDateTime pattern="#{dataUtil.dataPadrao}" locale="pt" />
-					</h:outputText>
 					
 					<h:outputText value="E-mail:" />
 					<h:outputText value="#{sistemaMB.usuarioAutenticado.usuario.email}" />					

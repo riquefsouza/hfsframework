@@ -44,7 +44,7 @@
 							</div>
 							<div class="col-md-3 form-group">
 								<div class="row">
-									<p:outputLabel for="geral" value="Todos os Funcionários: " />
+									<p:outputLabel for="geral" value="Todos os Usuários: " />
 									<p:selectBooleanCheckbox id="geral"
 										value="#{admPerfilMB.bean.geral}" />
 								</div>
@@ -57,7 +57,24 @@
 						</div>					
 						
 						<div class="row">
-							<div class="col-md-5">
+							<div class="col-md-6">
+								<p:outputLabel for="pickListUsuarios" value="Usuário(s) do Perfil" />
+								<p:pickList id="pickListUsuarios"
+									value="#{admPerfilMB.dualListAdmUsuario}"
+									converter="admUsuarioConverter" var="item"
+									itemLabel="#{item.nome}" itemValue="#{item}"
+									showSourceFilter="true" showTargetFilter="true"
+									filterMatchMode="contains" styleClass="picklistMaior">
+									<f:facet name="sourceCaption">Disponíveis</f:facet>
+									<f:facet name="targetCaption">Associados ao Perfil</f:facet>
+								</p:pickList>
+							</div>									
+						</div>	
+						
+						<p:spacer width="10" height="10" />
+							
+						<div class="row">
+							<div class="col-md-6">
 								<p:outputLabel for="pickListPagina" value="Página(s) do Perfil:" />
 								<p:pickList id="pickListPagina"
 									value="#{admPerfilMB.dualListAdmPagina}"
@@ -68,50 +85,9 @@
 									<f:facet name="sourceCaption">Disponíveis</f:facet>
 									<f:facet name="targetCaption">Autorizadas</f:facet>
 								</p:pickList>
-							</div>
-							<div class="col-md-5">
-								<p:outputLabel for="pickListFuncionalidade" value="Funcionalidade(s) do Perfil:" />
-								<p:pickList id="pickListFuncionalidade"
-									value="#{admPerfilMB.dualListAdmFuncionalidade}"
-									converter="admFuncionalidadeConverter" var="item"
-									itemLabel="#{item.descricao}" itemValue="#{item}"
-									showSourceFilter="true" showTargetFilter="true"
-									filterMatchMode="contains" styleClass="picklistMaior">
-									<f:facet name="sourceCaption">Disponíveis</f:facet>
-									<f:facet name="targetCaption">Autorizadas</f:facet>
-								</p:pickList>
-							</div>							
+							</div>					
 						</div>
-						
-						<p:spacer width="10" height="10" />
-						
-						<div class="row">
-							<div class="col-md-5 form-group">
-								<p:outputLabel for="pickListFuncionarios" value="Funcionário(s) do Perfil" />
-								<p:pickList id="pickListFuncionarios"
-									value="#{admPerfilMB.dualListAdmFuncionario}"
-									converter="admFuncionarioConverter" var="item"
-									itemLabel="#{item.nome}" itemValue="#{item}"
-									showSourceFilter="true" showTargetFilter="true"
-									filterMatchMode="contains" styleClass="picklistMaior">
-									<f:facet name="sourceCaption">Disponíveis</f:facet>
-									<f:facet name="targetCaption">Associados ao Perfil</f:facet>
-								</p:pickList>
-							</div>	
-							<div class="col-md-5 form-group">
-								<p:outputLabel for="pickListCargos" value="Cargo(s) do(s) Funcionário(s) do Perfil" />
-								<p:pickList id="pickListCargos"
-									value="#{admPerfilMB.dualListAdmCargo}"
-									converter="admCargoConverter" var="item"
-									itemLabel="#{item.nomeCargo}" itemValue="#{item}"
-									showSourceFilter="true" showTargetFilter="true"
-									filterMatchMode="contains" styleClass="picklistMaior">
-									<f:facet name="sourceCaption">Disponíveis</f:facet>
-									<f:facet name="targetCaption">Associados ao Perfil</f:facet>
-								</p:pickList>
-							</div>								
-						</div>	
-												
+																		
 					</div>
 				</div>
 					

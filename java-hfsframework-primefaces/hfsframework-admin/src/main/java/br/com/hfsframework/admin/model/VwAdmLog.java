@@ -14,8 +14,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedNativeQueries;
-import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -37,13 +35,6 @@ import javax.persistence.Transient;
 			+ "AND (v.dataNumero <= ?7 OR ?7 IS NULL) "
 			+ "ORDER BY v.id DESC")	
 })
-@NamedNativeQueries({ 
-	@NamedNativeQuery(name = "VwAdmLog.isContemChave", query = "select count(1) from ?1 where id = ?2 and ?3 = ?4"), // and rownum = 1")
-	@NamedNativeQuery(name = "VwAdmLog.detalhar", query = "select DISTINCT * from ?1 where id = ?2"),
-	@NamedNativeQuery(name = "VwAdmLog.primaryKeys", query = "SELECT DISTINCT column_name "
-			+ "FROM user_cons_columns "
-			+ "WHERE constraint_name=(SELECT CONSTRAINT_NAME FROM USER_CONSTRAINTS WHERE LOWER(TABLE_NAME) = LOWER(?1) AND CONSTRAINT_TYPE='P')"),
-}) 
 public class VwAdmLog implements Serializable {
 
 	/** The Constant serialVersionUID. */

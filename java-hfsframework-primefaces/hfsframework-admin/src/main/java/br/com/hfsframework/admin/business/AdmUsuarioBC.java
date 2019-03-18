@@ -11,7 +11,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -24,7 +23,8 @@ import org.omnifaces.util.Faces;
 
 import br.com.hfsframework.admin.data.AdmUsuarioRepository;
 import br.com.hfsframework.admin.model.AdmUsuario;
-import br.com.hfsframework.admin.model.AdmUsuarioPK;
+import br.com.hfsframework.admin.model.AdmUsuarioIp;
+import br.com.hfsframework.admin.model.AdmUsuarioIpPK;
 import br.com.hfsframework.base.BaseBusinessController;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
@@ -32,7 +32,7 @@ import br.com.hfsframework.util.exceptions.TransacaoException;
 /**
  * The Class AdmUsuarioBC.
  */
-public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, AdmUsuarioPK, AdmUsuarioRepository> {
+public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, Long, AdmUsuarioRepository> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -40,7 +40,14 @@ public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, AdmUsuarioP
 	/** The em. */
 	@Inject
 	private EntityManager em;
+	
+	@Inject
+	private AdmUsuarioIpBC admUsuarioIpBC;
 
+	public AdmUsuario findByLogin(String login){
+		return repositorio.findByLogin(login);
+	}
+	
 	/**
 	 * Login.
 	 *
@@ -61,10 +68,8 @@ public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, AdmUsuarioP
 	/**
 	 * Update by login.
 	 *
-	 * @param matricula the matricula
-	 * @param ip the ip
+	 * @param id the id
 	 * @param cpf the cpf
-	 * @param data the data
 	 * @param email the email
 	 * @param ldapDN the ldap DN
 	 * @param nome the nome
@@ -73,10 +78,10 @@ public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, AdmUsuarioP
 	 * @throws TransacaoException the transacao exception
 	 */
 	@Transactional
-	public int updateByLogin(BigDecimal cpf, Date data, String email, String ldapDN, String nome, 
-			Long matricula, String ip, String login) throws TransacaoException {
+	public int updateByLogin(BigDecimal cpf, String email, String ldapDN, String nome, 
+			Long id, String login) throws TransacaoException {
 		try {
-			return repositorio.updateByLogin(cpf, data, email, ldapDN, nome, matricula, ip, login);
+			return repositorio.updateByLogin(cpf, email, ldapDN, nome, id, login);
 		} catch (Exception e) {
 			throw new TransacaoException(log, ERRO_UPDATE + e.getMessage(), e);
 		}
@@ -249,8 +254,8 @@ public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, AdmUsuarioP
 	/**
 	 * Gets the usuario.
 	 *
-	 * @param matricula
-	 *            the matricula
+	 * @param id
+	 *            the id
 	 * @param login
 	 *            the login
 	 * @param nome
@@ -266,37 +271,52 @@ public class AdmUsuarioBC extends BaseBusinessController<AdmUsuario, AdmUsuarioP
 	 *             the transacao exception
 	 */
 	@Transactional
-	public AdmUsuario getUsuario(Long matricula, String login, String nome, 
+	public AdmUsuario getUsuario(Long id, String login, String nome, 
 			BigDecimal cpf, String email, String ldapDN) throws TransacaoException {
-		AdmUsuarioPK admUsuarioPK = new AdmUsuarioPK();
-		admUsuarioPK.setIp(Faces.getRemoteAddr());
-		admUsuarioPK.setMatricula(matricula);
+		AdmUsuarioIpPK admUsuarioIpPK = new AdmUsuarioIpPK();
+		admUsuarioIpPK.setIp(Faces.getRemoteAddr());
+		admUsuarioIpPK.setUsuarioSeq(id);
 
-		AdmUsuario usuario = this.load(admUsuarioPK);
-		if (usuario == null) {
-			usuario = new AdmUsuario();
-			usuario.setId(admUsuarioPK);
+		AdmUsuario admUsuario = this.load(id);
+		if (admUsuario == null) {
+			AdmUsuario usuario = new AdmUsuario();
+			usuario.setId(id);
 			usuario.setLogin(login);
 			usuario.setNome(nome);
-			usuario.setData(new Date());
 			usuario.setCpf(cpf);
 			usuario.setEmail(email);
 			usuario.setLdapDN(ldapDN);
-			this.insert(usuario);
-		} else {
-			this.updateByLogin(cpf, new Date(), email, ldapDN, nome, 
-					matricula, admUsuarioPK.getIp(), login);
+			//this.insert(usuario);
+		} 
+		/*
+		else {
+			this.updateByLogin(cpf, email, ldapDN, nome, id, login);
 		}
+		*/
 
+		admUsuario.setIp(admUsuarioIpPK.getIp());
+		
+		admUsuarioIpBC.updateAtivoByIdUsuario(false, id);
+		
+		AdmUsuarioIp admUsuarioIp = admUsuarioIpBC.load(admUsuarioIpPK);
+		if (admUsuarioIp==null) {
+			AdmUsuarioIp usuarioIp = new AdmUsuarioIp();
+			usuarioIp.setId(admUsuarioIpPK);
+			usuarioIp.setAtivo(true);
+			admUsuarioIpBC.insert(usuarioIp);
+		} else {
+			admUsuarioIpBC.updateAtivoById(true, admUsuarioIpPK);
+		}
+		
 		String banco = findBanco();
 		if (banco.equals("Oracle")) {
-			setOracleLoginAndIP(admUsuarioPK.getMatricula().toString(), admUsuarioPK.getIp());
+			setOracleLoginAndIP(admUsuarioIpPK.getUsuarioSeq().toString(), admUsuarioIpPK.getIp());
 		}
 		if (banco.equals("PostgreSQL")) {
-			setLoginPostgreSQL(admUsuarioPK.getMatricula().toString());
-			setIPPostgreSQL(admUsuarioPK.getIp());
+			setLoginPostgreSQL(admUsuarioIpPK.getUsuarioSeq().toString());
+			setIPPostgreSQL(admUsuarioIpPK.getIp());
 		}
 
-		return usuario;
+		return admUsuario;
 	}
 }

@@ -12,7 +12,6 @@ import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
 
-import br.com.hfsframework.admin.model.AdmFuncionalidade;
 import br.com.hfsframework.admin.model.AdmPagina;
 import br.com.hfsframework.admin.model.AdmPerfil;
 
@@ -63,15 +62,5 @@ public interface AdmPaginaRepository extends EntityRepository<AdmPagina, Long> {
 	 */
 	@Query(named = "AdmPagina.findPerfisPorPagina")
 	List<AdmPerfil> findPerfisPorPagina(AdmPagina pagina);
-
-	/**
-	 * Find funcionalidades por pagina.
-	 *
-	 * @param pagina
-	 *            the pagina
-	 * @return the list
-	 */
-	@Query(named = "AdmPagina.findFuncionalidadesPorPagina")
-	List<AdmFuncionalidade> findFuncionalidadesPorPagina(AdmPagina pagina);
 
 }

@@ -1,24 +1,37 @@
 /**
  * <p><b>HFS Framework</b></p>
  * @author Henrique Figueiredo de Souza
- * @version 1.0
- * @since 2017
+ * @version 1.0.2
+ * @since 2019
  */
 package br.com.hfsframework.admin.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import br.com.hfsframework.security.model.UsuarioVO;
 import br.com.hfsframework.util.CPFCNPJUtil;
@@ -29,7 +42,10 @@ import br.com.hfsframework.util.CPFCNPJUtil;
  */
 @Entity
 @Table(name = "ADM_USUARIO")
-@NamedQuery(name = "AdmUsuario.login", query = "SELECT a FROM AdmUsuario a WHERE a.login=?1 AND a.senha=?2")
+@NamedQueries({
+	@NamedQuery(name = "AdmUsuario.findByLogin", query = "SELECT DISTINCT a FROM AdmUsuario a WHERE a.login=?1"),
+	@NamedQuery(name = "AdmUsuario.login", query = "SELECT a FROM AdmUsuario a WHERE a.login=?1 AND a.senha=?2")
+})
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "AdmUsuario.findIPByOracle", query = "SELECT SYS_CONTEXT('USERENV', 'IP_ADDRESS', 15) FROM DUAL"),
 	@NamedNativeQuery(name = "AdmUsuario.findIPByPostgreSQL", query = "SELECT substr(CAST(inet_client_addr() AS VARCHAR),1,strpos(CAST(inet_client_addr() AS VARCHAR),'/')-1)"),
@@ -42,17 +58,15 @@ public class AdmUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/** The id. */
-	@EmbeddedId
-	private AdmUsuarioPK id;
+	@Id
+	@SequenceGenerator(name="ADM_USUARIO_ID_GENERATOR", sequenceName="ADM_USUARIO_SEQ", initialValue=1, allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ADM_USUARIO_ID_GENERATOR")	
+	@Column(name = "USU_SEQ")
+	private Long id;
 
 	/** The cpf. */
 	@Column(name = "USU_CPF")
 	private BigDecimal cpf;
-
-	/** The data. */
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "USU_DATA")
-	private Date data;
 
 	/** The email. */
 	@Column(name = "USU_EMAIL")
@@ -74,26 +88,96 @@ public class AdmUsuario implements Serializable {
 	@Column(name = "USU_SENHA")
 	private String senha;
 
+	/** The created date. */
+	@Column(name = "created_date", nullable = false, updatable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar createdDate;
+
+	/** The modified date. */
+	@Column(name = "modified_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Calendar modifiedDate;
+
+	/** The created by. */
+	@Column(name = "created_by")
+	private String createdBy;
+
+	/** The modified by. */
+	@Column(name = "modified_by")
+	private String modifiedBy;
+	
+	/** The adm usuarioIps. */
+	//bi-directional many-to-one association to AdmUsuarioIp
+	@OneToMany(mappedBy="admUsuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
+	private List<AdmUsuarioIp> admUsuarioIps;
+	
+	/** The ip. */
+	@Transient
+	private String ip;
+	
 	/**
 	 * Instantiates a new adm usuario.
 	 */
 	public AdmUsuario() {
 		super();
+		this.admUsuarioIps = new ArrayList<AdmUsuarioIp>();
 		limpar();
+	}
+
+	/**
+	 * Instantiates a new adm usuario.
+	 *
+	 * @param id the id
+	 * @param login the login
+	 * @param nome the nome
+	 * @param cpf the cpf
+	 * @param email the email
+	 * @param ldapDN the ldap DN
+	 * @param senha the senha
+	 */
+	public AdmUsuario(Long id, String login, String nome, BigDecimal cpf, String email, String ldapDN,
+			String senha) {
+		super();
+		this.id = id;
+		this.cpf = cpf;
+		this.email = email;
+		this.ldapDN = ldapDN;
+		this.login = login;
+		this.nome = nome;
+		this.senha = senha;
+	}
+
+	/**
+	 * Instantiates a new adm usuario.
+	 *
+	 * @param u the u
+	 */
+	public AdmUsuario(UsuarioVO u) {
+		this();
+		
+		this.id = u.getId();
+		this.cpf = u.getCpf();
+		this.email = u.getEmail();
+		this.ldapDN = u.getLdapDN();
+		this.login = u.getLogin();
+		this.nome = u.getNome();
+		this.senha = u.getSenha();
 	}
 
 	/**
 	 * Limpar.
 	 */
 	public void limpar() {
-		this.id = new AdmUsuarioPK();
+		this.id = 0L;
 		this.cpf = BigDecimal.ZERO;
-		this.data = new Date();
 		this.email = "";
 		this.ldapDN = "";
 		this.login = "";
 		this.nome = "";
 		this.senha = "";
+		this.admUsuarioIps.clear();
+		this.ip = "";		
 	}
 
 	/**
@@ -101,7 +185,7 @@ public class AdmUsuario implements Serializable {
 	 *
 	 * @return o the id
 	 */
-	public AdmUsuarioPK getId() {
+	public Long getId() {
 		return this.id;
 	}
 
@@ -111,7 +195,7 @@ public class AdmUsuario implements Serializable {
 	 * @param id
 	 *            o novo the id
 	 */
-	public void setId(AdmUsuarioPK id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -132,25 +216,6 @@ public class AdmUsuario implements Serializable {
 	 */
 	public void setCpf(BigDecimal cpf) {
 		this.cpf = cpf;
-	}
-
-	/**
-	 * Pega o the data.
-	 *
-	 * @return o the data
-	 */
-	public Date getData() {
-		return this.data;
-	}
-
-	/**
-	 * Atribui o the data.
-	 *
-	 * @param data
-	 *            o novo the data
-	 */
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	/**
@@ -248,6 +313,71 @@ public class AdmUsuario implements Serializable {
 	}
 	
 	/**
+	 * Pega o the adm usuarioIps.
+	 *
+	 * @return o the adm usuarioIps
+	 */
+	public List<AdmUsuarioIp> getAdmUsuarioIps() {
+		return this.admUsuarioIps;
+	}
+
+	/**
+	 * Atribui o the adm usuarioIps.
+	 *
+	 * @param admUsuarioIps
+	 *            o novo the adm usuarioIps
+	 */
+	public void setAdmUsuarioIps(List<AdmUsuarioIp> admUsuarioIps) {
+		this.admUsuarioIps = admUsuarioIps;
+	}
+
+	/**
+	 * Adiciona o adm usuarioIp.
+	 *
+	 * @param admUsuarioIp
+	 *            the adm usuarioIp
+	 * @return the adm usuarioIp
+	 */
+	public AdmUsuarioIp addAdmUsuarioIp(AdmUsuarioIp admUsuarioIp) {
+		getAdmUsuarioIps().add(admUsuarioIp);
+		admUsuarioIp.setAdmUsuario(this);
+
+		return admUsuarioIp;
+	}
+
+	/**
+	 * Remove o adm usuarioIp.
+	 *
+	 * @param admUsuarioIp
+	 *            the adm usuarioIp
+	 * @return the adm usuarioIp
+	 */
+	public AdmUsuarioIp removeAdmUsuarioIp(AdmUsuarioIp admUsuarioIp) {
+		getAdmUsuarioIps().remove(admUsuarioIp);
+		admUsuarioIp.setAdmUsuario(null);
+
+		return admUsuarioIp;
+	}
+
+	/**
+	 * Gets the ip.
+	 *
+	 * @return the ip
+	 */
+	public String getIp() {
+		return ip;
+	}
+
+	/**
+	 * Sets the ip.
+	 *
+	 * @param ip the new ip
+	 */
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+			
+	/**
 	 * Gets the cpf formatado.
 	 *
 	 * @return the cpf formatado
@@ -307,10 +437,9 @@ public class AdmUsuario implements Serializable {
 	public UsuarioVO toUsuarioVO(){
 		UsuarioVO u = new UsuarioVO();
 
-		u.setMatricula(this.id.getMatricula());
-		u.setIp(this.id.getIp());
+		u.setId(this.getId());
+		u.setIp(ip);
 		u.setCpf(cpf);
-		u.setData(data);
 		u.setEmail(email);
 		u.setLdapDN(ldapDN);
 		u.setLogin(login);
@@ -318,6 +447,78 @@ public class AdmUsuario implements Serializable {
 		u.setSenha(senha);
 		
 		return u;
+	}
+
+	/**
+	 * Gets the created date.
+	 *
+	 * @return the created date
+	 */
+	public Calendar getCreatedDate() {
+		return createdDate;
+	}
+
+	/**
+	 * Sets the created date.
+	 *
+	 * @param createdDate the new created date
+	 */
+	public void setCreatedDate(Calendar createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	/**
+	 * Gets the modified date.
+	 *
+	 * @return the modified date
+	 */
+	public Calendar getModifiedDate() {
+		return modifiedDate;
+	}
+
+	/**
+	 * Sets the modified date.
+	 *
+	 * @param modifiedDate the new modified date
+	 */
+	public void setModifiedDate(Calendar modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
+
+	/**
+	 * Gets the created by.
+	 *
+	 * @return the created by
+	 */
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	/**
+	 * Sets the created by.
+	 *
+	 * @param createdBy the new created by
+	 */
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	/**
+	 * Gets the modified by.
+	 *
+	 * @return the modified by
+	 */
+	public String getModifiedBy() {
+		return modifiedBy;
+	}
+
+	/**
+	 * Sets the modified by.
+	 *
+	 * @param modifiedBy the new modified by
+	 */
+	public void setModifiedBy(String modifiedBy) {
+		this.modifiedBy = modifiedBy;
 	}
 
 }

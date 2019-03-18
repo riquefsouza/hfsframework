@@ -14,7 +14,6 @@ import javax.inject.Named;
 
 import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.admin.model.AdmUsuario;
-import br.com.hfsframework.admin.model.AdmUsuarioPK;
 import br.com.hfsframework.base.IBaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.BaseViewRelatorio;
 import br.com.hfsframework.base.relatorio.IBaseRelatorio;
@@ -25,7 +24,7 @@ import br.com.hfsframework.util.interceptors.TratamentoErrosEsperados;
 @ViewScoped
 @TratamentoErrosEsperados
 public class AdmUsuarioRelMB 
-	extends BaseViewRelatorio<AdmUsuario, AdmUsuarioPK, AdmUsuarioBC>
+	extends BaseViewRelatorio<AdmUsuario, Long, AdmUsuarioBC>
 		implements IBaseViewRelatorio {
 
 	private static final long serialVersionUID = 1L;

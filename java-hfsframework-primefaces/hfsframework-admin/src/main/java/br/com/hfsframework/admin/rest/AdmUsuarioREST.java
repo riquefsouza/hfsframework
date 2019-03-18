@@ -19,12 +19,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.PathSegment;
 
 import br.com.hfsframework.admin.business.AdmUsuarioBC;
 import br.com.hfsframework.admin.model.AdmUsuario;
-import br.com.hfsframework.admin.model.AdmUsuarioPK;
 import br.com.hfsframework.util.exceptions.TransacaoException;
 
 /**
@@ -41,27 +39,6 @@ public class AdmUsuarioREST implements Serializable {
 	private AdmUsuarioBC bc;
 
 	/**
-	 * Gets the primary key.
-	 *
-	 * @param pathSegment
-	 *            the path segment
-	 * @return the primary key
-	 */
-	private AdmUsuarioPK getPrimaryKey(PathSegment pathSegment) {
-		AdmUsuarioPK key = new AdmUsuarioPK();
-		MultivaluedMap<String, String> map = pathSegment.getMatrixParameters();
-		List<String> ip = map.get("ip");
-		if (ip != null && !ip.isEmpty()) {
-			key.setIp(ip.get(0));
-		}
-		List<String> matricula = map.get("matricula");
-		if (matricula != null && !matricula.isEmpty()) {
-			key.setMatricula(new Long(matricula.get(0)));
-		}
-		return key;
-	}
-
-	/**
 	 * Load.
 	 *
 	 * @param id
@@ -71,9 +48,8 @@ public class AdmUsuarioREST implements Serializable {
 	@GET
 	@Path("{id}")
 	@Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-	public AdmUsuario load(@PathParam("id") PathSegment id) {
-		AdmUsuarioPK pk = getPrimaryKey(id);
-		return bc.load(pk);
+	public AdmUsuario load(@PathParam("id") Long id) {
+		return bc.load(id);
 	}
 
 	/**
@@ -131,9 +107,8 @@ public class AdmUsuarioREST implements Serializable {
 	 */
 	@DELETE
 	@Path("{id}")
-	public void delete(@PathParam("id") PathSegment id) throws TransacaoException {
-		AdmUsuarioPK pk = getPrimaryKey(id);
-		bc.delete(bc.load(pk));
+	public void delete(@PathParam("id") Long id) throws TransacaoException {
+		bc.delete(bc.load(id));
 	}
 
 	/**

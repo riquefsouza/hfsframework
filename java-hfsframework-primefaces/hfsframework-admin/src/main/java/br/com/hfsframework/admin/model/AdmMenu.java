@@ -41,14 +41,13 @@ import br.com.hfsframework.security.model.MenuVO;
 	@NamedQuery(name = "AdmMenu.getDescricaoById", query = "SELECT c.descricao FROM AdmMenu c WHERE c.id = ?1"),
 	@NamedQuery(name = "AdmMenu.countNovo", query = "SELECT COUNT(c) FROM AdmMenu c WHERE LOWER(c.descricao) = ?1"),
 	@NamedQuery(name = "AdmMenu.countAntigo", query = "SELECT COUNT(c) FROM AdmMenu c WHERE LOWER(c.descricao) <> ?1 AND LOWER(c.descricao) = ?2"),	
-	@NamedQuery(name = "AdmMenu.findMenuRaiz", query = "SELECT m FROM AdmMenu m left join m.admMenuPai mp left join m.admFuncionalidade f WHERE m.admMenuPai IS NULL ORDER BY m.ordem, mp.ordem"),
-	@NamedQuery(name = "AdmMenu.findMenuRaizByDescricao", query = "SELECT m FROM AdmMenu m left join m.admMenuPai mp left join m.admFuncionalidade f WHERE m.admMenuPai IS NULL AND m.descricao = ?1 ORDER BY m.ordem, mp.ordem"),
-	@NamedQuery(name = "AdmMenu.countMenuByFuncionalidade", query = "SELECT COUNT(m) FROM AdmMenu m WHERE m.admFuncionalidade = ?1"),
+	@NamedQuery(name = "AdmMenu.findMenuRaiz", query = "SELECT m FROM AdmMenu m left join m.admMenuPai mp left join m.admPagina f WHERE m.admMenuPai IS NULL ORDER BY m.ordem, mp.ordem"),
+	@NamedQuery(name = "AdmMenu.findMenuRaizByDescricao", query = "SELECT m FROM AdmMenu m left join m.admMenuPai mp left join m.admPagina f WHERE m.admMenuPai IS NULL AND m.descricao = ?1 ORDER BY m.ordem, mp.ordem"),
+	@NamedQuery(name = "AdmMenu.countMenuByPagina", query = "SELECT COUNT(m) FROM AdmMenu m WHERE m.admPagina = ?1"),
 	@NamedQuery(name = "AdmMenu.findMenusFilhos", query = "SELECT m FROM AdmMenu m left join m.admMenuPai mp WHERE m.admMenuPai = ?1 ORDER BY m.ordem, mp.ordem"),
-	@NamedQuery(name = "AdmMenu.findAdminMenuPaiByFuncionalidade", query="SELECT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmMenu m WHERE m.admFuncionalidade = ?1 AND m.admMenuPai IS NULL AND m.id <= 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmMenu.findMenuPaiByFuncionalidade", query="SELECT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmMenu m WHERE m.admFuncionalidade = ?1 AND m.admMenuPai IS NULL AND m.id > 14) ORDER BY t.id, t.ordem"),
-	@NamedQuery(name = "AdmMenu.findPaginaByMenu", query="SELECT m.admFuncionalidade.admPaginaInicial FROM AdmMenu m WHERE m.admFuncionalidade = ?1 AND m.id = ?2")
-	//@NamedQuery(name = "AdmMenu.findFuncionariosPorMenu", query = "SELECT distinct f FROM AdmMenu m inner join m.vwAdmFuncionarios f where m = ?1"),
+	@NamedQuery(name = "AdmMenu.findAdminMenuPaiByPagina", query="SELECT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmMenu m WHERE m.admPagina = ?1 AND m.admMenuPai IS NULL AND m.id <= 9) ORDER BY t.id, t.ordem"),
+	@NamedQuery(name = "AdmMenu.findMenuPaiByPagina", query="SELECT t FROM AdmMenu t WHERE t.id IN (SELECT m.admMenuPai.id FROM AdmMenu m WHERE m.admPagina = ?1 AND m.admMenuPai IS NULL AND m.id > 9) ORDER BY t.id, t.ordem"),
+	@NamedQuery(name = "AdmMenu.findPaginaByMenu", query="SELECT m.admPagina FROM AdmMenu m WHERE m.admPagina = ?1 AND m.id = ?2")
 })
 public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 
@@ -70,15 +69,15 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 	@Column(name = "MNU_ORDEM")
 	private Integer ordem;
 
-	/** The id funcionalidade. */
-	@Column(name = "MNU_FUN_SEQ", nullable = true)
-	private Long idFuncionalidade;
+	/** The id pagina. */
+	@Column(name = "MNU_PAG_SEQ", nullable = true)
+	private Long idPagina;
 
-	/** The adm funcionalidade. */
-	// bi-directional many-to-one association to AdmFuncionalidade
+	/** The adm pagina. */
+	// bi-directional many-to-one association to AdmPagina
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	@JoinColumn(name = "MNU_FUN_SEQ", nullable = false, insertable = false, updatable = false)
-	private AdmFuncionalidade admFuncionalidade;
+	@JoinColumn(name = "MNU_PAG_SEQ", nullable = false, insertable = false, updatable = false)
+	private AdmPagina admPagina;
 
 	/** The adm menu. */
 	// bi-directional many-to-one association to AdmMenu
@@ -93,20 +92,6 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 	@OneToMany(mappedBy = "admMenuPai", fetch = FetchType.EAGER)	
 	private List<AdmMenu> admSubMenus;
 
-	/* The adm menu funcionarios. *
-	// bi-directional many-to-one association to AdmMenuFuncionario
-	@Fetch(FetchMode.SUBSELECT)
-	@OneToMany(mappedBy = "admMenu", fetch = FetchType.LAZY)	
-	private List<AdmMenuFuncionario> admMenuFuncionarios;
-
-	** The adm funcionarios. *
-	// bi-directional many-to-many association to AdmFuncionario
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "ADM_MENU_FUNCIONARIO", joinColumns = {
-			@JoinColumn(name = "MNF_MNU_SEQ") }, inverseJoinColumns = { @JoinColumn(name = "MNF_COD_FUNCIONARIO") })
-	private List<AdmFuncionarioDTO> vwAdmFuncionarios;
-	*/
-	
 	/**
 	 * Instantiates a new adm menu.
 	 */
@@ -123,8 +108,8 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 		this.id = null;
 		this.descricao = null;
 		this.ordem = null;
-		this.idFuncionalidade = null;
-		this.admFuncionalidade = new AdmFuncionalidade();
+		this.idPagina = null;
+		this.admPagina = new AdmPagina();
 		this.admMenuPai = null; // new AdmMenu();
 		this.admSubMenus.clear();
 		//this.admMenuFuncionarios.clear();		
@@ -188,22 +173,22 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 	}
 
 	/**
-	 * Pega o the adm funcionalidade.
+	 * Pega o the adm pagina.
 	 *
-	 * @return o the adm funcionalidade
+	 * @return o the adm pagina
 	 */
-	public AdmFuncionalidade getAdmFuncionalidade() {
-		return this.admFuncionalidade;
+	public AdmPagina getAdmPagina() {
+		return this.admPagina;
 	}
 
 	/**
-	 * Atribui o the adm funcionalidade.
+	 * Atribui o the adm pagina.
 	 *
-	 * @param admFuncionalidade
-	 *            o novo the adm funcionalidade
+	 * @param admPagina
+	 *            o novo the adm pagina
 	 */
-	public void setAdmFuncionalidade(AdmFuncionalidade admFuncionalidade) {
-		this.admFuncionalidade = admFuncionalidade;
+	public void setAdmPagina(AdmPagina admPagina) {
+		this.admPagina = admPagina;
 	}
 
 	/**
@@ -381,7 +366,7 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 	 * @return true, if is sub menu
 	 */
 	public boolean isSubMenu() {
-		return getAdmFuncionalidade() == null;
+		return getAdmPagina() == null;
 	}
 
 	/*
@@ -395,21 +380,12 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 	}
 
 	/**
-	 * Gets the managed bean.
-	 *
-	 * @return the managed bean
-	 */
-	public String getManagedBean() {
-		return this.admFuncionalidade != null ? this.admFuncionalidade.getAdmPaginaInicial().getManagedBean() : null;
-	}
-
-	/**
 	 * Gets the url.
 	 *
 	 * @return the url
 	 */
 	public String getUrl() {
-		return this.admFuncionalidade != null ? this.admFuncionalidade.getAdmPaginaInicial().getUrl() : null;
+		return this.admPagina != null ? this.admPagina.getUrl() : null;
 	}
 
 	/* (non-Javadoc)
@@ -421,22 +397,22 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 	}
 
 	/**
-	 * Pega o the id funcionalidade.
+	 * Pega o the id pagina.
 	 *
-	 * @return o the id funcionalidade
+	 * @return o the id pagina
 	 */
-	public Long getIdFuncionalidade() {
-		return idFuncionalidade;
+	public Long getIdPagina() {
+		return idPagina;
 	}
 
 	/**
-	 * Atribui o the id funcionalidade.
+	 * Atribui o the id pagina.
 	 *
-	 * @param idFuncionalidade
-	 *            o novo the id funcionalidade
+	 * @param idPagina
+	 *            o novo the id pagina
 	 */
-	public void setIdFuncionalidade(Long idFuncionalidade) {
-		this.idFuncionalidade = idFuncionalidade;
+	public void setIdPagina(Long idPagina) {
+		this.idPagina = idPagina;
 	}
 
 	/**
@@ -450,9 +426,9 @@ public class AdmMenu implements Serializable, Comparable<AdmMenu> {
 		m.setId(id);
 		m.setDescricao(descricao);
 		m.setOrdem(ordem);
-		m.setIdFuncionalidade(idFuncionalidade);
-		if (admFuncionalidade!=null) {
-				m.setFuncionalidade(admFuncionalidade.toFuncionalidadeVO());
+		m.setIdPagina(idPagina);
+		if (admPagina!=null) {
+				m.setPagina(admPagina.toPaginaVO());
 		}
 		/*
 		if (admMenuPai!=null) {

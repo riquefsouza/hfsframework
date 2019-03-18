@@ -7,25 +7,19 @@
 		<!-- 
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
-		<class>br.com.hfsframework.admin.model.AdmCargoPerfil</class>
-		<class>br.com.hfsframework.admin.model.AdmFuncionarioPerfil</class>
-		<class>br.com.hfsframework.admin.model.AdmFuncionalidade</class>
 		<class>br.com.hfsframework.admin.model.AdmMenu</class>
 		<class>br.com.hfsframework.admin.model.AdmPagina</class>
 		<class>br.com.hfsframework.admin.model.AdmParametro</class>
 		<class>br.com.hfsframework.admin.model.AdmParametroCategoria</class>
 		<class>br.com.hfsframework.admin.model.AdmPerfil</class>
 		<class>br.com.hfsframework.admin.model.AdmUsuario</class>
-		<class>br.com.hfsframework.admin.model.AdmLogColuna</class>
-		<class>br.com.hfsframework.admin.model.AdmUsuarioPK</class>
-		<class>br.com.hfsframework.admin.model.AdmCargoPerfilPK</class>		
-		<class>br.com.hfsframework.admin.model.AdmCargo</class>
-		<class>br.com.hfsframework.admin.model.AdmCargoFuncionario</class>
-		<class>br.com.hfsframework.admin.model.AdmFuncionario</class>
-		<class>br.com.hfsframework.admin.model.AdmSetor</class>
-		<class>br.com.hfsframework.admin.model.AdmCargoFuncionarioPK</class>
+		<class>br.com.hfsframework.admin.model.AdmUsuarioIp</class>
+		<class>br.com.hfsframework.admin.model.AdmUsuarioIpPK</class>
+		<class>br.com.hfsframework.admin.model.AdmUsuarioPerfil</class>
+		<class>br.com.hfsframework.admin.model.AdmUsuarioPerfilPK</class>
 		<class>br.com.hfsframework.admin.model.VwAdmLog</class>
 		<class>br.com.hfsframework.admin.model.VwAdmLogValor</class>
+		<class>br.com.hfsframework.admin.audit.AdmAuditoriaRevisao</class>
 				
 		<shared-cache-mode>ALL</shared-cache-mode>
 		 -->

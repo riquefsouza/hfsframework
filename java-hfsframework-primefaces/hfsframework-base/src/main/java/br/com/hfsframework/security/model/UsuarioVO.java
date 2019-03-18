@@ -8,7 +8,6 @@ package br.com.hfsframework.security.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 
 import br.com.hfsframework.util.CPFCNPJUtil;
 
@@ -20,18 +19,14 @@ public class UsuarioVO implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The matricula. */
-	private Long matricula;
+	private Long id;
 
 	/** The ip. */
 	private String ip;
 	
 	/** The cpf. */
 	private BigDecimal cpf;
-
-	/** The data. */
-	private Date data;
-
+	
 	/** The email. */
 	private String email;
 
@@ -59,10 +54,9 @@ public class UsuarioVO implements Serializable {
 	 * Limpar.
 	 */
 	public void limpar() {
-		this.matricula = 0L;
+		this.id = 0L;
 		this.ip = "";
 		this.cpf = BigDecimal.ZERO;
-		this.data = new Date();
 		this.email = "";
 		this.ldapDN = "";
 		this.login = "";
@@ -71,22 +65,22 @@ public class UsuarioVO implements Serializable {
 	}
 
 	/**
-	 * Pega o the matricula.
+	 * Pega o the id.
 	 *
-	 * @return o the matricula
+	 * @return o the id
 	 */
-	public Long getMatricula() {
-		return matricula;
+	public Long getId() {
+		return id;
 	}
 
 	/**
-	 * Atribui o the matricula.
+	 * Atribui o the id.
 	 *
-	 * @param matricula
-	 *            o novo the matricula
+	 * @param id
+	 *            o novo the id
 	 */
-	public void setMatricula(Long matricula) {
-		this.matricula = matricula;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	/**
@@ -125,25 +119,6 @@ public class UsuarioVO implements Serializable {
 	 */
 	public void setCpf(BigDecimal cpf) {
 		this.cpf = cpf;
-	}
-
-	/**
-	 * Pega o the data.
-	 *
-	 * @return o the data
-	 */
-	public Date getData() {
-		return this.data;
-	}
-
-	/**
-	 * Atribui o the data.
-	 *
-	 * @param data
-	 *            o novo the data
-	 */
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	/**
@@ -252,7 +227,6 @@ public class UsuarioVO implements Serializable {
 			return this.cpf.toString();
 		}
 	}
-	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -262,7 +236,7 @@ public class UsuarioVO implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ip == null) ? 0 : ip.hashCode());
-		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -283,10 +257,10 @@ public class UsuarioVO implements Serializable {
 				return false;
 		} else if (!ip.equals(other.ip))
 			return false;
-		if (matricula == null) {
-			if (other.matricula != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!matricula.equals(other.matricula))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}

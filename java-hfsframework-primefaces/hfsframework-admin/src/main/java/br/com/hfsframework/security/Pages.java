@@ -51,20 +51,6 @@ public interface Pages {
 		}
 		
 		/**
-		 * The Class ListarAdmFuncionalidade.
-		 */
-		@View(basePath = "/private/admin/admFuncionalidade/")
-		class ListarAdmFuncionalidade implements ViewConfig {
-		}
-
-		/**
-		 * The Class EditarAdmFuncionalidade.
-		 */
-		@View(basePath = "/private/admin/admFuncionalidade/")
-		class EditarAdmFuncionalidade implements ViewConfig {
-		}
-
-		/**
 		 * The Class ListarAdmMenu.
 		 */
 		@View(basePath = "/private/admin/admMenu/")
@@ -128,66 +114,10 @@ public interface Pages {
 		}
 
 		/**
-		 * The Class ListarAdmCargo.
-		 */
-		@View(basePath = "/private/admin/admCargo/")
-		class ListarAdmCargo implements ViewConfig {
-		}
-
-		/**
-		 * The Class EditarAdmCargo.
-		 */
-		@View(basePath = "/private/admin/admCargo/")
-		class EditarAdmCargo implements ViewConfig {
-		}
-		
-		/**
-		 * The Class ListarAdmFuncionario.
-		 */
-		@View(basePath = "/private/admin/admFuncionario/")
-		class ListarAdmFuncionario implements ViewConfig {
-		}
-
-		/**
-		 * The Class EditarAdmFuncionario.
-		 */
-		@View(basePath = "/private/admin/admFuncionario/")
-		class EditarAdmFuncionario implements ViewConfig {
-		}
-		
-		/**
-		 * The Class ListarAdmSetor.
-		 */
-		@View(basePath = "/private/admin/admSetor/")
-		class ListarAdmSetor implements ViewConfig {
-		}
-
-		/**
-		 * The Class EditarAdmSetor.
-		 */
-		@View(basePath = "/private/admin/admSetor/")
-		class EditarAdmSetor implements ViewConfig {
-		}
-		
-		/**
 		 * The Class ListarVwAdmLog.
 		 */
 		@View(basePath = "/private/admin/vwAdmLog/")
 		class ListarVwAdmLog implements ViewConfig {
-		}
-		
-		/**
-		 * The Class ListarAdmLogColuna.
-		 */
-		@View(basePath = "/private/admin/admLogColuna/")
-		class ListarAdmLogColuna implements ViewConfig {
-		}
-
-		/**
-		 * The Class EditarAdmLogColuna.
-		 */
-		@View(basePath = "/private/admin/admLogColuna/")
-		class EditarAdmLogColuna implements ViewConfig {
 		}
 		
 		/**
@@ -197,6 +127,12 @@ public interface Pages {
 		class ListarAdmUsuario implements ViewConfig {
 		}
 	
+		/**
+		 * The Class EditarAdmUsuario.
+		 */
+		@View(basePath = "/private/admin/admUsuario/")
+		class EditarAdmUsuario implements ViewConfig {
+		}		
 	}
 
 }

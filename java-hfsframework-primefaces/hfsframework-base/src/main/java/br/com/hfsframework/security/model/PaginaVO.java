@@ -21,14 +21,11 @@ public class PaginaVO implements Serializable {
 	/** The id. */
 	private Long id;
 
-	/** The managed bean. */
-	private String managedBean;
-
+	/** descricao */
+	private String descricao;
+	
 	/** The url. */
 	private String url;
-
-	/** The funcionalidades. */
-	private List<FuncionalidadeVO> funcionalidades;
 
 	/** The perfils. */
 	private List<PerfilVO> perfils;
@@ -37,7 +34,6 @@ public class PaginaVO implements Serializable {
 	 * Instantiates a new pagina VO.
 	 */
 	public PaginaVO() {
-		this.funcionalidades = new ArrayList<FuncionalidadeVO>();
 		this.perfils = new ArrayList<PerfilVO>();
 		limpar();
 	}
@@ -47,9 +43,8 @@ public class PaginaVO implements Serializable {
 	 */
 	public void limpar() {
 		this.id = null;
-		this.managedBean = null;
+		this.descricao = null;
 		this.url = null;
-		this.funcionalidades.clear();
 		this.perfils.clear();
 	}
 
@@ -75,24 +70,24 @@ public class PaginaVO implements Serializable {
 	}
 
 	/**
-	 * Gets the managed bean.
+	 * Gets the descricao.
 	 *
-	 * @return the managed bean
+	 * @return the descricao
 	 */
-	public String getManagedBean() {
-		return this.managedBean;
+	public String getDescricao() {
+		return this.descricao;
 	}
 
 	/**
-	 * Sets the managed bean.
+	 * Sets the descricao.
 	 *
-	 * @param managedBean
-	 *            the new managed bean
+	 * @param descricao
+	 *            the new descricao
 	 */
-	public void setManagedBean(String managedBean) {
-		this.managedBean = managedBean;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
+	
 	/**
 	 * Gets the url.
 	 *
@@ -110,53 +105,6 @@ public class PaginaVO implements Serializable {
 	 */
 	public void setUrl(String url) {
 		this.url = url;
-	}
-
-	/**
-	 * Gets the funcionalidades.
-	 *
-	 * @return the funcionalidades
-	 */
-	public List<FuncionalidadeVO> getFuncionalidades() {
-		return this.funcionalidades;
-	}
-
-	/**
-	 * Sets the funcionalidades.
-	 *
-	 * @param funcionalidades
-	 *            the new funcionalidades
-	 */
-	public void setFuncionalidades(List<FuncionalidadeVO> funcionalidades) {
-		this.funcionalidades = funcionalidades;
-	}
-
-	/**
-	 * Adiciona o funcionalidades.
-	 *
-	 * @param funcionalidades
-	 *            the funcionalidades
-	 * @return the funcionalidade VO
-	 */
-	public FuncionalidadeVO addFuncionalidades(FuncionalidadeVO funcionalidades) {
-		getFuncionalidades().add(funcionalidades);
-		funcionalidades.setPaginaInicial(this);
-
-		return funcionalidades;
-	}
-
-	/**
-	 * Remove o funcionalidades.
-	 *
-	 * @param funcionalidades
-	 *            the funcionalidades
-	 * @return the funcionalidade VO
-	 */
-	public FuncionalidadeVO removeFuncionalidades(FuncionalidadeVO funcionalidades) {
-		getFuncionalidades().remove(funcionalidades);
-		funcionalidades.setPaginaInicial(null);
-
-		return funcionalidades;
 	}
 
 	/**

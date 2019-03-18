@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com</groupId>
 	<artifactId>hfsframework-base</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<name>HFS Framework Base</name>
 	<description>HFS Framework Base</description>
 	
