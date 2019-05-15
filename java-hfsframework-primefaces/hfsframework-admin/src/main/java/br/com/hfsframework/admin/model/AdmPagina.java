@@ -266,4 +266,13 @@ public class AdmPagina implements Serializable {
 
 		return p;
 	}
+	
+	public List<AdmMenu> getAdmMenus() {
+		return admMenus;
+	}
+
+	public void setAdmMenus(List<AdmMenu> admMenus) {
+		this.admMenus = admMenus;
+	}
+	
 }

@@ -7,8 +7,8 @@
 	<parameter name="PARAMETRO1" class="java.lang.String"/>
 	<field name="managedBean" class="java.lang.String"/>
 	<field name="url" class="java.lang.String"/>
-	<field name="admFuncionalidades" class="java.util.List"/>
 	<field name="admPerfils" class="java.util.List"/>
+	<field name="admMenus" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -108,14 +108,14 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Funcionalidade(s) da Página:]]></text>
+				<text><![CDATA[Menu(s) da Página:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField" x="122" y="0" width="679" height="13" uuid="6173cfef-6a2c-4c81-b3cf-ef6a2c4c818e"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{admFuncionalidades}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{admMenus}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

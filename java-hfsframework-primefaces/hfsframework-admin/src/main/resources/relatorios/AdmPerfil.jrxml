@@ -8,10 +8,8 @@
 	<field name="administrador" class="java.lang.Boolean"/>
 	<field name="descricao" class="java.lang.String"/>
 	<field name="geral" class="java.lang.Boolean"/>
-	<field name="admFuncionalidades" class="java.util.List"/>
-	<field name="admFuncionarios" class="java.util.List"/>
 	<field name="admPaginas" class="java.util.List"/>
-	<field name="admCargos" class="java.util.List"/>
+	<field name="admUsuarios" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -125,46 +123,14 @@
 				<textElement verticalAlignment="Middle">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Funcionalidade(s) do Perfil:]]></text>
+				<text><![CDATA[Usuário(s) do Perfil:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="textField" x="122" y="0" width="680" height="13" uuid="92e4d9ef-c0a6-4c0a-a4d9-efc0a6fc0ada"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{admFuncionalidades}]]></textFieldExpression>
-			</textField>
-		</band>
-		<band height="13">
-			<staticText>
-				<reportElement key="staticText" x="0" y="0" width="122" height="13" uuid="da2e82e3-6ac0-4c42-ae82-e36ac0dc42f9"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Funcionário(s) do Perfil:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement key="textField" x="122" y="0" width="680" height="13" uuid="da2e82e3-6ac0-4c42-ae82-e36ac0dc42f9"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{admFuncionarios}]]></textFieldExpression>
-			</textField>
-		</band>
-		<band height="13">
-			<staticText>
-				<reportElement key="staticText" x="0" y="0" width="122" height="13" uuid="89109d01-38be-4855-909d-0138bee85592"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cargo(s) do(s) Func. do Perfil:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement key="textField" x="122" y="0" width="100" height="13" uuid="89109d01-38be-4855-909d-0138bee85592"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{admCargos}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{admUsuarios}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

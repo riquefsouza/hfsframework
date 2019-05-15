@@ -37,17 +37,12 @@ public class TemplateExemplo {
 
 		/*
 		String[][] classes = {
-				{"AdmFuncionalidade", "Long"},
 				{"AdmMenu", "Long"},
 				{"AdmPagina", "Long"},
 				{"AdmParametro", "Long"},
 				{"AdmParametroCategoria", "Long"},
 				{"AdmPerfil", "Long"},
-				{"VwAdmCargo", "Long"},
-				{"VwAdmFuncionario", "Long"},
-				{"VwAdmLog", "Long"},
-				{"VwAdmSetor", "String"},
-				{"AdmLogColuna", "String"}
+				{"VwAdmLog", "Long"}
 		};
 		*/		
 		String[][] classes = {

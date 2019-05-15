@@ -7,7 +7,6 @@
 	<parameter name="PARAMETRO1" class="java.lang.String"/>
 	<field name="descricao" class="java.lang.String"/>
 	<field name="ordem" class="java.lang.Integer"/>
-	<field name="admFuncionalidade.descricao" class="java.lang.String"/>
 	<field name="admSubMenus" class="java.util.List"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -64,13 +63,6 @@
 				</textElement>
 				<text><![CDATA[Ordem]]></text>
 			</staticText>
-			<staticText>
-				<reportElement key="staticText" x="397" y="0" width="404" height="13" uuid="d11e1bdf-f04b-453e-9e1b-dff04ba53efd"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Funcionalidade]]></text>
-			</staticText>
 			<line>
 				<reportElement x="1" y="16" width="800" height="1" uuid="4d0e3239-c018-40e4-a640-fb2401b7a851"/>
 			</line>
@@ -91,13 +83,6 @@
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{ordem}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement key="textField" x="397" y="0" width="404" height="13" uuid="d11e1bdf-f04b-453e-9e1b-dff04ba53efd"/>
-				<textElement verticalAlignment="Middle">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{admFuncionalidade.descricao}]]></textFieldExpression>
 			</textField>
 		</band>
 		<band height="13">

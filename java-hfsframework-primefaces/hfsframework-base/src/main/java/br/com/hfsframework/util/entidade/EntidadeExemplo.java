@@ -37,21 +37,12 @@ public class EntidadeExemplo {
         
 		String[][] classes = {
 				{"AdmAuditoria", "Long"},
-				{"AdmCargoPerfil", "AdmCargoPerfilPK"},
-				{"AdmFuncionalidade", "Long"},
-				{"AdmFuncionarioPerfil", "Long"},
 				{"AdmLog", "Long"},
 				{"AdmMenu", "Long"},
-				{"AdmMenuFuncionario", "Long"},
-				{"AdmOcorrencia", "Long"},
 				{"AdmPagina", "Long"},
 				{"AdmParametro", "Long"},
 				{"AdmParametroCategoria", "Long"},
-				{"AdmPerfil", "Long"},
-				{"VwAdmCargo", "Long"},
-				{"VwAdmCargoFuncionario", "VwAdmCargoFuncionarioPK"},
-				{"VwAdmFuncionario", "Long"},
-				{"VwAdmSetor", "Long"}
+				{"AdmPerfil", "Long"}
 		};
 
 		/*
